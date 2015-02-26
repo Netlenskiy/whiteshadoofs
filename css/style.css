@@ -1,0 +1,85 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+body {
+	width: 1000px;
+	margin: 0px auto;
+}
+header {
+	width: 1000px;
+	height: 150px;
+	background-color: #860000;
+}
+nav {
+	width: 1000px;
+	height: 30px;
+	background-color: #3B3ACA;
+}
+nav li {
+	list-style-type: none;
+	float: left;
+	/*margin: 10px 0px 0px 15px;*/
+	width: 150px;
+	height: 26px;
+	background-color: #D33A42;
+	border: 1px solid grey;
+	color: white;
+	font-size: 20px;	
+	text-align: center;
+	cursor: pointer;
+}
+ul li:hover {
+	background-color: orange;
+}
+ul li>ul li {
+	display: none;
+}
+
+ul li>ul {
+	position: relative;
+	top: 5px;
+	color: white;
+	font-size: 16px;
+	text-align: center;
+	cursor: pointer;
+}
+.menuItem {
+	list-style-type: none;
+	/*margin: 10px 0px 0px 15px;*/
+	width: 150px;
+	height: 30px;
+	background-color: #D33A22;
+	border: 1px solid grey;
+	position: relative;
+	top: 28px;
+
+}
+aside {
+	width: 200px;
+	height: 600px;
+	background-color: #4F81D3;
+}
+section {
+	width: 800px;
+	height: 600px;
+	width: 800px;
+	height: 600px;
+	float: right;
+	border-right: 3px solid #4F81D3;
+}
+#wsMap {
+	width: 797px;
+	height: 600px;
+}
+footer {
+	position: relative;
+	width: 1000px;
+	height: 150px;
+	background-color: #7B4FD3;
+}
+input[onclick="foo()"] {
+	position: relative;
+	top: 50px;
+	left: 900px;
+}
