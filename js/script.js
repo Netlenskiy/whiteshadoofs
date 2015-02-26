@@ -186,5 +186,6 @@ function hideMenu(id) {
 	}
 }
 
+
 var items = document.getElementById("items");
 items.addEventListener("click", showMenu, true);
