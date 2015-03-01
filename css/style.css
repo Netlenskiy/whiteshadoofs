@@ -32,9 +32,6 @@ nav li {
 ul li:hover {
 	background-color: orange;
 }
-ul li>ul li {
-	display: none;
-}
 
 ul li>ul {
 	position: relative;
@@ -44,27 +41,23 @@ ul li>ul {
 	text-align: center;
 	cursor: pointer;
 }
-.menuFace {
-	list-style-type: none;
-	/*margin: 10px 0px 0px 15px;*/
-	width: 150px;
-	height: 30px;
-	background-color: #D33A22;
-	border: 1px solid grey;
-}
 .blockMenu {
 	list-style-type: none;
-	/*margin: 10px 0px 0px 15px;*/
 	width: 150px;
 	height: 30px;
 	background-color: #D33A22;
 	border: 1px solid grey;
 	position: relative;
-	top: 23px;
 	display: block;
+	z-index: 1;
 }
 .noneMenu {
 	display: none;
+}
+ul li>ul li {
+	display: none;
+	text-align: left;
+	padding-left: 10px;
 }
 aside {
 	width: 200px;
@@ -78,6 +71,7 @@ section {
 	height: 600px;
 	float: right;
 	border-right: 3px solid #4F81D3;
+	z-index: 0;
 }
 #wsMap {
 	width: 797px;

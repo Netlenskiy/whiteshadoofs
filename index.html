@@ -4,8 +4,8 @@
 	<title>Белые журавли</title>
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no, maximum-scale=1" /> 
 	<link href="css/style.css" rel="stylesheet" type="text/css"/>
-	<script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU&mode=debug" type="text/javascript"></script>
 	<script src="js/menu.js"></script>
+	<script src="js/data.js"></script>
 </head>
 <body>
 <header>
@@ -17,47 +17,68 @@
 	</div>
 </header>
 <nav>
-	<ul id="mainMenu">
-		<li>Категории
+	<ul id="mainMenu" class="oops">
+		<li id="categories">Категории
 			<ul>
 				<li>
-					<input type="checkbox" />
-					Аллея
+					<label><input type="checkbox" />
+					Аллея</label>
 				</li>
 				<li>
-					<input type="checkbox" />
-					Вечный огонь
+					<label><input type="checkbox" />
+					Вечный огонь</label>
 				</li>
 				<li>
-					<input type="checkbox" />
-					Мемориал
+					<label><input type="checkbox" />
+					Мемориал</label>
 				</li>
 				<li>
-					<input type="checkbox" />
-					Памятник
+					<label><input type="checkbox" />
+					Монумент</label>
 				</li>
 				<li>
-					<input type="checkbox" />
-					Обелиск
+					<label><input type="checkbox" />
+					Памятник</label>
 				</li>
 				<li>
+					<label><input type="checkbox" />
+					Парк</label>
+				</li>
+				<li>
+					<label><input type="checkbox" />
+					Площадь</label>
+				</li>
+				<li>
+					<label><input type="checkbox" />
+					Обелиск</label>
+				</li>
+				<li>
+					<label><input type="checkbox" />
+					Улица</label>
+				</li>
+				<li>
+					<label><input type="checkbox" />
+					Прочее</label>
+				</li>
+				<li>
+					Отфильтровать
 				</li>
 			</ul>
 		</li>
-		<li>
+		<li id="actions">Мероприятия
 			<ul>
 				<li></li>
 				<li></li>
 				<li></li>
 			</ul>
 		</li>
-		<li>
+		<li id="about">О проекте
 			<ul>
 				<li></li>
 				<li></li>
 			</ul>
 		</li>
-		<li>
+		<li id="search">Поиск
 			<ul>
 				<li></li>
 				<li></li>
@@ -77,5 +98,8 @@
 
 </footer>
 </body>
+	<script src="js/init.js"></script>
+	<script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU&mode=debug" type="text/javascript"></script>
 	<script src="js/script.js"></script>
+	<script src="js/showGallery.js"></script>
 </html>
