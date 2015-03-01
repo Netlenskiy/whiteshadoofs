@@ -20,11 +20,11 @@ var pmarksType = [
 var icons = [
 	"RedStarPic.gif"
 	, "RedStarPic.gif"
-	, "fire.jpg"
-	, "RedStarPic.gif"
+	, "fire.gif"
+	, "fire.gif"
 	, "RedStarPic.gif"
 ];
-var myMap;
+var myMap, objects, objectsCopy;
 function init() { // Отвечает за загрузку карты, геолокацию
 
 	myMap = new ymaps.Map('wsMap', {
@@ -57,6 +57,8 @@ function init() { // Отвечает за загрузку карты, геол
 				iconImageHref: "icons/" + icons[i]
 			} ) )
 	}
+	objects = ymaps.geoQuery(myMap.geoObjects);
+	objectsCopy = ymaps.geoQuery(myMap.geoObjects);
 }
 
 ymaps.ready(init);
@@ -156,10 +158,9 @@ function showGallery(coordinates) {
 // 	}
 // 	el.onmouseover = funct
 // }
-var divs = ["Памятник", "Вечный огонь", "Обелиск", "Мемориал", "Братская могила", "", "", "", "", ""];
 var isOpen = false;
+
 function showMenu(e) {
-	console.log(myMap.geoObjects);
 	var elems = document.getElementById("items").firstElementChild.getElementsByTagName("li");
 	if (!isOpen) {
 		isOpen = true;
@@ -167,25 +168,38 @@ function showMenu(e) {
 			elems[i].style.display = "block";
 		}
 	} else {
+		switch(e.target.id) {
+			case "alley":
+				objects.each( function(pm) {
+					myMap.geoObjects.remove(pm);
+					if (pm.properties._data.category != 0) {
+						objects.remove(pm);
+					} else {
+						// myMap.geoObjects.add(pm);
+					}
+					myMap.geoObjects.add(objects);
+				} );
+				break;
+			case "eternalflame":
+				objects.each( function(pm) {
+					myMap.geoObjects.remove(pm);
+					if (pm.properties._data.category != 0) {
+						objects.remove(pm);
+					} else {
+						// myMap.geoObjects.add(pm);
+					}
+					myMap.geoObjects.add(objects);
+				} );
+				break;
+		}
 		isOpen = false;
 		for (var i=0; i<elems.length; i++) {
 			elems[i].style.display = "none";
 		}
+		objects = objectsCopy;
 	}
-	var notSelectedObjects = ymaps.geoQuery(myMap.geoObjects);
-	notSelectedObjects.each( function(pm) {
-		if (pm.properties._data.category == 0)
-			myMap.geoObjects.remove(pm);
-		console.log(pm.properties._data.category);
-	} );
+	
 }
-function hideMenu(id) {
-	var elem = document.getElementById(id);
-	for (var i = 0; i < 9; i++) {
-		elem.removeChild(elem.firstElementChild);
-	}
-}
-
 
 var items = document.getElementById("items");
-items.addEventListener("click", showMenu, true);
+items.addEventListener("click", showMenu, false);

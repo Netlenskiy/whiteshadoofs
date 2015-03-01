@@ -25,7 +25,7 @@ nav li {
 	background-color: #D33A42;
 	border: 1px solid grey;
 	color: white;
-	font-size: 20px;	
+	font-size: 20px;
 	text-align: center;
 	cursor: pointer;
 }
@@ -44,7 +44,15 @@ ul li>ul {
 	text-align: center;
 	cursor: pointer;
 }
-.menuItem {
+.menuFace {
+	list-style-type: none;
+	/*margin: 10px 0px 0px 15px;*/
+	width: 150px;
+	height: 30px;
+	background-color: #D33A22;
+	border: 1px solid grey;
+}
+.blockMenu {
 	list-style-type: none;
 	/*margin: 10px 0px 0px 15px;*/
 	width: 150px;
@@ -52,8 +60,11 @@ ul li>ul {
 	background-color: #D33A22;
 	border: 1px solid grey;
 	position: relative;
-	top: 28px;
-
+	top: 23px;
+	display: block;
+}
+.noneMenu {
+	display: none;
 }
 aside {
 	width: 200px;
