@@ -14,7 +14,6 @@ var isOpen = false;
 function Menu(arg) {
 	var self = this;
 	//self.isOpen = false;
-
 	self.open = function () {
 		var li = arg.children;
 		//if (!self.isOpen) {
@@ -27,6 +26,7 @@ function Menu(arg) {
 		}
 		//self.isOpen = !self.isOpen;
 		isOpen = !isOpen;
+console.log("Menu.open");
 	}
 	self.filter = function () {
 
@@ -44,7 +44,7 @@ function Filter(arg) {
 	var self = this;
 	//self.isOpen = false;
 
-	self.open = function () {
+	self.open = function (e) {
 		var li = arg.children;
 		//if (!self.isOpen) {
 		if (!isOpen) {
@@ -56,6 +56,7 @@ function Filter(arg) {
 		}
 		//self.isOpen = !self.isOpen;
 		isOpen = !isOpen;
+console.log("Filter.open");
 	}
 
 	arg.parentNode.onclick = function (e) {
@@ -64,7 +65,7 @@ function Filter(arg) {
 		if (target == "[object HTMLLIElement]")
 			if (target == arg.parentNode || target == arg.lastElementChild) {
 				self.open();
-				};
+			};
 	}
 
 };
@@ -76,26 +77,38 @@ function Navigation(elem, args) {
 	var lastOpened = "";
 
 	self.open = function (id) {
-		if (!self.isOpen) {
+console.log("1 Navigation.open");
+console.log("1 isOpen = " + isOpen);
+		if (!isOpen) {
+console.log("! isOpen");
 			menu[id].open();
 			isOpen = true;
 			lastOpened = id;
 		} else if (id == lastOpened) {
+console.log("else if");
 				menu[id].open();
 				isOpen = false;
 				lastOpened = "";
 			} else {
+console.log("else");
 				menu[lastOpened].open();
 				menu[id].open();
 				lastOpened = id;	
 			}
+console.log("2 Navigation.open");
+console.log("2 isOpen = " + isOpen);
 	}
 	function onclckHandler(e) {
 		var event = e || window.event;
 		var target = event.target;
-		var targetId = target.id;
-		console.log(target.id =="categories");//HERE TO DO
+		// console.log("elem = " + elem);//HERE TO DO
+		// menu[target.id].open();
+		self.open(target.id);
 	}
 
-	elem.addEventListener("click", onclckHandler, false);
+	elem.addEventListener("click", onclckHandler, true);
 };
+/* меню навигации слушает клики, по клику вызывает метот подменю с соотв. атрибутом, или закрывает, 
+если уже открыто.
+Запоминает открытие и атрибут открытого подменю. 
+По клику по другому закрывает открытое, открывает новое с соотв. атрибутом
