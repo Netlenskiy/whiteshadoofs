@@ -10,24 +10,9 @@
 Он определяет таргет и вызывает метод объекта из хэша, соответствующего этому таргету.
 У него есть приватная переменная isOpen. 
 */
-var isOpen = false;
 function Menu(arg) {
 	var self = this;
 	//self.isOpen = false;
-	self.open = function () {
-		var li = arg.children;
-		//if (!self.isOpen) {
-		if (!isOpen) {
-			for (var i = 0; i < li.length; i++)
-				li[i].className = "blockMenu";
-		} else {
-			for (var i = 0; i < li.length; i++)
-				li[i].className = "noneMenu";
-		}
-		//self.isOpen = !self.isOpen;
-		isOpen = !isOpen;
-console.log("Menu.open");
-	}
 	self.filter = function () {
 
 	}
@@ -35,36 +20,30 @@ console.log("Menu.open");
 	arg.parentNode.onclick = function (e) {
 		var event = e || window.event;
 		var target = event.target;
-		if (target == "[object HTMLLIElement]")
+		if (target == "[object HTMLLIElement]" && !target.id)
 			self.open();
 	}
 };
 
-function Filter(arg) {
+function Filter(arg) { // arg == ul
 	var self = this;
-	//self.isOpen = false;
+	var isOpen = false;
 
-	self.open = function (e) {
+	self.close = function (e) {
 		var li = arg.children;
-		//if (!self.isOpen) {
-		if (!isOpen) {
-			for (var i = 0; i < li.length; i++)
-				li[i].className = "blockMenu";
-		} else {
-			for (var i = 0; i < li.length; i++)
-				li[i].className = "noneMenu";
-		}
-		//self.isOpen = !self.isOpen;
+		for (var i = 0; i < li.length; i++)
+			li[i].className = "noneMenu";
 		isOpen = !isOpen;
-console.log("Filter.open");
+console.log("Filter.close");
 	}
 
-	arg.parentNode.onclick = function (e) {
+	arg.lastElementChild.onclick = function (e) {
+	console.log("arg.lastElementChild");
 		var event = e || window.event;
 		var target = event.target;
 		if (target == "[object HTMLLIElement]")
-			if (target == arg.parentNode || target == arg.lastElementChild) {
-				self.open();
+			if (target == arg.lastElementChild) {
+				self.close();
 			};
 	}
 
@@ -76,39 +55,40 @@ function Navigation(elem, args) {
 	var isOpen = false;
 	var lastOpened = "";
 
-	self.open = function (id) {
-console.log("1 Navigation.open");
-console.log("1 isOpen = " + isOpen);
-		if (!isOpen) {
-console.log("! isOpen");
-			menu[id].open();
-			isOpen = true;
-			lastOpened = id;
-		} else if (id == lastOpened) {
-console.log("else if");
-				menu[id].open();
-				isOpen = false;
-				lastOpened = "";
-			} else {
-console.log("else");
-				menu[lastOpened].open();
-				menu[id].open();
-				lastOpened = id;	
-			}
-console.log("2 Navigation.open");
-console.log("2 isOpen = " + isOpen);
+	self.showHide = function (arr, clssName) {
+		for (var i = 0; i < arr.length; i++)
+				arr[i].className = clssName;
 	}
+	self.open = function (target) {
+		var li = target.getElementsByTagName("li");
+		console.log(lastOpened);
+		if (!isOpen) {
+			console.log("!isOpen");
+			self.showHide(li, "blockMenu");
+			isOpen = !isOpen;
+		} else  if (target == lastOpened) {
+			console.log("else  if");
+			self.showHide(li, "noneMenu");
+			isOpen = !isOpen;
+		} else if (target.id == "filter"){
+			console.log("delegation is not needed here");
+			self.showHide( lastOpened.getElementsByTagName("li"), "noneMenu" );
+			isOpen = !isOpen;
+		} else {
+			self.showHide( lastOpened.getElementsByTagName("li"), "noneMenu" );
+			self.showHide( li, "blockMenu");
+			lastOpened = target;
+		}
+	}
+
 	function onclckHandler(e) {
 		var event = e || window.event;
 		var target = event.target;
-		// console.log("elem = " + elem);//HERE TO DO
-		// menu[target.id].open();
-		self.open(target.id);
+		if (target.id) {
+			self.open(target);
+			lastOpened = target;
+		}
 	}
 
-	elem.addEventListener("click", onclckHandler, true);
+	elem.addEventListener("click", onclckHandler, false);
 };
-/* меню навигации слушает клики, по клику вызывает метот подменю с соотв. атрибутом, или закрывает, 
-если уже открыто.
-Запоминает открытие и атрибут открытого подменю. 
-По клику по другому закрывает открытое, открывает новое с соотв. атрибутом
