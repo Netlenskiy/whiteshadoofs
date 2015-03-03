@@ -19,13 +19,13 @@ function init() { // Отвечает за загрузку карты, геол
 		);
 	//ymaps.layout.storage.add('my#Layout', myBalloonLayout); - Why it does not work?
 
-	for (var i=0; i<myPMarks.length; i++) {
+	for (var i=0; i<myPlaceMarks.length; i++) {
 		myMap.geoObjects.add(
-			new ymaps.Placemark( myPMarks[i], {
-				imageAddress: mySrcStrings[i],
-				coordinates: myPMarks[i],
-				disclamer: myDisclamers[i],
-				category: pmarksType[i],
+			new ymaps.Placemark( myPlaceMarks[i].coordnts, {
+				imageAddress: myPlaceMarks[i].srcString,
+				coordinates: myPlaceMarks[i].coordnts,
+				disclamer: myPlaceMarks[i].disclamer,
+				category: myPlaceMarks[i].icontype,
 			}, {
 				balloonContentLayout: myBalloonLayout,//'my#Layout' - Why it does not work?
 				iconLayout: "default#image",

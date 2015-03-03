@@ -1,6 +1,6 @@
 //5
 
-// ymaps.ready(init);
+ymaps.ready(init);
 // var filter = new Filter( document.getElementById("mainMenu").getElementsByTagName("ul")[0] );
 // var actions = new Menu( document.getElementById("mainMenu").getElementsByTagName("ul")[1] );
 // var about = new Menu( document.getElementById("mainMenu").getElementsByTagName("ul")[2] );

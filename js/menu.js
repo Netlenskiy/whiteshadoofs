@@ -29,23 +29,11 @@ function Filter(arg) { // arg == ul
 	var self = this;
 	var isOpen = false;
 
-	self.close = function (e) {
-		var li = arg.children;
-		for (var i = 0; i < li.length; i++)
-			li[i].className = "noneMenu";
-		isOpen = !isOpen;
-console.log("Filter.close");
-	}
-
-	arg.lastElementChild.onclick = function (e) {
-	console.log("arg.lastElementChild");
-		var event = e || window.event;
-		var target = event.target;
-		if (target == "[object HTMLLIElement]")
-			if (target == arg.lastElementChild) {
-				self.close();
-			};
-	}
+	// self.close = function (e) {
+	// 	var li = arg.children;
+	// 	for (var i = 0; i < li.length; i++)
+	// 		li[i].className = "noneMenu";
+	// 	isOpen = !isOpen;
 
 };
 
@@ -55,24 +43,24 @@ function Navigation(elem, args) {
 	var isOpen = false;
 	var lastOpened = "";
 
+	self.filterPlcmarks = function () {
+		
+	}
 	self.showHide = function (arr, clssName) {
 		for (var i = 0; i < arr.length; i++)
 				arr[i].className = clssName;
 	}
 	self.open = function (target) {
 		var li = target.getElementsByTagName("li");
-		console.log(lastOpened);
 		if (!isOpen) {
-			console.log("!isOpen");
 			self.showHide(li, "blockMenu");
 			isOpen = !isOpen;
 		} else  if (target == lastOpened) {
-			console.log("else  if");
 			self.showHide(li, "noneMenu");
 			isOpen = !isOpen;
 		} else if (target.id == "filter"){
-			console.log("delegation is not needed here");
 			self.showHide( lastOpened.getElementsByTagName("li"), "noneMenu" );
+			self.filterPlcmarks();
 			isOpen = !isOpen;
 		} else {
 			self.showHide( lastOpened.getElementsByTagName("li"), "noneMenu" );
