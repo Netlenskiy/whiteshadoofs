@@ -49,7 +49,7 @@ var myPlaceMarks = [
 		"coordnts": [55.20, 37.20],
 		"srcString": "face/image31207551.jpg",
 		"disclamer": "Quisque a volutpat metus. Aliquam malesuada arcu enim, nec pretium nunc commodo eu. Curabitur eleifend ipsum at risus porttitor, in sollicitudin felis aliquam.",
-		"icontype": 1,
+		"icontype": 0,
 		"icon": "RedStarPic.gif"
 	}
 ]
