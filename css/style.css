@@ -42,6 +42,7 @@ ul li>ul {
 	cursor: pointer;
 }
 .blockMenu {
+	position: relative;
 	list-style-type: none;
 	width: 150px;
 	height: 30px;
@@ -53,6 +54,16 @@ ul li>ul {
 }
 .noneMenu {
 	display: none;
+}
+.canselButton {
+	width: 15px;
+	height: 15px;
+	background: url("../imgs/canselButton.png");
+	position: absolute;
+	top: 5px;
+	right: 20px;
+	z-index: 5;
+	cursor: pointer;
 }
 ul li>ul li {
 	display: none;

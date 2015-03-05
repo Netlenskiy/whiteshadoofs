@@ -17,6 +17,8 @@ function init() { // Отвечает за загрузку карты, геол
 	    '</div>'
 		);
 
+
+
 	//ymaps.layout.storage.add('my#Layout', myBalloonLayout); - Why it does not work?
 	
 	var items = [];

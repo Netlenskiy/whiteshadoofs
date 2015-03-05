@@ -1,17 +1,17 @@
 //6
 function showGallery(coordinates) {
-	// загружаем фотки, метка идентифицируется по координатам однозначно
+	// загружаем фотки, метка идентифицируется по координатам
 	//считаем количество фоток, вычисляем размер блока
 	// создаем элементы в DOM
 	// обеспечиваем анимацию в случае необходимости
 	// по клику на балун запращивается адрес папки с фотками для данной метки
 	// и адреса фоток загружаются в массив
 	var images = [ 
-		"photo/0a2f78ff51bb.jpg"
-		, "photo/2jf.jpg"
-		, "photo/1361207948_pingvin.jpg"
-		, "photo/pingvinyi.jpg"
-		, "photo/Spheniscidae_2.jpg"
+		"photo/09_b.jpg"
+		, "photo/b111007.jpg"
+		, "photo/ff1ea55c51182c8280ad631eb080f535.jpg"
+		, "photo/images (1).jpg"
+		, "photo/images (2).jpg"
 		];
 
 	if ( !document.getElementById("gallery") ) {
@@ -23,6 +23,7 @@ function showGallery(coordinates) {
 		gallery.style.height = "0px";
 		gallery.style.borderTop = "3px solid #4F81D3";
 		gallery.style.overflow = "auto";
+		gallery.style.position = "relative";
 		
 		var imgs = [];
 		for (var i=0; i<images.length; i++) {
@@ -35,8 +36,19 @@ function showGallery(coordinates) {
 			imgs[i].setAttribute( "src", images[i] );
 			gallery.appendChild( imgs[i] );
 		}
+		var wrapper = document.createElement("div");
+		var canselButton = document.createElement("div");
+		canselButton.className = "canselButton";
+		canselButton.addEventListener("click", function () {
+			hideGallery(options);
+		}, true);
+		wrapper.appendChild( canselButton );
+		wrapper.style.position = "relative";
+
 		gallery.style.background = "white";
 		gallery.style.borderRight = "3px solid #4F81D3";
+		gallery.style.position = "relative";
+		section.appendChild( wrapper );
 		section.appendChild(gallery);
 		var opts = {
 			delay: 50,
@@ -67,6 +79,28 @@ function showGallery(coordinates) {
 				clearInterval(timer);
 		}, opts.delay );
 	}
+	var options= {
+		delay: 20,
+		duration: 100,
+		count: 0,
+		step: function() {
+			//gallery.style.height = h * progress + "px";
+			aside.style.height = 850 - (this.count += 50) + "px";
+			console.log(" aside.style.height = " + aside.style.height);
+		}
+	};
+function hideGallery (options) {	
+		var h = 250;
+		var start = new Date();
+		var timer = setInterval( function () {
+			var progress = (new Date() - start)/options.duration;
+			options.step();
+			if (progress > 1) 
+				clearInterval(timer);
+		}, options.delay );
+		section.removeChild( wrapper );
+		section.removeChild( gallery );
+}
 	var opts = {
 		delay: 20,
 		duration: 500,
@@ -75,6 +109,6 @@ function showGallery(coordinates) {
 			aside.style.height = 600 + h * progress + "px";
 			gallery.scrollIntoView(false);	
 		}
-	}
+	};
 	animate(opts);
 }
