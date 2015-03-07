@@ -38,6 +38,7 @@
         <Location left="824" top="37" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
+        <Member type="Field">int is_opened = false</Member>
         <Member type="Method">private void open()</Member>
         <Member type="Method">private void close()</Member>
         <Modifier>None</Modifier>
@@ -103,6 +104,15 @@
         <Location left="76" top="604" />
         <Size width="160" height="75" />
       </Entity>
+      <Entity type="Class">
+        <Name>CloseButton</Name>
+        <Access>Public</Access>
+        <Location left="1047" top="70" />
+        <Size width="162" height="94" />
+        <Collapsed>False</Collapsed>
+        <Member type="Event">public event close click</Member>
+        <Modifier>None</Modifier>
+      </Entity>
     </Entities>
     <Relationships>
       <Relationship type="Association" first="0" second="1">
@@ -164,6 +174,14 @@
       <Relationship type="Comment" first="4" second="1">
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Association" first="3" second="13">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+        <StartMultiplicity>1</StartMultiplicity>
+        <EndMultiplicity>1</EndMultiplicity>
       </Relationship>
     </Relationships>
   </ProjectItem>
