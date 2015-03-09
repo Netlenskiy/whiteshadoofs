@@ -45,7 +45,7 @@
       </Entity>
       <Entity type="Comment">
         <Text>Метка имеет поле с адресом своих картинок балун, который генерирует событие по клику, которое отлавливает Mediator.</Text>
-        <Location left="300" top="190" />
+        <Location left="300" top="188" />
         <Size width="160" height="92" />
       </Entity>
       <Entity type="Comment">
@@ -69,7 +69,7 @@
         <Access>Public</Access>
         <Location left="76" top="270" />
         <Size width="162" height="216" />
-        <Collapsed>False</Collapsed>
+        <Collapsed>True</Collapsed>
         <Member type="Field">int categories = [ ]</Member>
         <Member type="Event">public event send_types_to_Map click</Member>
         <Member type="Method">public void get_types()</Member>
@@ -100,9 +100,9 @@
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Comment">
-        <Text>Имеет массив типов меток отобранных для фильтра. Пересылает их в объект Map. </Text>
-        <Location left="76" top="604" />
-        <Size width="160" height="75" />
+        <Text>Имеет массив типов меток отобранных для фильтра. Генерирует событие по клику, на которое подписан Mediator, он по событию получает массив типов меток с пом-ю get_types().</Text>
+        <Location left="76" top="382" />
+        <Size width="160" height="128" />
       </Entity>
       <Entity type="Class">
         <Name>CloseButton</Name>
@@ -116,6 +116,8 @@
     </Entities>
     <Relationships>
       <Relationship type="Association" first="0" second="1">
+        <Label>
+        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
@@ -124,32 +126,24 @@
         <EndMultiplicity>1..*</EndMultiplicity>
       </Relationship>
       <Relationship type="Association" first="1" second="2">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Association</AssociationType>
       </Relationship>
       <Relationship type="Association" first="2" second="3">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Association</AssociationType>
       </Relationship>
       <Relationship type="Association" first="8" second="2">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Association</AssociationType>
       </Relationship>
       <Relationship type="Association" first="2" second="0">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
@@ -176,6 +170,8 @@
         <EndOrientation>Vertical</EndOrientation>
       </Relationship>
       <Relationship type="Association" first="3" second="13">
+        <Label>
+        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
