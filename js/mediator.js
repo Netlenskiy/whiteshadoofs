@@ -9,6 +9,7 @@ function Mediator() {
 	}
 	self.requestImageSrc = function () {
 		console.log("requestImageSrc");
+<<<<<<< HEAD
 		var images = [
 		"photo/09_b.jpg"
 		, "photo/b111007.jpg"
@@ -17,5 +18,7 @@ function Mediator() {
 		, "photo/images (2).jpg"
 		];
 		gallery.open(images);
+=======
+>>>>>>> acf63317a6d92c061115541584f18a79ac5eb3a3
 	}
 }
