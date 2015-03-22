@@ -102,3 +102,19 @@ input[onclick="foo()"] {
 	top: 50px;
 	left: 900px;
 }
+.openGallery {
+	width: 800px;
+	height: 0px;
+	border-top: 3px solid #4F81D3;
+	overflow: auto;
+	position: relative;
+	background: white;
+	border-right: 3px solid #4F81D3;
+}
+.galleryImage {
+	width: 220px;
+	height: 220px;
+	float: left;
+	margin: 15px;
+	outline: 1px solid grey;	
+}
