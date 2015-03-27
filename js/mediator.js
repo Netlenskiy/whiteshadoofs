@@ -1,15 +1,14 @@
 //1
 function Mediator() {
 	var self = this;
+	var curPmId = null;
 	
 	self.sendTypesToMap = function (options) {
 		console.log(map);
 		map.filterPlacemarks(options.types);
 
 	}
-	self.requestImageSrc = function () {
-		console.log("requestImageSrc");
-<<<<<<< HEAD
+	self.requestImageSrc = function (pmId) {
 		var images = [
 		"photo/09_b.jpg"
 		, "photo/b111007.jpg"
@@ -17,8 +16,10 @@ function Mediator() {
 		, "photo/images (1).jpg"
 		, "photo/images (2).jpg"
 		];
+		if (curPmId != pmId) {
+			curPmId = pmId;
+			console.log("requestImageSrc");
+		}
 		gallery.open(images);
-=======
->>>>>>> acf63317a6d92c061115541584f18a79ac5eb3a3
 	}
 }

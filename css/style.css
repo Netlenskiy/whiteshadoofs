@@ -79,9 +79,8 @@ aside {
 	background-color: #4F81D3;
 }
 section {
-	width: 800px;
-	height: 600px;
-	width: 800px;
+	position: relative;
+	width: 797px;
 	height: 600px;
 	float: right;
 	border-right: 3px solid #4F81D3;
@@ -90,6 +89,7 @@ section {
 #wsMap {
 	width: 797px;
 	height: 600px;
+	float: right;
 }
 footer {
 	position: relative;
@@ -103,13 +103,13 @@ input[onclick="foo()"] {
 	left: 900px;
 }
 .openGallery {
-	width: 800px;
+	width: 797px;
 	height: 0px;
 	border-top: 3px solid #4F81D3;
 	overflow: auto;
-	position: relative;
-	background: white;
-	border-right: 3px solid #4F81D3;
+	background: #fff;
+	position: absolute;
+	top: 600px;
 }
 .galleryImage {
 	width: 220px;

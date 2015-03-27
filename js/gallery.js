@@ -9,94 +9,89 @@
 function Gallery() {
 	var self = this;
 	var isOpened = false;
-	var aside = $( "#aside");
 	var section = $("#section");
-	var gallery = $( document.createElement("div") );
-	var opts = {
-		delay: 50,
-		duration: 1000,
-		step: function () {
-			var h = document.documentElement.clientHeight;
-			var needScroll = 1050 - h - document.body.scrollTop;
-			document.body.scrollTop += 5;
-		}
-	};
-	var options= {
-		delay: 20,
-		duration: 100,
-		count: 0,
-		step: function() {
-			//gallery.style.height = h * progress + "px";
-			aside.style.height = 850 - (this.count += 50) + "px";
-			console.log(" aside.style.height = " + aside.style.height);
-		}
-	};
 
-	gallery.attr( "id", "gallery" );
-	gallery.toggleClass( "openGallery" );
+	var canselButton = $( document.createElement("div") )
+	.addClass('canselButton')
+	.on("click", function () {
+		hideGallery();
+	});
+
+	var wrapper = $( document.createElement("div") )
+	.append( canselButton )
+	.css({
+		position: "relative"
+	});
+
+	var gallery = $( document.createElement("div") )
+	.attr( "id", "gallery" )
+	.toggleClass( "openGallery" )
+	.append( wrapper );
+
 
 	self.open = function (images) {
-		console.log("gallery.open()", " isOpened = ", isOpened);
-		var imgs = [];
-		if (!isOpened) {
-			for (var i=0; i<images.length; i++) {
-				imgs.push( $( document.createElement("img") ) );
-				imgs[i].attr( "src", images[i] );
-				gallery.append( imgs[i] );
-				console.log("image added");
-			}
-			var wrapper = $( document.createElement("div") );
-			var canselButton = $( document.createElement("div") );
-			canselButton.addClass('canselButton');
-			canselButton.on("click", function () {
-				hideGallery(options);
-			});
-			wrapper.append( canselButton );
-			wrapper.css( "position", "relative" );
-			section.append( wrapper );
-			section.append( gallery );
-			var timer = setInterval( function() {
-				var hgth = document.body.scrollTop;
-				var ns = 1050 - document.documentElement.clientHeight - hgth;
-				console.log("timer ", hgth);
-				if (hgth < ns)
-					opts.step();
-				else clearInterval(timer);
-			}, opts.delay );
+		if (isOpened) {
+			$("#gallery>img").remove();
+			appendImage(images);
+		} else {
+			appendImage(images);
+			animate();
+			isOpened = !isOpened;
 		}
 	}
 
-	function animate(opts) {	
-		var h = 250;
-		var start = new Date();
-		var timer = setInterval( function () {
-			var progress = (new Date() - start)/opts.duration;
-			if (progress < 1)
-				opts.step(progress, h);
-			else
-				clearInterval(timer);
-		}, opts.delay );
+	function appendImage(images) {
+		var imgs = [];
+		for (var i=0; i<images.length; i++) {
+			imgs.push( $( document.createElement("img") )
+				.attr({
+					src: images[i],
+					width: 200,
+					height: 200
+				})
+				.css({
+					margin: 5,
+					border: "1px solid grey"
+				})
+			);
+			gallery.append( imgs[i] );
+			console.log("append('img[i]')");
+		};		
 	}
-	function hideGallery (options) {	
-			var h = 250;
-			var start = new Date();
-			var timer = setInterval( function () {
-				var progress = (new Date() - start)/options.duration;
-				options.step();
-				if (progress > 1) 
-					clearInterval(timer);
-			}, options.delay );
-			section.removeChild( wrapper );
-			section.removeChild( gallery );
+	function windowScroll(into) {
+		var html = document.documentElement;
+		var body = document.body;
+		var elem = html.scrollTop ? html : body; 
+		var s_h = into - document.documentElement.clientHeight;
+		$(document.body).animate({
+			scrollTop: s_h
+		}, {
+			duration: 1000
+		});
 	}
-	var opts = {
-		delay: 20,
-		duration: 500,
-		step: function(progress, h) {
-			gallery.css( "height", h * progress + "px" );
-			aside.css( "height", 600 + h * progress + "px" );
-			// gallery.scrollIntoView(false);	
-		}
-	};
-	//animate(opts);
+	function animate() {
+		section
+		.append( gallery );
+		windowScroll(780);
+		gallery.animate({
+			height: 250,
+			top: 350
+		}, {
+			duration: 1000
+		});
+	}
+
+	function hideGallery (options) {
+		isOpened = !isOpened;
+		gallery.animate({
+			height: 0,
+			top: 600
+		}, {
+			duration: 1000,
+			queue: true
+		});
+		setTimeout(function () {
+			$("#gallery>img").remove();
+		}, 1000);
+	}
 }

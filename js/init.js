@@ -1,17 +1,16 @@
 //2
-function initGeoObjectManager() { // Отвечает за загрузку карты, геолокацию
+function initGeoObjectManager() {
 	var self = this;
 	var myMap = new ymaps.Map('wsMap', {
 		center: [55.20, 37.20],
 		zoom: 10
 	});
-	var myBalloonLayout = ymaps.templateLayoutFactory.createClass(//переместить в локальную обл. вид-ти
+	var myBalloonLayout = ymaps.templateLayoutFactory.createClass(
 		'<div style="width:170px; margin: 10px; overflow:auto">' +
 		'<figure>' +
 	    	'<img src="{{properties.imageAddress}}" ' +
 	    	' style="width:150px; height:150px;" ' +
-//запрашивается адрес картинок для метки либо по координатам либо по id
-	    	' onclick="mediator.requestImageSrc({{properties.coordinates}})"/>' +
+	    	' onclick="mediator.requestImageSrc({{properties.id}})"/>' +
 	    	'<figcaption>{{properties.disclamer}}</figcaption>' +
 	    '</figure>' +
 	    '</div>'
