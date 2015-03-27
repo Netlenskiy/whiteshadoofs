@@ -1,7 +1,3 @@
-* {
-	margin: 0px;
-	padding: 0px;
-}
 body {
 	width: 1000px;
 	margin: 0px auto;
@@ -29,13 +25,30 @@ nav li {
 	text-align: center;
 	cursor: pointer;
 }
-.hovered {
-	background-color: orange;
+#wsMap {
+	width: 797px;
+	height: 600px;
+	float: right;
 }
-.unhovered {
-	background-color: #3B3ACA;
+aside {
+	width: 200px;
+	height: 600px;
+	background-color: #4F81D3;
 }
-
+section {
+	position: relative;
+	width: 797px;
+	height: 600px;
+	float: right;
+	border-right: 3px solid #4F81D3;
+	z-index: 0;
+}
+footer {
+	position: relative;
+	width: 1000px;
+	height: 150px;
+	background-color: #7B4FD3;
+}
 ul li>ul {
 	position: relative;
 	top: 5px;
@@ -43,6 +56,16 @@ ul li>ul {
 	font-size: 16px;
 	text-align: center;
 	cursor: pointer;
+}
+ul li>ul li {
+	display: none;
+	text-align: left;
+	padding-left: 10px;
+}
+input[onclick="foo()"] {
+	position: relative;
+	top: 50px;
+	left: 900px;
 }
 .blockMenu {
 	position: relative;
@@ -54,6 +77,12 @@ ul li>ul {
 	position: relative;
 	display: block;
 	z-index: 1;
+}
+.hovered {
+	background-color: orange;
+}
+.unhovered {
+	background-color: #3B3ACA;
 }
 .noneMenu {
 	display: none;
@@ -68,48 +97,14 @@ ul li>ul {
 	z-index: 5;
 	cursor: pointer;
 }
-ul li>ul li {
-	display: none;
-	text-align: left;
-	padding-left: 10px;
-}
-aside {
-	width: 200px;
-	height: 600px;
-	background-color: #4F81D3;
-}
-section {
-	width: 800px;
-	height: 600px;
-	width: 800px;
-	height: 600px;
-	float: right;
-	border-right: 3px solid #4F81D3;
-	z-index: 0;
-}
-#wsMap {
-	width: 797px;
-	height: 600px;
-}
-footer {
-	position: relative;
-	width: 1000px;
-	height: 150px;
-	background-color: #7B4FD3;
-}
-input[onclick="foo()"] {
-	position: relative;
-	top: 50px;
-	left: 900px;
-}
 .openGallery {
-	width: 800px;
+	width: 797px;
 	height: 0px;
 	border-top: 3px solid #4F81D3;
 	overflow: auto;
-	position: relative;
-	background: white;
-	border-right: 3px solid #4F81D3;
+	background: #fff;
+	position: absolute;
+	top: 600px;
 }
 .galleryImage {
 	width: 220px;
@@ -117,4 +112,8 @@ input[onclick="foo()"] {
 	float: left;
 	margin: 15px;
 	outline: 1px solid grey;	
+}
+* {
+	margin: 0px;
+	padding: 0px;
 }
