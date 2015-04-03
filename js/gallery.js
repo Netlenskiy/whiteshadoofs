@@ -9,8 +9,8 @@ function Gallery(gallery) {
 	var section = $("#section");
 	var carousel = $("#carousel");
 	var carouselWidth = parseInt( $("#carousel").css("width"), 10 );
+
 	$.fx.speeds["very_slow"] = 1000;
-	
 	$(".canselButton", gallery).on("click", function () {
 		hideGallery();
 	});
@@ -21,6 +21,7 @@ function Gallery(gallery) {
 	gallery.toggleClass( "openGallery" );
 	
 	self.open = function (images) {
+		console.log("open");
 		if (isOpened) {
 			$("#img", carousel).remove();
 			appendImages(images);
@@ -31,8 +32,11 @@ function Gallery(gallery) {
 		}
 	}
 	function appendImages(images) {
+		console.log("appendImages");
+		var posLeft = 5;
 		var imgs = [];
 		for (var i=0; i<images.length; i++) {
+			console.log("push");
 			imgs.push( $( "<img/>", {
 					src: images[i]
 				} ).css({
@@ -66,7 +70,8 @@ function Gallery(gallery) {
 			duration: "very_slow"
 		});
 	}
-	function hideGallery (options) {
+	function hideGallery () {
+		console.log("hideGallery");
 		isOpened = !isOpened;
 		gallery.animate({
 			height: 0,
