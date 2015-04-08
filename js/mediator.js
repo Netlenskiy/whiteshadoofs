@@ -4,9 +4,7 @@ function Mediator() {
 	var curPmId = null;
 	
 	self.sendTypesToMap = function (options) {
-		console.log(map);
 		map.filterPlacemarks(options.types);
-
 	}
 	self.requestImageSrc = function (pmId) {
 		var images = [
