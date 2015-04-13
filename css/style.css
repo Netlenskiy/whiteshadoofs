@@ -131,6 +131,47 @@ aside {
 	left: -200px;
 	display: none;
 }
+#addObject {
+	position: absolute;
+	top: 15px;
+	width: 175px;
+	color: white;
+	left: 12px;
+	height: 570px;
+	outline: 1px solid orange;
+	/*display: none;	*/
+}
+#addObject li {
+	margin-bottom: 15px;
+}
+#addObject input[type=file] {
+	width: 150px;
+	overflow: auto;
+}
+#addObject input[name=comments] {
+}
+#searchResult {
+	position: absolute;
+	top: 15px;
+	width: 200px;
+	color: white;
+	left: -200px;
+	display: none;
+	outline: 1px solid red;
+	height: 570px;
+}
+#searchResult #sr_block {
+	outline: 1px solid lime;
+	width: 200px;
+	height: 200px;
+	
+}
+#searchResult input {
+	position: absolute;
+	left: 20px;
+	bottom: 10px;
+}
+
 #sf_block_1 {
 	top: 10px;
 }

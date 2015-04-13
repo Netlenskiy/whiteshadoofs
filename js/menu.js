@@ -3,13 +3,11 @@
 function MenuCategory(elem, list) {
 	var self = this;
 	var isOpened = false;
-
 	self.toggle = function (e) {
 		isOpened ? self.hide() : show();
 	}
 	self.hide = function (into) {
 		var pos = into == "left" ? -175 : 200;
-		console.log("category.hide()", isOpened);
 		isOpened = false;
 		list.animate({
 			left: pos
@@ -21,6 +19,18 @@ function MenuCategory(elem, list) {
 					"left": -175
 				});
 			}
+		});
+	}
+	self.isOpen = function () {
+		return isOpened;
+	}
+	function show() {
+		isOpened = true;
+		list.css("display", "block");
+		list.animate({
+			left: 25
+		}, {
+			duration: "default"
 		});
 	}
 	list.last().on("click", function (e) {
@@ -35,19 +45,6 @@ function MenuCategory(elem, list) {
 			types: types
 		});
 	});
-	self.isOpen = function () {
-		return isOpened;
-	}
-	function show() {
-		console.log("category.show()", isOpened);
-		isOpened = true;
-		list.css("display", "block");
-		list.animate({
-			left: 25
-		}, {
-			duration: "default"
-		});
-	}
 }
 function MenuActions() {
 	var self = this;
@@ -65,7 +62,6 @@ function MenuActions() {
 		return isOpened;
 	}	
 	self.hide = function () {
-		console.log("actions.hide()", isOpened);
 		isOpened = false;
 		$(self.authorized).change();
 		elem.animate({
@@ -78,7 +74,6 @@ function MenuActions() {
 		});
 	}
 	function show () {
-		console.log("actions.show()", isOpened);
 		isOpened = true;
 		elem.css("display", "block");
 		elem.animate({
@@ -124,7 +119,6 @@ function MenuAbout(elem) {
 		return isOpened;
 	}	
 	self.hide = function () {
-		console.log("about.hide()", isOpened);
 		isOpened = false;
 		elem.animate({
 			left: 1000
@@ -136,7 +130,6 @@ function MenuAbout(elem) {
 		});
 	}
 	function show () {
-		console.log("about.show()", isOpened);
 		isOpened = true;
 		elem.css("display", "block");
 		elem.animate({
@@ -146,16 +139,20 @@ function MenuAbout(elem) {
 		});
 	}	
 }
-function MenuSearch(elem) {
+function MenuSearch(search, result) {
 	var self = this;
 	var isOpened = false;
-
-	self.toggle = function (e) {
-		isOpened ? self.hide() : show();
+	var openedItem = "search";
+	self.toggle = function () {
+		if (isOpened) {
+			openedItem === "result" ? self.hide(null, "result") : self.hide();
+		} else {
+			show();
+		};
 	}
 	self.hide = function (into) {
 		var pos = into == "left" ? -200 : 200;
-		console.log("search.hide()", isOpened);
+		var elem = openedItem === "result" ? $(result) : $(search);
 		isOpened = false;
 		elem.animate({
 			left: pos
@@ -172,63 +169,60 @@ function MenuSearch(elem) {
 	self.isOpen = function () {
 		return isOpened;
 	}
-	function show() {
-		console.log("category.show()", isOpened);
+	function show(item) {
 		isOpened = true;
-		$(elem).css("display", "block");
-		$(elem).animate({
+		var elem = item === "result" ? $(result) : $(search);
+		openedItem = item === "result" ? "result" : "search";
+		elem.css("display", "block");
+		elem.animate({
 			left: 0
 		}, {
 			duration: "default"
 		});
-	}	
+	}
+	$("input[name=toSearch]", search).on('click', function (event) {
+		event.preventDefault();
+		self.hide();
+		show("result");
+	});
+	$("input[name=newSearch]", result).on('click', function (event) {
+		event.preventDefault();
+		self.hide("right", "result");
+		show();
+	});
 }
 function Menu(elem) {
-	var category = new MenuCategory( $("#category"), $("#categoryList") );
-	var actions = new MenuActions();
-	var about = new MenuAbout( $('#aboutWindow') );
-	var search = new MenuSearch( $("#searchFilter") );
+	var menu = {
+		category: new MenuCategory( $("#category"), $("#categoryList") ),
+		actions: new MenuActions(),
+		about: new MenuAbout( $('#aboutWindow') ),
+		search: new MenuSearch( $("#searchFilter"), $("#searchResult") )
+	}
 	var lastOpened = null;
 	var curOpened = null;
 
 	elem.on('click', function(event) {
 		event.preventDefault();
 		curOpened = event.target.id;
-
-		console.log(event.target.id, lastOpened);
-
 		if (curOpened != lastOpened) {
 			switch(lastOpened) {
 			case "category":
-				if (curOpened != "search") category.hide("left");
-				else category.hide();
+				if (curOpened != "search") menu.category.hide("left");
+				else menu.category.hide();
 				break;
 			case "actions":
-				actions.hide();
+				menu.actions.hide();
 				break;
 			case "search":
-				if (curOpened != "category") search.hide("left");
-				else search.hide();
+				if (curOpened != "category") menu.search.hide("left");
+				else menu.search.hide();
 				break;
 			case "about":
-				about.hide();
+				menu.about.hide();
 				break;
 			}
-		lastOpened = event.target.id;
+			lastOpened = event.target.id;
 		}
-		switch(event.target.id) {
-		case "category":
-			category.toggle();
-			break;
-		case "actions":
-			actions.toggle();
-			break;
-		case "search":
-			search.toggle();
-			break;
-		case "about":
-			about.toggle();
-			break;
-		}
+		menu[curOpened].toggle();
 	});
 }
