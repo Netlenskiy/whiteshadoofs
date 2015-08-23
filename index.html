@@ -1,0 +1,251 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Белые журавли</title>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no, maximum-scale=1" /> 
+	<link href="css/style.css" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+	<script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU&mode=debug" type="text/javascript"></script>
+	<script src="js/mediator.js"></script>
+	<script src="js/menu.js"></script>
+	<script src="js/gallery.js"></script>
+	<script src="js/data.js"></script>
+</head>
+<body>
+<header>
+	<div id="logo"></div>
+	<div id="auth"></div>
+</header>
+<nav>
+	<ul id="mainMenu" class="oops">
+		<li id="category">Категории
+		</li>
+		<li id="actions">Мероприятия
+		</li>
+		<li id="about">О проекте
+		</li>
+		<li id="search">Поиск
+		</li>
+	</ul>
+</nav>
+<section id="container">
+	<aside id="aside">
+		<ul id="categoryList">
+			<label><li>
+				<input type="checkbox" />
+				Аллея
+			</li></label>
+			<label><li>
+				<input type="checkbox" />
+				Вечный огонь
+			</li></label>
+			<label><li>
+				<input type="checkbox" />
+				Мемориал
+			</li></label>
+			<label><li>
+				<input type="checkbox" />
+				Монумент
+			</li></label>
+			<label><li>
+				<input type="checkbox" />
+				Памятник
+			</li></label>
+			<label><li>
+				<input type="checkbox" />
+				Парк
+			</li></label>
+			<label><li>
+				<input type="checkbox" />
+				Площадь
+			</li></label>
+			<label><li>
+				<input type="checkbox" />
+				Обелиск
+			</li></label>
+			<label><li>
+				<input type="checkbox" />
+				Улица
+			</li></label>
+			<label><li>
+				<input type="checkbox" />
+				Прочее
+			</li></label>
+			<li>
+				<div id="filter">Отфильтровать</div>			
+			</li>
+		</ul>
+		<div id="searchFilter">
+			<div id="sf_block_1" class="posabs">
+				<span>Искать в</span>
+				<label>
+				<div id="sf_block_2" class="posabs">
+					<input name="title" type="checkbox">названии
+					</label><br>
+					<label>
+					<input name="desc" type="checkbox">описании
+					</label>
+				</div>
+				<input name="text" type="textarea" class="posabs" placeholder="Введите текст">
+			</div>
+			<div id="sf_block_3" class="posabs">
+				<span>Выберите категорию</span><br>
+				<ul>
+					<label><li>
+						<input name="alley" type="checkbox" />
+						Аллея
+					</li></label>
+					<label><li>
+						<input name="eternalFlame" type="checkbox" />
+						Вечный огонь
+					</li></label>
+					<label><li>
+						<input name="memorial" type="checkbox" />
+						Мемориал
+					</li></label>
+					<label><li>
+						<input name="monument" type="checkbox" />
+						Монумент
+					</li></label>
+					<label><li>
+						<input name="record" type="checkbox" />
+						Памятник
+					</li></label>
+					<label><li>
+						<input name="square" type="checkbox" />
+						Парк
+					</li></label>
+					<label><li>
+						<input name="place" type="checkbox" />
+						Площадь
+					</li></label>
+					<label><li>
+						<input name="obelisk" type="checkbox" />
+						Обелиск
+					</li></label>
+					<label><li>
+						<input name="street" type="checkbox" />
+						Улица
+					</li></label>
+					<label><li>
+						<input name="other" type="checkbox" />
+						Прочее
+					</li></label>
+				</ul>
+			</div>
+			<div id="sf_block_4" class="posabs">			
+				<input name="" type="textarea" placeholder="Страна">
+				<input name="" type="textarea" placeholder="Область">
+				<input name="" type="textarea" placeholder="Населенный пункт"><br>
+				<input name="toSearch" type="button" value="Поиск">
+			</div>
+		</div>
+		<div id="searchResult">
+			<div id="sr_block">
+				
+			</div>
+			<input name="newSearch" type="button" value="Начать новый поиск">
+		</div>
+		<div id="addObject">
+		<ul>
+			<li>
+				<h4>Поля для заполнения</h4>
+			</li>
+			<li>
+				<span>Название</span>
+				<input type="textarea" name="name">
+			</li>
+			<li>
+				<span>Местоположение</span>
+				<input type="textarea" name="place">
+			</li>
+			<li>
+				<span>Категория</span>
+				<select name="category" id="category">
+					<option value="Аллея">Аллея</option>
+					<option value="Обелиск">Обелиск</option>
+					<option value="Парк">Парк</option>
+					<option value="Мемориал">Мемориал</option>
+					<option value="Вечный огонь">Вечный огонь</option>
+					<option value="Монумент">Монумент</option>
+					<option value="Памятник">Памятник</option>
+					<option value="Площадь">Площадь</option>
+					<option value="Улица">Улица</option>
+					<option value="Прочее">Прочее</option>
+				</select>
+			</li>
+			<li>
+				<span>Фото</span>
+				<input type="file" name="photo">
+			</li>
+			<li>
+				<span>Описание</span>
+				<input type="textarea" name="desc">
+			</li>
+			<li>
+				<span>История</span>
+				<input type="textarea" name="history">
+			</li>
+			<li>
+				<span>Состояние</span>
+				<select name="condition" id="condition">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+				</select>
+			</li>
+			<li>
+				<span>Комментарии</span>
+				<textarea name="comments" id="comments" cols="22" rows="3"></textarea>
+				<!-- <input type="textarea" rows="10" name="comments"> -->
+			</li>
+			<li>
+				<input type="button" name="add" value="Добавить">
+			</li>
+		</ul>
+		</div>
+	</aside>
+	<div id="section">
+		<div id="wsMap"></div>
+		<div id="gallery">
+			<div id="leftButton">
+				<img id="left" src="imgs/left.png" alt="" class="scrollButton transform">		
+			</div>
+			<div id="carousel"></div>
+			<div id="wrapper">
+				<div id="canselButton" class="canselButton transform"></div>
+			</div>
+			<div id="rightButton">
+				<img id="right" src="imgs/right.png" alt="" class="scrollButton transform">
+			</div>
+		</div>
+	</div>
+	<div id="actionsWindow_1" class="actionsWindow">
+	</div>
+	<div id="actionsWindow_2" class="actionsWindow">
+		<input type="button" value="Предложить мероприятие">
+	</div>
+	<div id="actionsWindow_3" class="actionsWindow">
+		<div id="aw3_date" class="aw3_divs">Дата<input type="textarea"></div>
+		<div id="aw3_place" class="aw3_divs">Место<input  type="textarea"></div>
+		<div id="aw3_desc" class="aw3_divs">Описание<input type="textarea"></div>
+		<input type="button" value="Добавить">
+	</div>
+	<div id="actionsWindow_4" class="actionsWindow">
+		<input type="button" value="Предложить мероприятие">
+	</div>
+	<div id="aboutWindow">
+	</div>
+</section>
+<footer id="footer"></footer>
+</body>
+	<script src="js/init.js"></script>
+	<script src="js/script.js"></script>
+</html>
