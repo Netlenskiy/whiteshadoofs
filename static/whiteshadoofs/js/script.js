@@ -1,9 +1,6 @@
 //5
 try
 {
-    ymaps.ready( function () {
-        initGeoObjectManager();
-    })
 }
 catch (e)
 {
@@ -11,7 +8,10 @@ catch (e)
 }
 
 
-//mediator.requestImageSrc(1);
-window.menu = new Menu( $("#mainMenu") );
-window.mediator = new Mediator();
-window.gallery = new Gallery( $("#gallery") );
+ymaps.ready( function () {
+    initGeoObjectManager();
+    // mediator.requestImageSrc(1);
+    window.menu = new Menu( $("#mainMenu") );
+    window.mediator = new Mediator();
+    window.gallery = new Gallery( $("#gallery") );
+})

@@ -1,0 +1,10 @@
+
+aside {
+    float: left;
+    width: 200px;
+    height: 450px;
+    overflow: hidden;
+    background-image: url("../imgs/aside.png");
+    background-repeat: no-repeat;
+    background-position: 5px 0px;
+}

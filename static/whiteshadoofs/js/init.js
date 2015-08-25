@@ -1,6 +1,8 @@
 //2
+
 function initGeoObjectManager() {
 	var self = this;
+	var icon_path = "static/whiteshadoofs/icons/";
 	var myMap = new ymaps.Map('wsMap', {
 		center: [55.20, 37.20],
 		zoom: 10
@@ -21,17 +23,18 @@ function initGeoObjectManager() {
 	// var hiddenCollection = new ymaps.GeoObjectCollection();
 	// var tempCollection = new ymaps.GeoObjectCollection();
 	for (var i=0; i<myPlaceMarks.length; i++) {
-			mainCollection.add( new ymaps.Placemark( myPlaceMarks[i].coordnts, {
-				id: myPlaceMarks[i].id,
-				imageAddress: myPlaceMarks[i].srcString,
-				coordinates: myPlaceMarks[i].coordnts,
-				disclamer: myPlaceMarks[i].disclamer,
-				category: myPlaceMarks[i].icontype,
-			}, {
-				balloonContentLayout: myBalloonLayout,//'my#Layout' - Why it does not work?
-				iconLayout: "default#image",
-				iconImageHref: "icons/" + myPlaceMarks[i].icon
-			} ) );
+		mainCollection.add( new ymaps.Placemark( myPlaceMarks[i].coordnts, {
+			id: myPlaceMarks[i].id,
+			imageAddress: myPlaceMarks[i].srcString,
+			coordinates: myPlaceMarks[i].coordnts,
+			disclamer: myPlaceMarks[i].disclamer,
+			category: myPlaceMarks[i].icontype,
+		}, {
+			balloonContentLayout: myBalloonLayout,//'my#Layout' - Why it does not work?
+			iconLayout: "default#image",
+			iconImageHref: icon_path + myPlaceMarks[i].icon
+			// iconImageHref: "{% static icon_path %}"
+		} ) );
 	}
 
 	mainCollection.each( function (item) {

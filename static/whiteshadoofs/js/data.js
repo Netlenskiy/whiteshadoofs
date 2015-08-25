@@ -11,11 +11,12 @@ var Types = {
 	street: 8,
 	other: 9
 }
+var face_path = "static/whiteshadoofs/";
 var myPlaceMarks = [
 	{
 		"id": 0,
 		"coordnts": [55.10, 37.10],
-		"srcString": "face/Smolensk_skver_pamyati_geroyev.jpg",
+		"srcString": face_path + "face/Smolensk_skver_pamyati_geroyev.jpg",
 		"disclamer": "Сквер памяти героев один из старейших скверов в Смоленске. В январе 1911 года, во время подготовки к празднованию 100-летнего юбилея победы над армией императора Наполеона, Смоленская городская Дума постановила: «Устроить бульвар возле крепостной стены… и назвать этот бульвар и сооружаемое здесь здание начального городского училища «Бульваром и начальным городским училищем в память 1812 года»..",
 		"icontype": 0,
 		"icon": "RedStarPic.gif"
