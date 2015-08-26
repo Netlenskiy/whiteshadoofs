@@ -24,7 +24,7 @@ var myPlaceMarks = [
 	{
 		"id": 1,
 		"coordnts": [55.30, 37.30],
-		"srcString": "face/DSC_0014.jpg",
+		"srcString": face_path + "face/DSC_0014.jpg",
 		"disclamer": "Мемориальная аллея Памяти в Московском парке Победы Санкт-Петербурга — создана к 60-летию снятия блокады Ленинграда 27 января 2004 г. по инициативе Московского районного общества «Жители Блокадного Ленинграда»",
 		"icontype": 0,
 		"icon": "RedStarPic.gif"
@@ -32,7 +32,7 @@ var myPlaceMarks = [
 	{
 		"id": 2,
 		"coordnts": [55.10, 37.30],
-		"srcString": "face/96_big.jpg",
+		"srcString": face_path + "face/96_big.jpg",
 		"disclamer": "Мемориал памяти погибшим в Великой Отечественной Войне.",
 		"icontype": 1,
 		"icon": "fire.gif"
@@ -40,7 +40,7 @@ var myPlaceMarks = [
 	{
 		"id": 3,
 		"coordnts": [55.30, 37.10],
-		"srcString": "face/1424204291_3.jpg",
+		"srcString": face_path + "face/1424204291_3.jpg",
 		"disclamer": "Ве́чный ого́нь — постоянно горящий огонь, символизирующий вечную память о чём-либо или о ком-либо.",
 		"icontype": 1,
 		"icon": "fire.gif"
@@ -48,7 +48,7 @@ var myPlaceMarks = [
 	{
 		"id": 4,
 		"coordnts": [55.20, 37.20],
-		"srcString": "face/image31207551.jpg",
+		"srcString": face_path + "face/image31207551.jpg",
 		"disclamer": "Ве́чный ого́нь — постоянно горящий огонь, символизирующий вечную память о чём-либо или о ком-либо.",
 		"icontype": 0,
 		"icon": "RedStarPic.gif"

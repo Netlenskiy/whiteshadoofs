@@ -1,12 +1,13 @@
 //2
 
 function initGeoObjectManager() {
-	var self = this;
 	var icon_path = "static/whiteshadoofs/icons/";
 	var myMap = new ymaps.Map('wsMap', {
 		center: [55.20, 37.20],
-		zoom: 10
+		zoom: 10,
+		controls: ['smallMapDefaultSet']
 	});
+	myMap.controls.remove('searchControl');
 	var myBalloonLayout = ymaps.templateLayoutFactory.createClass(
 		'<div style="width:170px; margin: 10px; overflow:auto">' +
 		'<figure>' +

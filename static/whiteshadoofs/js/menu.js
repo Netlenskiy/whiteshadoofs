@@ -254,9 +254,9 @@ function MenuSearch(search, searchResultElem) {
 	}
 
 	function jxRequestSearchResult (url, elem) {
-		// Отправляет ajax-запрос форму с параметрами поиска.
-		// При получении результата встраивает его в элемент 
-		// div блока результата поиска.
+		/*Отправляет ajax-запрос форму с параметрами поиска.
+		При получении результата встраивает его в элемент 
+		div блока результата поиска.*/
 		if (url === 'undefined' || elem === 'undefined')
 			throw new Error('2 arguments expected.');
 
