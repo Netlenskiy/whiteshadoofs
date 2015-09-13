@@ -1,0 +1,11 @@
+
+header {
+    position: relative;
+    width: 1000px;
+    height: 130px;
+}
+header #logo {
+    position: absolute;
+    top: 30px;
+    left: 50px;
+}
