@@ -1,0 +1,38 @@
+body {
+	width: 1000px;
+	margin: 0px auto;
+}
+#main_wrapper {
+	background-image: url("../images/bg.png");
+	background-repeat: no-repeat;
+	height: 765px;
+}
+.posabs {
+	position: absolute;
+}
+.transform:hover {
+	-webkit-transform: scale(1.2);
+	-moz-transform: scale(1.2);
+	-ms-transform: scale(1.2);
+	-o-transform: scale(1.2);
+	transform: scale(1.2);
+}
+.transform:active {
+	-webkit-transform: scale(1.1);
+	-moz-transform: scale(1.1);
+	-ms-transform: scale(1.1);
+	-o-transform: scale(1.1);
+	transform: scale(1.1);/**/
+}
+footer {
+	position: relative;
+	top: 30px;
+	left: 25px;
+	width: 950px;
+	height: 90px;
+	background-image: url("../images/footer_bg.png");
+}
+* {
+	margin: 0px;
+	padding: 0px;
+}
