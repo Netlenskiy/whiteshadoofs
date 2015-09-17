@@ -34,12 +34,13 @@ class Locality extends CActiveRecord
             'region'=>[
                 self::BELONGS_TO,
                 'Region',
-                'locality_fk_to_region',
+                'region',
+                'with'=>'country',
             ],
             'address'=>[
                 self::HAS_MANY,
                 'Address',
-                'address_fk_to_locality',
+                'address',
             ],
         ];
     }

@@ -31,10 +31,11 @@ class Address extends CActiveRecord
     public function relations()
     {
         return [
-            'address_fk_to_locality'=>[
+            'locality'=>[
                 self::BELONGS_TO,
                 'Locality',
-                'address_fk_to_locality',
+                'locality',
+                'with'=>'region',
             ],
         ];
     }

@@ -34,7 +34,7 @@ class Country extends CActiveRecord
             'region'=>[
                 self::HAS_MANY,
                 'Region',
-                'region_fk_to_country',
+                'country',
             ],
         ];
     }

@@ -29,4 +29,16 @@ class Object extends CActiveRecord
     {
         return 'CActiveRecord';
     }
+
+    public function relations()
+    {
+        return [
+            'address'=>[
+                self::BELONGS_TO,
+                'Address',
+                'address',
+                'with'=>'locality',
+            ]
+        ];
+    }
 }

@@ -6,7 +6,7 @@ class SiteController extends Controller
      * @param $str String Удаляет кавычки из строки-аргумента,
      * @return mixed Возвращает "очищенную" строку
      */
-    function quotes_delete($str)
+    function delete_quotes($str)
     {
         $temp = str_ireplace("'", '', $str);
         $temp = str_ireplace("\"", '', $temp);
@@ -49,39 +49,35 @@ class SiteController extends Controller
     {
 //      gets: in_desc, title, country, region, city, street
 
-        if (!isset($_GET['title']) || !$_GET['title']) {
-            echo "'Название' обязательно для заполнения";
-            Yii::app()->end();
-        }
-
         $criteria = new CDbCriteria;
-        $criteria->alias = 'object';
         $criteria->select = 'title';
-        $title = $this::quotes_delete(Yii::app()->getRequest()->getParam('title'));
-        $criteria->condition = 'title=' . '\'' . $title . '\'';
+        $title =   $this->delete_quotes(Yii::app()->request->getParam('title'));
+        $street =  $this->delete_quotes(Yii::app()->request->getParam('street'));
+        $locality =$this->delete_quotes(Yii::app()->request->getParam('city'));
+        $region =  $this->delete_quotes(Yii::app()->request->getParam('region'));
+        $country = $this->delete_quotes(Yii::app()->request->getParam('country'));
+        if ($title) {
+            $criteria->addCondition('title=' . '\'' . $title . '\'');
+        }
+        if ($street) {
+            $criteria->addSearchCondition('address.street', $street, true, 'LIKE');
+        }
+        if ($locality) {
+            $criteria->addCondition('locality.title=' . '\'' . $locality . '\'');
+        }
+        if ($region) {
+            $criteria->addCondition('region.title=' . '\'' . $region . '\'');
+        }
+        if ($country) {
+            $criteria->addCondition('country.title=' . '\'' . $country . '\'');
+        }
+        $criteria->with = [
+            'address'=>[
+                'select'=>false,
+            ]
+        ];
+        $related_tables = [];
 
-        if (isset($_GET['country']) && $_GET['country']) {
-            $country = $this::quotes_delete("'", '', Yii::app()->getRequest()->getParam('country'));
-
-
-            $condition = 'country=' . '\'' . $country . '\'';
-            $criteria->addCondition($condition);
-        }
-        if (isset($_GET['region']) && $_GET['region']) {
-            $region = $this::quotes_delete(Yii::app()->getRequest()->getParam('region'));
-            $condition = 'region=' . '\'' . $region . '\'';
-            $criteria->addCondition($condition);
-        }
-        if (isset($_GET['city']) && $_GET['city']) {
-            $city = $this::quotes_delete(Yii::app()->getRequest()->getParam('city'));
-            $condition = 'city=' . '\'' . $city . '\'';
-            $criteria->addCondition($condition);
-        }
-        if (isset($_GET['street']) && $_GET['street']) {
-            $street = $this::quotes_delete(Yii::app()->getRequest()->getParam('street'));
-            $condition = 'street=' . '\'' . $street . '\'';
-            $criteria->addCondition($condition);
-        }
         $objects = Object::model()->findAll($criteria);
         $obj_titles = '';
         foreach ($objects as $t) {

@@ -31,15 +31,15 @@ class Region extends CActiveRecord
     public function relations()
     {
         return [
-            'region_fk_to_country'=>[
+            'country'=>[
                 self::BELONGS_TO,
                 'Country',
-                'region_fk_to_country',
+                'country',
             ],
             'locality'=>[
                 self::HAS_MANY,
                 'Locality',
-                'locality_fk_to_region',
+                'region',
             ],
         ];
     }
