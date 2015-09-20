@@ -12,7 +12,7 @@ class Locality extends CActiveRecord
      * @param string $classname
      * @return static
      */
-    public static function model($classname=__CLASS__)
+    public static function model($classname = __CLASS__)
     {
         return parent::model($classname);
     }
@@ -30,18 +30,23 @@ class Locality extends CActiveRecord
      */
     public function relations()
     {
-        return [
-            'region'=>[
+        return array(
+            'region' => array(
                 self::BELONGS_TO,
                 'Region',
                 'region',
-                'with'=>'country',
-            ],
-            'address'=>[
+                'with' => 'country',
+            ),
+            'address' => array(
                 self::HAS_MANY,
                 'Address',
                 'address',
-            ],
-        ];
+            ),
+            'object' => array(
+                self::HAS_MANY,
+                'Object',
+                'object',
+            ),
+        );
     }
 }

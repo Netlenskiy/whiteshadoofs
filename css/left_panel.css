@@ -2,8 +2,8 @@
 aside {
     float: left;
     width: 200px;
-    height: 450px;
-    overflow: hidden;
+    height: 1450px;
+    overflow: auto;
     background-image: url("../images/aside.png");
     background-repeat: no-repeat;
     background-position: 5px 0px;

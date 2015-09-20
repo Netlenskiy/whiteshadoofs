@@ -19,7 +19,7 @@ function MenuCategory(list) {
 
 	self.toggle = function (e) {
 		isOpened ? self.hide() : show();
-	}
+	};
 
 	self.hide = function (into) {
 		/*
@@ -46,11 +46,11 @@ function MenuCategory(list) {
 				});
 			}
 		});
-	}
+	};
 
 	self.isOpen = function () {
 		return isOpened;
-	}
+	};
 
 	function show() {
 		/*
@@ -100,11 +100,11 @@ function MenuActions() {
 
 	self.toggle = function () {
 		isOpened ? self.hide() : show();
-	}
+	};
 
 	self.isOpen = function () {
 		return isOpened;
-	}
+	};
 
 	self.hide = function () {
 		isOpened = false;
@@ -117,7 +117,7 @@ function MenuActions() {
 				elem.css("display", "none");
 			}
 		});
-	}
+	};
 
 	self.toggleAuth = function (flag) {
 		function toggle(newElem) {
@@ -141,8 +141,8 @@ function MenuActions() {
 			toggle(elem_2);
 		} else {
 			toggle(elem_1);
-		};
-	}
+		}
+	};
 	function show () {
 		isOpened = true;
 		elem.css("display", "block");
@@ -161,10 +161,10 @@ function MenuAbout(elem) {
 
 	self.toggle = function () {
 		isOpened ? self.hide() : show();
-	}
+	};
 	self.isOpen = function () {
 		return isOpened;
-	}	
+	};
 	self.hide = function () {
 		isOpened = false;
 		elem.animate({
@@ -175,7 +175,7 @@ function MenuAbout(elem) {
 				elem.css("display", "none");
 			}
 		});
-	}
+	};
 	function show () {
 		isOpened = true;
 		elem.css("display", "block");
@@ -209,8 +209,8 @@ function MenuSearch(search, searchResultElem) {
 			openedItem === "searchResultElem" ? self.hide(null, "searchResultElem") : self.hide();
 		} else {
 			show();
-		};
-	}
+		}
+	};
 
 	self.hide = function (into) {
 		/*
@@ -231,11 +231,11 @@ function MenuSearch(search, searchResultElem) {
 				});
 			}
 		});
-	}
+	};
 
 	self.isOpen = function () {
 		return isOpened;
-	}
+	};
 
 	function show(item) {
 		/*
@@ -318,7 +318,7 @@ function Menu(elem) {
 		actions:  new MenuActions(),
 		about:    new MenuAbout( $('#about_window') ),
 		search:   new MenuSearch( $("#search_filter"), $("#search_result") )
-	}
+	};
 	var lastOpened = null;
 	var curOpened = null;
 	var authorized = false;

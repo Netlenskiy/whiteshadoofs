@@ -1,14 +1,17 @@
 <?php
 
-// This is the database connection configuration.
 return array(
-//	'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
-	// uncomment the following lines to use a MySQL database
-	'connectionString' => 'mysql:host=localhost;dbname=ws',
+    /*'connectionString' => 'mysql:host=traktir44.mysql;port=3306;dbname=traktir44_ws',
+    'username' => 'traktir44_ws',
+    'password' => 'NTWf2-hM',
+    'charset' => 'utf8',*/
+    'connectionString' => 'mysql:host=localhost;dbname=ws',
+    'username' => 'root',
+    'password' => 'password',
+    'charset' => 'utf8',
 //	'emulatePrepare' => true,
-	'username' => 'root',
-	'password' => 'password',
-	'charset' => 'utf8',
-	/*
-	*/
+    'enableProfiling' => true,
+    'enableParamLogging' => true,/**/
+    /*
+    */
 );

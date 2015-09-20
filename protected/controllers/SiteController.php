@@ -13,6 +13,7 @@ class SiteController extends Controller
 
         return $temp;
     }
+
     /**
      * Declares class-based actions.
      */
@@ -43,24 +44,30 @@ class SiteController extends Controller
         // using the default layout 'protected/views/layouts/main.php'
 
         $this->render('index');
+        Yii::log('индекс: ', 'trace', '*');
     }
 
     public function actionSearch()
     {
 //      gets: in_desc, title, country, region, city, street
 
+        Yii::trace('инфо: ', 'system.*');
         $criteria = new CDbCriteria;
-        $criteria->select = 'title';
-        $title =   $this->delete_quotes(Yii::app()->request->getParam('title'));
-        $street =  $this->delete_quotes(Yii::app()->request->getParam('street'));
-        $locality =$this->delete_quotes(Yii::app()->request->getParam('city'));
-        $region =  $this->delete_quotes(Yii::app()->request->getParam('region'));
+        $criteria->select = 'object.title';
+        $criteria->alias = 'object';
+        $criteria->with = array(
+            'address' => array('select' => false)
+        );
+        $title = $this->delete_quotes(Yii::app()->request->getParam('title'));
+        $street = $this->delete_quotes(Yii::app()->request->getParam('street'));
+        $locality = $this->delete_quotes(Yii::app()->request->getParam('city'));
+        $region = $this->delete_quotes(Yii::app()->request->getParam('region'));
         $country = $this->delete_quotes(Yii::app()->request->getParam('country'));
-        if ($title) {
-            $criteria->addCondition('title=' . '\'' . $title . '\'');
+        if (isset($title)) {
+            $criteria->addCondition('object.title=' . '\'' . $title . '\'');
         }
         if ($street) {
-            $criteria->addSearchCondition('address.street', $street, true, 'LIKE');
+            $criteria->addSearchCondition('address.street', $street, true);
         }
         if ($locality) {
             $criteria->addCondition('locality.title=' . '\'' . $locality . '\'');
@@ -71,22 +78,17 @@ class SiteController extends Controller
         if ($country) {
             $criteria->addCondition('country.title=' . '\'' . $country . '\'');
         }
-        $criteria->with = [
-            'address'=>[
-                'select'=>false,
-            ]
-        ];
-        $related_tables = [];
 
         $objects = Object::model()->findAll($criteria);
         $obj_titles = '';
         foreach ($objects as $t) {
             $obj_titles .= $t->attributes['title'];
-            $obj_titles .= ' ';
+            $obj_titles .= "\n";
         }
 
         echo $obj_titles;
-        Yii::app()->end();
+        Yii::trace('инфо: ', 'system.*');
+//        Yii::app()->end();
     }
 
 

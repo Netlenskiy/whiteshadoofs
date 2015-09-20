@@ -32,13 +32,13 @@ class User extends CActiveRecord
      */
     public function relations()
     {
-        return [
-            'user_fk_to_role'=>[
+        return array(
+            'user_fk_to_role'=>array(
                 self::BELONGS_TO,
                 'Role',
                 'user_fk_to_role',
-            ],
-        ];
+            ),
+        );
     }
 
 }

@@ -30,17 +30,17 @@ class Region extends CActiveRecord
      */
     public function relations()
     {
-        return [
-            'country'=>[
+        return array(
+            'country'=>array(
                 self::BELONGS_TO,
                 'Country',
                 'country',
-            ],
-            'locality'=>[
+            ),
+            'locality'=>array(
                 self::HAS_MANY,
                 'Locality',
                 'region',
-            ],
-        ];
+            ),
+        );
     }
 }

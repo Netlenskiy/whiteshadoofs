@@ -30,14 +30,14 @@ class Address extends CActiveRecord
      */
     public function relations()
     {
-        return [
-            'locality'=>[
+        return array(
+            'locality'=>array(
                 self::BELONGS_TO,
                 'Locality',
                 'locality',
                 'with'=>'region',
-            ],
-        ];
+            ),
+        );
     }
 
 }

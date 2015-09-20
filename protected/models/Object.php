@@ -22,23 +22,15 @@ class Object extends CActiveRecord
         return 'object';
     }
 
-    /**
-     * @return string
-     */
-    public static function __toString()
-    {
-        return 'CActiveRecord';
-    }
-
     public function relations()
     {
-        return [
-            'address'=>[
+        return array(
+            'address'=>array(
                 self::BELONGS_TO,
                 'Address',
                 'address',
                 'with'=>'locality',
-            ]
-        ];
+            ),
+        );
     }
 }
