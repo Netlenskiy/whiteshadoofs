@@ -71,8 +71,8 @@ return array(
                     'categories' => 'system.db.*',*/
                     'class' => 'CFileLogRoute',
                     'levels' => 'error, warning, trace',
-                    'enabled' => true,
-//                    'categories' => 'system.*',
+//                    'enabled' => true,
+//                    'categories' => '*',
 
                 ),/**/
                 // uncomment the following to show log messages on web pages

@@ -42,16 +42,15 @@ class SiteController extends Controller
     {
         // renders the view file 'protected/views/site/index.php'
         // using the default layout 'protected/views/layouts/main.php'
+        Yii::log('индекс: ', 'trace', '*');
 
         $this->render('index');
-        Yii::log('индекс: ', 'trace', '*');
     }
 
     public function actionSearch()
     {
 //      gets: in_desc, title, country, region, city, street
 
-        Yii::trace('инфо: ', 'system.*');
         $criteria = new CDbCriteria;
         $criteria->select = 'object.title';
         $criteria->alias = 'object';
@@ -87,8 +86,8 @@ class SiteController extends Controller
         }
 
         echo $obj_titles;
-        Yii::trace('инфо: ', 'system.*');
-//        Yii::app()->end();
+        Yii::trace('инфо: ', '*');
+        Yii::app()->end();
     }
 
 
