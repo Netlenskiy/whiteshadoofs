@@ -70,9 +70,8 @@ return array(
                     'levels' => 'profile',
                     'categories' => 'system.db.*',*/
                     'class' => 'CFileLogRoute',
-                    'levels' => 'error, warning, trace',
-//                    'enabled' => true,
-//                    'categories' => '*',
+                    'levels' => 'error, warning',
+//                    'categories' => 'system.db.CDbConnection',
 
                 ),/**/
                 // uncomment the following to show log messages on web pages

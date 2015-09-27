@@ -228,6 +228,7 @@
 </div>
 </body>
 <script src="/js/init.js"></script>
+<script src="/js/map.js"></script>
 <script src="/js/mediator.js"></script>
 <script src="/js/script.js"></script>
 </html>

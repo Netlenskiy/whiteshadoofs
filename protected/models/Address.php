@@ -37,6 +37,11 @@ class Address extends CActiveRecord
                 'locality',
                 'with'=>'region',
             ),
+            'object'=>array(
+                self::HAS_MANY,
+                'Object',
+                'address',
+            ),
         );
     }
 

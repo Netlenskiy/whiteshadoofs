@@ -4,7 +4,7 @@ try
 }
 catch (e)
 {
-    console.log("ymaps was not loaded.")
+    console.log("ymaps was not loaded.");
 }
 
 
@@ -14,4 +14,4 @@ ymaps.ready( function () {
     window.menu = new Menu( $("#mainMenu") );
     window.mediator = new Mediator();
     window.gallery = new Gallery( $("#gallery") );
-})
+});

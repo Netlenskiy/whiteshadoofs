@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Class SiteController
+ */
 class SiteController extends Controller
 {
     /**
@@ -42,7 +45,6 @@ class SiteController extends Controller
     {
         // renders the view file 'protected/views/site/index.php'
         // using the default layout 'protected/views/layouts/main.php'
-        Yii::log('индекс: ', 'trace', '*');
 
         $this->render('index');
     }
@@ -86,7 +88,6 @@ class SiteController extends Controller
         }
 
         echo $obj_titles;
-        Yii::trace('инфо: ', '*');
         Yii::app()->end();
     }
 
@@ -159,5 +160,17 @@ class SiteController extends Controller
     {
         Yii::app()->user->logout();
         $this->redirect(Yii::app()->homeUrl);
+    }
+
+    public function actionAdd()
+    {
+        for ($i=0; $i<10000; $i++) {
+            $addr = new Address();
+            $addr->latitude = rand(-90, 90) + rand(1, 1000) / rand(1000, 10000);
+            $addr->longitude = rand(-180, 180) + rand(1, 1000) / rand(1000, 10000);
+            $addr->locality = 1;
+            $addr->save();
+            unset($addr);
+        }
     }
 }

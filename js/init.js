@@ -1,3 +1,4 @@
+
 //2
 
 function initGeoObjectManager() {
@@ -8,6 +9,7 @@ function initGeoObjectManager() {
 		controls: ['smallMapDefaultSet']
 	});
 	myMap.controls.remove('searchControl');
+
 	var myBalloonLayout = ymaps.templateLayoutFactory.createClass(
 		'<div style="width:170px; margin: 10px; overflow:auto">' +
 		'<figure>' +
@@ -18,7 +20,8 @@ function initGeoObjectManager() {
 	    '</figure>' +
 	    '</div>'
 		);
-	//ymaps.layout.storage.add('my#Layout', myBalloonLayout); - Why it does not work?	
+	//ymaps.layout.storage.add('my#Layout', myBalloonLayout); - Why it does not work?
+
 	var items = [];
 	var mainCollection = new ymaps.GeoObjectCollection();
 	// var hiddenCollection = new ymaps.GeoObjectCollection();
@@ -29,7 +32,7 @@ function initGeoObjectManager() {
 			imageAddress: myPlaceMarks[i].srcString,
 			coordinates: myPlaceMarks[i].coordnts,
 			disclamer: myPlaceMarks[i].disclamer,
-			category: myPlaceMarks[i].icontype,
+			category: myPlaceMarks[i].icontype
 		}, {
 			balloonContentLayout: myBalloonLayout,//'my#Layout' - Why it does not work?
 			iconLayout: "default#image",
@@ -40,7 +43,7 @@ function initGeoObjectManager() {
 
 	mainCollection.each( function (item) {
 		items.push(item);
-	})
+	});
 	myMap.geoObjects.add( mainCollection );
 
 	objects = ymaps.geoQuery(myMap.geoObjects);
@@ -60,3 +63,4 @@ function initGeoObjectManager() {
 		}
 	}
 }
+
