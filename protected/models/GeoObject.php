@@ -44,7 +44,7 @@ class GeoObject extends CActiveRecord
     {
         try {
             $criteria = new CDbCriteria();
-            $criteria->select = 'id, latitude, longitude';
+            $criteria->select = 'id, title, disclamer, face_link, latitude, longitude';
             $criteria->addCondition('latitude>='  . $bbox[0]);
             $criteria->addCondition('latitude<='  . $bbox[2]);
             $criteria->addCondition('longitude>=' . $bbox[1]);
@@ -56,12 +56,20 @@ class GeoObject extends CActiveRecord
             );
             foreach ($placemarks as $value) {
                 $response['features'][] = array(
-                    'type' => 'Feature',
                     'id'   => $value['id'],
                     'geometry' => array(
                         'type' => 'Point',
                         'coordinates' => array($value['latitude'], $value['longitude']),
                     ),
+                    'properties' => array(
+                        'title' => $value['title'],
+                        'disclamer' => $value['disclamer'],
+                        'face_link' => $value['face_link'],
+//                        'face_link' => 'http://ws/face/96_big.jpg',
+                        'gallery_link' => $value['gallery_link'],
+                        'category' => $value['category'],
+                        'object' => $value['object'],
+                    )
                 );
             }
 

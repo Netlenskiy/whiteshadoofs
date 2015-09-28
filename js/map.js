@@ -4,19 +4,40 @@
 
 //2
 
-function initGeoObjectManager() {
+function initMap() {
     var myMap = new ymaps.Map('wsMap', {
         center: [58.1395, 42.2004],
-        zoom: 4,
+        zoom: 6,
         controls: ['smallMapDefaultSet']
     });
     myMap.controls.remove('searchControl');
 
-    var lom = new ymaps.LoadingObjectManager('http://ws/index.php/map/fetchplacemarks?bbox=%b', {
+    var myBalloonLayout = ymaps.templateLayoutFactory.createClass(
+        '<div style="width:170px; margin: 10px; overflow:auto">' +
+        '<figure>' +
+        '<img src="{{properties.face_link}}" ' +
+        ' style="width:150px; height:150px;cursor:pointer" ' +
+        ' onclick="mediator.requestImageSrc({{properties.id}})"/>' +
+        '<figcaption>{{properties.disclamer}}</figcaption>' +
+        '</figure>' +
+        '</div>'
+    );
+    var myHintLayout = ymaps.templateLayoutFactory.createClass(
+        '{{properties.title}}'
+    );
+    // @TODO Сделать, чтобы поинтер метки определялся по типу метки
+    var iconImageHref = 'http://белыежуравли.рф/imgs/fire.gif';
+
+    var lom = new ymaps.LoadingObjectManager('http://белыежуравли.рф/index.php/map/fetchplacemarks?bbox=%b', {
         clusterize: true,
         splitRequests: false
     });
     lom.objects.options.set('preset', 'islands#greenDotIcon');
+    lom.objects.options.set('balloonContentLayout', myBalloonLayout);
+    lom.objects.options.set('hintContentLayout', myHintLayout);
+    lom.objects.options.set('iconLayout', "default#image");
+    lom.objects.options.set('iconImageHref', iconImageHref);
+
 
     var mainCollection = new ymaps.GeoObjectCollection();
 

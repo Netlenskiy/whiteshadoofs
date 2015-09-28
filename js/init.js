@@ -1,7 +1,7 @@
 
 //2
 
-function initGeoObjectManager() {
+function initMap() {
 	var icon_path = "imgs/";
 	var myMap = new ymaps.Map('wsMap', {
 		center: [55.20, 37.20],

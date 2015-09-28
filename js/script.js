@@ -9,7 +9,7 @@ catch (e)
 
 
 ymaps.ready( function () {
-    initGeoObjectManager();
+    initMap();
     // mediator.requestImageSrc(1);
     window.menu = new Menu( $("#mainMenu") );
     window.mediator = new Mediator();

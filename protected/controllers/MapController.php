@@ -34,9 +34,11 @@ class MapController extends CController
                 $value = (float)$value;
             }
             $geo_object = new GeoObject();
+            header('ContentType', 'application/json');
             echo $geo_object->fetchPlacemarks($bbox, $callback);
         } catch (Exception $e) {
             echo json_encode( array('error' => true ) );
         }
     }
+
 }

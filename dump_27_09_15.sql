@@ -25,13 +25,13 @@ DROP TABLE IF EXISTS `address`;
 CREATE TABLE `address` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `street` varchar(45) NOT NULL,
-  `latitude` float NOT NULL COMMENT 'широта заполняется программно',
-  `longitude` float NOT NULL COMMENT 'долгота заполняется программно',
+  `latitude` float NOT NULL,
+  `longitude` float NOT NULL,
   `locality` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `ixLocality` (`locality`),
   CONSTRAINT `address_fk_to_locality` FOREIGN KEY (`locality`) REFERENCES `locality` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10207 DEFAULT CHARSET=utf8 COMMENT='таблица "адрес"';
+) ENGINE=InnoDB AUTO_INCREMENT=10207 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -53,16 +53,16 @@ DROP TABLE IF EXISTS `arangement`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `arangement` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(45) NOT NULL COMMENT 'название мероприятия',
-  `description` text COMMENT 'описание мероприятия',
-  `creation_date` datetime DEFAULT NULL COMMENT 'дата создания, заполняется программно',
-  `beginning_date` datetime NOT NULL COMMENT 'дата проведения мероприятия',
-  `ending_date` datetime DEFAULT NULL COMMENT 'дата окончания мероприятия',
-  `user` int(10) unsigned NOT NULL COMMENT 'внешний ключ ссылается на таблицу user',
-  `object` int(10) unsigned NOT NULL COMMENT 'внешний ключ ссылается на таблицу user',
+  `title` varchar(45) NOT NULL,
+  `description` text,
+  `creation_date` datetime DEFAULT NULL,
+  `beginning_date` datetime NOT NULL,
+  `ending_date` datetime DEFAULT NULL,
+  `user` int(10) unsigned NOT NULL,
+  `object` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `ixUser` (`user`) COMMENT 'индекс на внешний ключ',
-  KEY `ixObject` (`object`) COMMENT 'индекс на внешний ключ',
+  KEY `ixUser` (`user`),
+  KEY `ixObject` (`object`),
   CONSTRAINT `arangement_fk_to_object` FOREIGN KEY (`object`) REFERENCES `object` (`id`),
   CONSTRAINT `arangement_fk_to_user` FOREIGN KEY (`user`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -86,9 +86,9 @@ DROP TABLE IF EXISTS `country`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `country` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(30) NOT NULL COMMENT 'название страны',
+  `title` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='таблица "страна"';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -111,11 +111,11 @@ DROP TABLE IF EXISTS `locality`;
 CREATE TABLE `locality` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(45) NOT NULL,
-  `region` int(10) unsigned NOT NULL COMMENT 'внешний ключ ссылается на таблицу region',
+  `region` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `ixRegion` (`region`),
   CONSTRAINT `locality_fk_to_region` FOREIGN KEY (`region`) REFERENCES `region` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='таблица "населенный пункт"';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -137,10 +137,10 @@ DROP TABLE IF EXISTS `mem_event`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mem_event` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(45) NOT NULL COMMENT 'название военного события',
-  `description` text COMMENT 'описание события',
+  `title` varchar(45) NOT NULL,
+  `description` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='таблица "военное событиеЖ';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -162,22 +162,22 @@ DROP TABLE IF EXISTS `object`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `object` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `state` enum('1','2','3','4','5') NOT NULL COMMENT 'состояние объекта',
-  `title` varchar(255) NOT NULL COMMENT 'название объекта',
-  `category` set('1','2','3','4','5','6','7','8','9','10') NOT NULL COMMENT 'категория объекта (памятник, монумент и т.д.',
-  `adding_date` datetime NOT NULL COMMENT 'заполняется программно',
-  `description` text COMMENT 'описание объекта',
-  `user` int(10) unsigned NOT NULL COMMENT 'внешний ключ ссылается на таблицу user',
-  `mem_event` int(10) unsigned NOT NULL COMMENT 'внешний ключ ссылается на таблицу event',
-  `address` int(10) unsigned NOT NULL COMMENT 'внешний ключ ссылается на таблицу address',
+  `state` enum('1','2','3','4','5') NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `category` set('1','2','3','4','5','6','7','8','9','10') NOT NULL,
+  `adding_date` datetime NOT NULL,
+  `description` text,
+  `user` int(10) unsigned NOT NULL,
+  `mem_event` int(10) unsigned NOT NULL,
+  `address` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `ixUser` (`user`) COMMENT 'индекс на внешний ключ',
-  KEY `ixMem_Event` (`mem_event`) COMMENT 'индекс на внешний ключ',
-  KEY `ixAddress` (`address`) COMMENT 'индекс на внешний ключ',
+  KEY `ixUser` (`user`),
+  KEY `ixMem_Event` (`mem_event`),
+  KEY `ixAddress` (`address`),
   CONSTRAINT `object_fk_to_address` FOREIGN KEY (`address`) REFERENCES `address` (`id`),
   CONSTRAINT `object_fk_to_mem_event` FOREIGN KEY (`mem_event`) REFERENCES `mem_event` (`id`),
   CONSTRAINT `object_fk_to_user` FOREIGN KEY (`user`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='таблица "пользователь"';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -200,11 +200,11 @@ DROP TABLE IF EXISTS `region`;
 CREATE TABLE `region` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(45) NOT NULL,
-  `country` int(10) unsigned NOT NULL COMMENT 'внешний ключ ссылается на таблицу country',
+  `country` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `ixCountry` (`country`),
   CONSTRAINT `region_fk_to_country` FOREIGN KEY (`country`) REFERENCES `country` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='таблица "страна"';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -226,9 +226,9 @@ DROP TABLE IF EXISTS `role`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `role` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(45) NOT NULL COMMENT 'название роли',
+  `title` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='таблица "роль"';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -250,15 +250,15 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL COMMENT 'фио пользователя',
-  `soc_network` varchar(45) DEFAULT NULL COMMENT 'недоработано',
-  `soc_network_id` varchar(45) DEFAULT NULL COMMENT 'недоработано',
-  `nick` varchar(45) DEFAULT NULL COMMENT 'недоработано',
-  `role` int(10) unsigned NOT NULL COMMENT 'внешний ключ ссылается на таблицу role',
+  `name` varchar(45) NOT NULL,
+  `soc_network` varchar(45) DEFAULT NULL,
+  `soc_network_id` varchar(45) DEFAULT NULL,
+  `nick` varchar(45) DEFAULT NULL,
+  `role` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `ixRole` (`role`) COMMENT 'индекс на внешний ключ',
+  KEY `ixRole` (`role`),
   CONSTRAINT `user_fk_to_role` FOREIGN KEY (`role`) REFERENCES `role` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='таблица "роль"';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
