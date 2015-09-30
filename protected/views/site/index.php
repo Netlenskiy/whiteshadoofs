@@ -1,28 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Белые журавли</title>
-	<meta name="viewport" content="initial-scale=1.0, user-scalable=no, maximum-scale=1" /> 
-	<link href="/css/document.css" rel="stylesheet" type="text/css"/>
-	<link href="/css/header.css" rel="stylesheet" type="text/css"/>
-	<link href="/css/menu.css" rel="stylesheet" type="text/css"/>
-	<link href="/css/main_section.css" rel="stylesheet" type="text/css"/>
-	<link href="/css/left_panel.css" rel="stylesheet" type="text/css"/>
-	<link href="/css/map.css" rel="stylesheet" type="text/css"/>
-    <link href="/css/gallery.css" rel="stylesheet" type="text/css"/>
-	<link href="/css/top_message.css" rel="stylesheet" type="text/css"/>
 
-	<script src="/js/jquery-2.1.3.min.js"></script>
-	<script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU&mode=debug"></script>
-	<script src="/js/menu.js"></script>
-	<script src="/js/gallery.js"></script>
-	<script src="/js/data.js"></script>
-</head>
-<body>
-<div id='top_message'>
-    Проект находится в стадии разработки.
-</div>
-<div id="main_wrapper">
 	<header>
 		<img id="logo" src="/images/logo.png" alt="Белые журавли">
 		<div id="auth"></div>
@@ -224,11 +200,3 @@
 		<div id="about_window">
 		</div>
 	</section>
-	<footer id="footer"></footer>
-</div>
-</body>
-<script src="/js/init.js"></script>
-<script src="/js/map.js"></script>
-<script src="/js/mediator.js"></script>
-<script src="/js/script.js"></script>
-</html>

@@ -26,9 +26,9 @@ function initMap() {
         '{{properties.title}}'
     );
     // @TODO Сделать, чтобы поинтер метки определялся по типу метки
-    var iconImageHref = 'http://белыежуравли.рф/imgs/fire.gif';
+    var iconImageHref = 'http://ws/imgs/fire.gif';
 
-    var lom = new ymaps.LoadingObjectManager('http://белыежуравли.рф/index.php/map/fetchplacemarks?bbox=%b', {
+    var lom = new ymaps.LoadingObjectManager('http://ws/index.php/map/fetchplacemarks?bbox=%b', {
         clusterize: true,
         splitRequests: false
     });

@@ -16,17 +16,18 @@ return array(
     'import' => array(
         'application.models.*',
         'application.components.*',
+        'application.extensions.yiidebugtb.*', //our extension
     ),
 
     'modules' => array(
         // uncomment the following to enable the Gii tool
 
-        'gii' => array(
+        /*'gii' => array(
             'class' => 'system.gii.GiiModule',
             'password' => 'qweqweqwe',
             // If removed, Gii defaults to localhost only. Edit carefully to taste.
             'ipFilters' => array('127.0.0.1', '::1'),
-        ),
+        ),*/
 
     ),
 
@@ -80,6 +81,12 @@ return array(
                     'class'=>'CWebLogRoute',
                 ),
                 */
+                /*array( // configuration for the toolbar
+                    'class'=>'XWebDebugRouter',
+                    'config'=>'alignLeft, opaque, runInDebug, fixedPos, collapsed, yamlStyle',
+                    'levels'=>'error, warning, trace, profile, info',
+                    'allowedIPs'=>array('127.0.0.1','::1','192.168.1.54','192\.168\.1[0-5]\.[0-9]{3}'),
+                ),*/
             ),
         ),
 

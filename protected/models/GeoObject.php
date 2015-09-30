@@ -73,7 +73,8 @@ class GeoObject extends CActiveRecord
                 );
             }
 
-            return $callback . '(' . json_encode($response) . ');';
+//            return $callback . '(' . json_encode($response) . ');';
+            return $callback . '(' . CJSON::encode($response) . ');';
 
         } catch (Exception $e) {
             throw new Exception();
