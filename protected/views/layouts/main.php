@@ -35,6 +35,7 @@
 
 		<footer id="footer"></footer>
 	</div>
+<!--    --><?php /*$this->widget('application.extensions.email.debug'); */?>
 </body>
 <?PHP echo
 CHtml::scriptFile('/js/init.js'),

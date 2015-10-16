@@ -16,7 +16,7 @@ return array(
     'import' => array(
         'application.models.*',
         'application.components.*',
-        'application.extensions.yiidebugtb.*', //our extension
+        /*'application.extensions.yiidebugtb.*', //our extension*/
     ),
 
     'modules' => array(
@@ -42,7 +42,11 @@ return array(
         'request' => array(
             'enableCsrfValidation' => true,
         ),
-        // uncomment the following to enable URLs in path-format
+        'email'=>array(
+            'class'=>'application.extensions.email.Email',
+            'delivery'=>'php', //Will use the php mailing function.
+            //May also be set to 'debug' to instead dump the contents of the email into the view
+        ),
 
         'urlManager' => array(
             'urlFormat' => 'path',
@@ -51,7 +55,6 @@ return array(
 //				'/site/search'=>'site/search',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
-                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
             ),
         ),
         // database settings are configured in database.php

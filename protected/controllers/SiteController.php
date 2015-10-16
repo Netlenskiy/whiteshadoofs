@@ -37,6 +37,11 @@ class SiteController extends Controller
         );
     }
 
+    public function actionTest()
+    {
+        echo 'test';
+    }
+
     /**
      * This is the default 'index' action that is invoked
      * when an action is not explicitly requested by users.
@@ -96,6 +101,7 @@ class SiteController extends Controller
      */
     public function actionError()
     {
+
         if ($error = Yii::app()->errorHandler->error) {
             if (Yii::app()->request->isAjaxRequest)
                 echo $error['message'];
