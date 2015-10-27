@@ -1,0 +1,298 @@
+2015-10-21 18:39:57 [127.0.0.1][-][6ie7neannf401mr77au1u9mfu1][error][yii\base\InvalidConfigException] exception 'yii\base\InvalidConfigException' with message 'Either GD PHP extension with FreeType support or ImageMagick PHP extension with PNG support is required.' in /home/ivan/var/www/ws/vendor/yiisoft/yii2/captcha/Captcha.php:180
+Stack trace:
+#0 /home/ivan/var/www/ws/vendor/yiisoft/yii2/captcha/Captcha.php(94): yii\captcha\Captcha::checkRequirements()
+#1 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/Object.php(107): yii\captcha\Captcha->init()
+#2 [internal function]: yii\base\Object->__construct(Array)
+#3 /home/ivan/var/www/ws/vendor/yiisoft/yii2/di/Container.php(372): ReflectionClass->newInstanceArgs(Array)
+#4 /home/ivan/var/www/ws/vendor/yiisoft/yii2/di/Container.php(151): yii\di\Container->build('yii\\captcha\\Cap...', Array, Array)
+#5 /home/ivan/var/www/ws/vendor/yiisoft/yii2/BaseYii.php(344): yii\di\Container->get('yii\\captcha\\Cap...', Array, Array)
+#6 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/Widget.php(97): yii\BaseYii::createObject(Array)
+#7 /home/ivan/var/www/ws/vendor/yiisoft/yii2/widgets/ActiveField.php(665): yii\base\Widget::widget(Array)
+#8 /home/ivan/var/www/ws/views/site/contact.php(56): yii\widgets\ActiveField->widget('yii\\captcha\\Cap...', Array)
+#9 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/View.php(325): require('/home/ivan/var/...')
+#10 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/View.php(247): yii\base\View->renderPhpFile('/home/ivan/var/...', Array)
+#11 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/View.php(149): yii\base\View->renderFile('/home/ivan/var/...', Array, Object(app\controllers\SiteController))
+#12 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/Controller.php(371): yii\base\View->render('contact', Array, Object(app\controllers\SiteController))
+#13 /home/ivan/var/www/ws/controllers/SiteController.php(87): yii\base\Controller->render('contact', Array)
+#14 [internal function]: app\controllers\SiteController->actionContact()
+#15 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#16 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#17 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('contact', Array)
+#18 /home/ivan/var/www/ws/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('site/contact', Array)
+#19 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#20 /home/ivan/var/www/ws/web/index.php(12): yii\base\Application->run()
+#21 {main}
+2015-10-21 18:39:56 [127.0.0.1][-][6ie7neannf401mr77au1u9mfu1][info][application] $_GET = [
+    'r' => 'site/contact'
+]
+
+$_COOKIE = [
+    'PHPSESSID' => '6ie7neannf401mr77au1u9mfu1'
+    '_csrf' => 'e5abcae728185e221b89c61d42982b8c2cfd22bc51257bdee9c2b1fc60489520a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"rvdzX04vztc2BySJ3s1xFALxhHHiSwUM\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'ws'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.130 Safari/537.36'
+    'HTTP_REFERER' => 'http://ws/web/index.php'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => 'PHPSESSID=6ie7neannf401mr77au1u9mfu1; _csrf=e5abcae728185e221b89c61d42982b8c2cfd22bc51257bdee9c2b1fc60489520a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22rvdzX04vztc2BySJ3s1xFALxhHHiSwUM%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at ws Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'ws'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/home/ivan/var/www/ws'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/home/ivan/var/www/ws'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/home/ivan/var/www/ws/web/index.php'
+    'REMOTE_PORT' => '57558'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=site%2Fcontact'
+    'REQUEST_URI' => '/web/index.php?r=site%2Fcontact'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1445452796.674
+    'REQUEST_TIME' => 1445452796
+]
+2015-10-21 19:24:14 [127.0.0.1][-][-][error][yii\base\ErrorException:1] exception 'yii\base\ErrorException' with message 'Class 'CHtml' not found' in /home/ivan/var/www/ws/views/layouts/main.php:6
+Stack trace:
+#0 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/View.php(247): yii\base\View->renderPhpFile()
+#1 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/Controller.php(386): yii\base\View->renderFile()
+#2 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/Controller.php(372): yii\base\Controller->renderContent()
+#3 /home/ivan/var/www/ws/controllers/SiteController.php(52): yii\base\Controller->render()
+#4 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/InlineAction.php(55): app\controllers\SiteController->actionIndex()
+#5 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/InlineAction.php(55): ::call_user_func_array:{/home/ivan/var/www/ws/vendor/yiisoft/yii2/base/InlineAction.php:55}()
+#6 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams()
+#7 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction()
+#8 /home/ivan/var/www/ws/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction()
+#9 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest()
+#10 /home/ivan/var/www/ws/web/index.php(12): yii\base\Application->run()
+#11 {main}
+2015-10-21 19:24:14 [127.0.0.1][-][-][info][application] $_COOKIE = [
+    '_csrf' => 'e5abcae728185e221b89c61d42982b8c2cfd22bc51257bdee9c2b1fc60489520a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"rvdzX04vztc2BySJ3s1xFALxhHHiSwUM\";}'
+    'PHPSESSID' => 'bmu0e58j96v042m0agdfdqrv45'
+    '_identity' => '77b97502ae785a07a3db5444a5fc0538fa338401bd295b5e5bdfe89e79bfd674a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'ws'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.130 Safari/537.36'
+    'HTTP_REFERER' => 'http://ws/web/index.php?r=site%2Flogin'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=e5abcae728185e221b89c61d42982b8c2cfd22bc51257bdee9c2b1fc60489520a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22rvdzX04vztc2BySJ3s1xFALxhHHiSwUM%22%3B%7D; PHPSESSID=bmu0e58j96v042m0agdfdqrv45; _identity=77b97502ae785a07a3db5444a5fc0538fa338401bd295b5e5bdfe89e79bfd674a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at ws Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'ws'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/home/ivan/var/www/ws'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/home/ivan/var/www/ws'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/home/ivan/var/www/ws/web/index.php'
+    'REMOTE_PORT' => '57854'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/web/index.php'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1445455454.093
+    'REQUEST_TIME' => 1445455454
+]
+2015-10-21 19:58:20 [127.0.0.1][-][-][error][yii\base\UnknownPropertyException] exception 'yii\base\UnknownPropertyException' with message 'Getting unknown property: yii\web\View::pageTitle' in /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/Component.php:143
+Stack trace:
+#0 /home/ivan/var/www/ws/views/layouts/main.php(27): yii\base\Component->__get('pageTitle')
+#1 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/View.php(325): require('/home/ivan/var/...')
+#2 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/View.php(247): yii\base\View->renderPhpFile('/home/ivan/var/...', Array)
+#3 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/Controller.php(386): yii\base\View->renderFile('/home/ivan/var/...', Array, Object(app\controllers\SiteController))
+#4 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/Controller.php(372): yii\base\Controller->renderContent('\n\t<header>\n\t\t<i...')
+#5 /home/ivan/var/www/ws/controllers/SiteController.php(52): yii\base\Controller->render('index')
+#6 [internal function]: app\controllers\SiteController->actionIndex()
+#7 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#8 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#9 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction('', Array)
+#10 /home/ivan/var/www/ws/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction('', Array)
+#11 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#12 /home/ivan/var/www/ws/web/index.php(12): yii\base\Application->run()
+#13 {main}
+2015-10-21 19:58:19 [127.0.0.1][-][-][info][application] $_COOKIE = [
+    '_csrf' => 'e5abcae728185e221b89c61d42982b8c2cfd22bc51257bdee9c2b1fc60489520a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"rvdzX04vztc2BySJ3s1xFALxhHHiSwUM\";}'
+    'PHPSESSID' => 'bmu0e58j96v042m0agdfdqrv45'
+    '_identity' => '77b97502ae785a07a3db5444a5fc0538fa338401bd295b5e5bdfe89e79bfd674a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'ws'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.130 Safari/537.36'
+    'HTTP_REFERER' => 'http://ws/web/index.php?r=site%2Flogin'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=e5abcae728185e221b89c61d42982b8c2cfd22bc51257bdee9c2b1fc60489520a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22rvdzX04vztc2BySJ3s1xFALxhHHiSwUM%22%3B%7D; PHPSESSID=bmu0e58j96v042m0agdfdqrv45; _identity=77b97502ae785a07a3db5444a5fc0538fa338401bd295b5e5bdfe89e79bfd674a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at ws Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'ws'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/home/ivan/var/www/ws'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/home/ivan/var/www/ws'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/home/ivan/var/www/ws/web/index.php'
+    'REMOTE_PORT' => '58018'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/web/index.php'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1445457499.236
+    'REQUEST_TIME' => 1445457499
+]
+2015-10-21 20:01:48 [127.0.0.1][-][-][error][yii\base\ErrorException:2] exception 'yii\base\ErrorException' with message 'Invalid argument supplied for foreach()' in /home/ivan/var/www/ws/vendor/yiisoft/yii2/helpers/BaseHtml.php:1757
+Stack trace:
+#0 /home/ivan/var/www/ws/views/layouts/main.php(33): yii\helpers\BaseHtml::tag()
+#1 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/View.php(325): ::unknown()
+#2 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/View.php(247): yii\base\View->renderPhpFile()
+#3 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/Controller.php(386): yii\base\View->renderFile()
+#4 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/Controller.php(372): yii\base\Controller->renderContent()
+#5 /home/ivan/var/www/ws/controllers/SiteController.php(52): yii\base\Controller->render()
+#6 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/InlineAction.php(55): app\controllers\SiteController->actionIndex()
+#7 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/InlineAction.php(55): ::call_user_func_array:{/home/ivan/var/www/ws/vendor/yiisoft/yii2/base/InlineAction.php:55}()
+#8 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/Controller.php(151): yii\base\InlineAction->runWithParams()
+#9 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/Module.php(455): yii\base\Controller->runAction()
+#10 /home/ivan/var/www/ws/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction()
+#11 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest()
+#12 /home/ivan/var/www/ws/web/index.php(12): yii\base\Application->run()
+#13 {main}
+2015-10-21 20:01:48 [127.0.0.1][-][-][info][application] $_COOKIE = [
+    '_csrf' => 'e5abcae728185e221b89c61d42982b8c2cfd22bc51257bdee9c2b1fc60489520a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"rvdzX04vztc2BySJ3s1xFALxhHHiSwUM\";}'
+    'PHPSESSID' => 'bmu0e58j96v042m0agdfdqrv45'
+    '_identity' => '77b97502ae785a07a3db5444a5fc0538fa338401bd295b5e5bdfe89e79bfd674a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'ws'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.130 Safari/537.36'
+    'HTTP_REFERER' => 'http://ws/web/index.php?r=site%2Flogin'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=e5abcae728185e221b89c61d42982b8c2cfd22bc51257bdee9c2b1fc60489520a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22rvdzX04vztc2BySJ3s1xFALxhHHiSwUM%22%3B%7D; PHPSESSID=bmu0e58j96v042m0agdfdqrv45; _identity=77b97502ae785a07a3db5444a5fc0538fa338401bd295b5e5bdfe89e79bfd674a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at ws Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'ws'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/home/ivan/var/www/ws'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/home/ivan/var/www/ws'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/home/ivan/var/www/ws/web/index.php'
+    'REMOTE_PORT' => '58030'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/web/index.php'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1445457708.588
+    'REQUEST_TIME' => 1445457708
+]
+2015-10-21 20:16:56 [127.0.0.1][-][-][error][yii\base\ErrorException:1] exception 'yii\base\ErrorException' with message 'Class 'Controller' not found' in /home/ivan/var/www/ws/controllers/SiteController.php:7
+Stack trace:
+#0 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/Module.php(563): yii\BaseYii::autoload()
+#1 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/Module.php(563): ::spl_autoload_call()
+#2 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/Module.php(563): ::class_exists()
+#3 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/Module.php(521): yii\base\Module->createControllerByID()
+#4 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/Module.php(449): yii\base\Module->createController()
+#5 /home/ivan/var/www/ws/vendor/yiisoft/yii2/web/Application.php(84): yii\base\Module->runAction()
+#6 /home/ivan/var/www/ws/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest()
+#7 /home/ivan/var/www/ws/web/index.php(12): yii\base\Application->run()
+#8 {main}
+2015-10-21 20:16:56 [127.0.0.1][-][-][info][application] $_COOKIE = [
+    '_csrf' => 'e5abcae728185e221b89c61d42982b8c2cfd22bc51257bdee9c2b1fc60489520a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"rvdzX04vztc2BySJ3s1xFALxhHHiSwUM\";}'
+    'PHPSESSID' => 'bmu0e58j96v042m0agdfdqrv45'
+    '_identity' => '77b97502ae785a07a3db5444a5fc0538fa338401bd295b5e5bdfe89e79bfd674a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'ws'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.130 Safari/537.36'
+    'HTTP_REFERER' => 'http://ws/web/index.php?r=site%2Flogin'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=e5abcae728185e221b89c61d42982b8c2cfd22bc51257bdee9c2b1fc60489520a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22rvdzX04vztc2BySJ3s1xFALxhHHiSwUM%22%3B%7D; PHPSESSID=bmu0e58j96v042m0agdfdqrv45; _identity=77b97502ae785a07a3db5444a5fc0538fa338401bd295b5e5bdfe89e79bfd674a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at ws Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'ws'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/home/ivan/var/www/ws'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/home/ivan/var/www/ws'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/home/ivan/var/www/ws/web/index.php'
+    'REMOTE_PORT' => '58155'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/web/index.php'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1445458616.18
+    'REQUEST_TIME' => 1445458616
+]
