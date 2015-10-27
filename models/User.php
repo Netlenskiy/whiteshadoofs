@@ -1,103 +1,77 @@
 <?php
 
-namespace app\models;
-
-class User extends \yii\base\Object implements \yii\web\IdentityInterface
+/**
+ * Created by PhpStorm.
+ * User: ivan
+ * Date: 12.09.15
+ * Time: 17:24
+ */
+class User extends CActiveRecord
 {
-    public $id;
-    public $username;
-    public $password;
-    public $authKey;
-    public $accessToken;
-
-    private static $users = [
-        '100' => [
-            'id' => '100',
-            'username' => 'admin',
-            'password' => 'admin',
-            'authKey' => 'test100key',
-            'accessToken' => '100-token',
-        ],
-        '101' => [
-            'id' => '101',
-            'username' => 'demo',
-            'password' => 'demo',
-            'authKey' => 'test101key',
-            'accessToken' => '101-token',
-        ],
-    ];
 
     /**
-     * @inheritdoc
-     */
-    public static function findIdentity($id)
-    {
-        return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public static function findIdentityByAccessToken($token, $type = null)
-    {
-        foreach (self::$users as $user) {
-            if ($user['accessToken'] === $token) {
-                return new static($user);
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * Finds user by username
+     * @param string $className
+     * @return static
      *
-     * @param  string      $username
-     * @return static|null
      */
-    public static function findByUsername($username)
+    public static function model($className = __CLASS__)
     {
-        foreach (self::$users as $user) {
-            if (strcasecmp($user['username'], $username) === 0) {
-                return new static($user);
-            }
-        }
-
-        return null;
+        return parent::model($className);
     }
 
     /**
-     * @inheritdoc
+     * @return string Имя таблицы
      */
-    public function getId()
+    public function tableName()
     {
-        return $this->id;
+        return 'user';
     }
 
     /**
-     * @inheritdoc
+     * @return array
      */
-    public function getAuthKey()
+    public function attributeLabels()
     {
-        return $this->authKey;
+        return array(
+            'email' => 'Email',
+            'password' => 'пароль',
+            'nick' => 'Имя',
+        );
     }
 
     /**
-     * @inheritdoc
+     * @return array
      */
-    public function validateAuthKey($authKey)
+    public function rules()
     {
-        return $this->authKey === $authKey;
+        return array(
+            array('email, password', 'required'),
+            array('email', 'email', 'allowName' => true, 'allowEmpty' => false),
+            array('password', 'length', 'min' => 8, 'max' => 50),
+            array('nick', 'required'),
+            array('nick', 'length', 'min' => 3, 'max' => 50),
+            array('nick',
+                'unique',
+                'allowEmpty' => false,
+                'className' => 'User',
+                'attributeName' => 'nick',
+            )
+        );
     }
+    //@TODO Доделать валидацию ника и определить допустимую длину.
 
     /**
-     * Validates password
-     *
-     * @param  string  $password password to validate
-     * @return boolean if password provided is valid for current user
+     * @return array
      */
-    public function validatePassword($password)
+    public function relations()
     {
-        return $this->password === $password;
+        return array(
+            'user_fk_to_role'=>array(
+                self::BELONGS_TO,
+                'Role',
+                'user_fk_to_role',
+            ),
+        );
     }
+
 }

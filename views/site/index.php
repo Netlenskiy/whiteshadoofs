@@ -1,53 +1,202 @@
-<?php
 
-/* @var $this yii\web\View */
-
-$this->title = 'My Yii Application';
-?>
-<div class="site-index">
-
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
-
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
-        </div>
-
-    </div>
-</div>
+	<header>
+		<img id="logo" src="/images/logo.png" alt="Белые журавли">
+		<div id="auth"></div>
+	</header>
+	<nav>
+		<ul id="mainMenu" class="oops">
+			<li id="category">Категории
+			</li>
+			<li id="actions">Мероприятия
+			</li>
+			<li id="about">О проекте
+			</li>
+			<li id="search">Поиск
+			</li>
+		</ul>
+	</nav>
+	<section id="container">
+		<aside id="aside">
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+			<ul id="category_list">
+				<label><li>
+					<input type="checkbox" />
+					Аллея
+				</li></label>
+				<label><li>
+					<input type="checkbox" />
+					Вечный огонь
+				</li></label>
+				<label><li>
+					<input type="checkbox" />
+					Мемориал
+				</li></label>
+				<label><li>
+					<input type="checkbox" />
+					Монумент
+				</li></label>
+				<label><li>
+					<input type="checkbox" />
+					Памятник
+				</li></label>
+				<label><li>
+					<input type="checkbox" />
+					Парк
+				</li></label>
+				<label><li>
+					<input type="checkbox" />
+					Площадь
+				</li></label>
+				<label><li>
+					<input type="checkbox" />
+					Обелиск
+				</li></label>
+				<label><li>
+					<input type="checkbox" />
+					Улица
+				</li></label>
+				<label><li>
+					<input type="checkbox" />
+					Прочее
+				</li></label>
+				<li>
+					<div id="filter">Отфильтровать</div>			
+				</li>
+			</ul>
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+			<div id="search_filter">
+				<div id="sf_block_1" class="posabs">
+					<div id="sf_block_2" class="posabs">
+						<label>
+						<input name="in_desc" type="checkbox" form='search_form'/>Искать в описании
+						</label>
+					</div>
+					<input name="title" type="textarea" class="posabs" placeholder="Название"form='search_form'>
+				</div>
+				
+				<div id="sf_block_4" class="posabs">			
+					<input name="country" type="textarea" placeholder="Страна" form='search_form'>
+					<input name="region" type="textarea" placeholder="Область" form='search_form'>
+					<input name="city" type="textarea" placeholder="Населенный пункт" form='search_form'><br>
+					<input name="street" type="textarea" placeholder="Улица" form='search_form'><br>
+					<input name="to_search" type="submit" value="Поиск" form='search_form'>
+				<form id='search_form' action="" method="GET"></form>
+				</div>
+			</div>
+			<div id="search_result">
+				<div id="sr_block">
+					
+				</div>
+				<input name="new_search" type="button" value="Начать новый поиск">
+			</div>
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+			<div id="addObject">
+				<ul>
+					<li>
+						<h4>Поля для заполнения</h4>
+					</li>
+					<li>
+						<span>Название</span>
+						<input type="textarea" name="name">
+					</li>
+					<li>
+						<span>Местоположение</span>
+						<input type="textarea" name="place">
+					</li>
+					<li>
+						<span>Категория</span>
+						<select name="category" id="category">
+							<option value="Аллея">Аллея</option>
+							<option value="Обелиск">Обелиск</option>
+							<option value="Парк">Парк</option>
+							<option value="Мемориал">Мемориал</option>
+							<option value="Вечный огонь">Вечный огонь</option>
+							<option value="Монумент">Монумент</option>
+							<option value="Памятник">Памятник</option>
+							<option value="Площадь">Площадь</option>
+							<option value="Улица">Улица</option>
+							<option value="Прочее">Прочее</option>
+						</select>
+					</li>
+					<li>
+						<span>Фото</span>
+						<input type="file" name="photo">
+					</li>
+					<li>
+						<span>Описание</span>
+						<input type="textarea" name="desc">
+					</li>
+					<li>
+						<span>История</span>
+						<input type="textarea" name="history">
+					</li>
+					<li>
+						<span>Состояние</span>
+						<select name="condition" id="condition">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+						</select>
+					</li>
+					<li>
+						<span>Комментарии</span>
+						<textarea name="comments" id="comments" cols="22" rows="3"></textarea>
+						<!-- <input type="textarea" rows="10" name="comments"> -->
+					</li>
+					<li>
+						<input type="button" name="add" value="Добавить">
+					</li>
+				</ul>
+			</div>
+		</aside>
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+		<div id="section">
+			<div id="wsMap"></div>	<!--  контейнер карты -->
+			<div id="gallery">
+			<!--  контейнер галереи -->
+				<div id="leftButton">
+				<!-- контейнер для картинки левой кнопки, которая 
+					позиционируется относительно этого контейнера -->
+					<img id="left" src="/images/left.png" alt="" class="scrollButton transform">		
+				</div>
+				<div id="carousel">
+				<!-- контейнер для галереи-карусели картинок, загружается javascript'ом -->
+				</div>
+				<div id="wrapper">
+				<!-- контейнер, относительно которого позиционируется кнопка закрытия галереи -->
+					<div id="canselButton" class="canselButton transform">
+					<!-- контейнер для кнопки закрытия -->						
+					</div>
+				</div>
+				<div id="rightButton">				
+				<!-- контейнер для картинки правой кнопки, которая 
+					позиционируется относительно этого контейнера -->
+					<img id="right" src="/images/right.png" alt="" class="scrollButton transform">
+				</div>
+			</div>
+		</div>
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+		<div id="actionsWindow_1" class="actionsWindow">
+		</div>
+		<div id="actionsWindow_2" class="actionsWindow">
+			<input type="button" value="Предложить мероприятие">
+		</div>
+		<div id="actionsWindow_3" class="actionsWindow">
+			<div id="aw3_date" class="aw3_divs">Дата<input type="textarea"></div>
+			<div id="aw3_place" class="aw3_divs">Место<input  type="textarea"></div>
+			<div id="aw3_desc" class="aw3_divs">Описание<input type="textarea"></div>
+			<input type="button" value="Добавить">
+		</div>
+		<div id="actionsWindow_4" class="actionsWindow">
+			<input type="button" value="Предложить мероприятие">
+		</div>
+		<div id="about_window">
+		</div>
+	</section>

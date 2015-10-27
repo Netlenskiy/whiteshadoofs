@@ -1,94 +1,181 @@
 <?php
 
-namespace app\controllers;
-
-use Yii;
-use yii\filters\AccessControl;
-use yii\web\Controller;
-use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
-
+/**
+ * Class SiteController
+ */
 class SiteController extends Controller
 {
-    public function behaviors()
+    /**
+     * @param $str String Удаляет кавычки из строки-аргумента,
+     * @return mixed Возвращает "очищенную" строку
+     */с
+    function delete_quotes($str)
     {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout'],
-                'rules' => [
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
+        $temp = str_ireplace("'", '', $str);
+        $temp = str_ireplace("\"", '', $temp);
+
+        return $temp;
     }
+
+    /**
+     * Declares class-based actions.
+     */
 
     public function actions()
     {
-        return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
-            'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-            ],
-        ];
+        return array(
+            // captcha action renders the CAPTCHA image displayed on the contact page
+            /*'captcha'=>array(
+                'class'=>'CCaptchaAction',
+                'backColor'=>0xFFFFFF,
+            ),*/
+            // page action renders "static" pages stored under 'protected/views/site/pages'
+            // They can be accessed via: index.php?r=site/page&view=FileName
+            /*'page'=>array(
+                'class'=>'CViewAction',
+            ),*/
+        );
     }
 
+    public function actionTest()
+    {
+        echo 'test';
+    }
+
+    /**
+     * This is the default 'index' action that is invoked
+     * when an action is not explicitly requested by users.
+     */
     public function actionIndex()
     {
-        return $this->render('index');
+        // renders the view file 'protected/views/site/index.php'
+        // using the default layout 'protected/views/layouts/main.php'
+        $this->render('index');
     }
 
-    public function actionLogin()
+    public function actionSearch()
     {
-        if (!\Yii::$app->user->isGuest) {
-            return $this->goHome();
+//      gets: in_desc, title, country, region, city, street
+
+        $criteria = new CDbCriteria;
+        $criteria->select = 'object.title';
+        $criteria->alias = 'object';
+        $criteria->with = array(
+            'address' => array('select' => false)
+        );
+        $title = $this->delete_quotes(Yii::app()->request->getParam('title'));
+        $street = $this->delete_quotes(Yii::app()->request->getParam('street'));
+        $locality = $this->delete_quotes(Yii::app()->request->getParam('city'));
+        $region = $this->delete_quotes(Yii::app()->request->getParam('region'));
+        $country = $this->delete_quotes(Yii::app()->request->getParam('country'));
+        if (isset($title)) {
+            $criteria->addCondition('object.title=' . '\'' . $title . '\'');
+        }
+        if ($street) {
+            $criteria->addSearchCondition('address.street', $street, true);
+        }
+        if ($locality) {
+            $criteria->addCondition('locality.title=' . '\'' . $locality . '\'');
+        }
+        if ($region) {
+            $criteria->addCondition('region.title=' . '\'' . $region . '\'');
+        }
+        if ($country) {
+            $criteria->addCondition('country.title=' . '\'' . $country . '\'');
         }
 
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+        $objects = Object::model()->findAll($criteria);
+        $obj_titles = '';
+        foreach ($objects as $t) {
+            $obj_titles .= $t->attributes['title'];
+            $obj_titles .= "\n";
         }
-        return $this->render('login', [
-            'model' => $model,
-        ]);
+
+        echo $obj_titles;
+        Yii::app()->end();
     }
 
-    public function actionLogout()
+
+    /**
+     * This is the action to handle external exceptions.
+     */
+    public function actionError()
     {
-        Yii::$app->user->logout();
 
-        return $this->goHome();
+        if ($error = Yii::app()->errorHandler->error) {
+            if (Yii::app()->request->isAjaxRequest)
+                echo $error['message'];
+            else
+                $this->render('error', $error);
+        }
     }
 
+    /**
+     * Displays the contact page
+     */
     public function actionContact()
     {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
+        $model = new ContactForm;
+        if (isset($_POST['ContactForm'])) {
+            $model->attributes = $_POST['ContactForm'];
+            if ($model->validate()) {
+                $name = '=?UTF-8?B?' . base64_encode($model->name) . '?=';
+                $subject = '=?UTF-8?B?' . base64_encode($model->subject) . '?=';
+                $headers = "From: $name <{$model->email}>\r\n" .
+                    "Reply-To: {$model->email}\r\n" .
+                    "MIME-Version: 1.0\r\n" .
+                    "Content-Type: text/plain; charset=UTF-8";
 
-            return $this->refresh();
+                mail(Yii::app()->params['adminEmail'], $subject, $model->body, $headers);
+                Yii::app()->user->setFlash('contact', 'Thank you for contacting us. We will respond to you as soon as possible.');
+                $this->refresh();
+            }
         }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
+        $this->render('contact', array('model' => $model));
     }
 
-    public function actionAbout()
+    /**
+     * Displays the login page
+     */
+    public function actionLogin()
     {
-        return $this->render('about');
+        $model = new LoginForm;
+
+        // if it is ajax validation request
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'login-form') {
+            echo CActiveForm::validate($model);
+            Yii::app()->end();
+        }
+
+        // collect user input data
+        if (isset($_POST['LoginForm'])) {
+            $model->attributes = $_POST['LoginForm'];
+            // validate user input and redirect to the previous page if valid
+            if ($model->validate() && $model->login())
+                $this->redirect(Yii::app()->user->returnUrl);
+        }
+        // display the login form
+        $this->render('login', array('model' => $model));
+    }
+
+    /**
+     * Logs out the current user and redirect to homepage.
+     */
+    public function actionLogout()
+    {
+        Yii::app()->user->logout();
+        $this->redirect(Yii::app()->homeUrl);
+    }
+
+    public function actionAdd()
+    {
+        for ($i=0; $i<10000; $i++) {
+            $addr = new Address();
+            $addr->latitude = rand(-90, 90) + rand(1, 1000) / rand(1000, 10000);
+            $addr->longitude = rand(-180, 180) + rand(1, 1000) / rand(1000, 10000);
+            $addr->locality = 1;
+            $addr->save();
+            unset($addr);
+        }
     }
 }
