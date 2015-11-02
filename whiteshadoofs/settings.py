@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'whiteshadoofs.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'whiteshadoofs',#os.path.join(BASE_DIR, ''),
+        'NAME': 'ws',#os.path.join(BASE_DIR, ''),
         'USER': 'root',
         'PASSWORD': 'password'
     }
