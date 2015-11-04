@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', views.main),
     url(r'^objects_search', views.objects_search),
+    url(r'^fetch_placemarks', views.fetch_placemarks),
 ]

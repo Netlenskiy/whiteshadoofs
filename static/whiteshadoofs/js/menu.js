@@ -19,7 +19,7 @@ function MenuCategory(list) {
 
 	self.toggle = function (e) {
 		isOpened ? self.hide() : show();
-	}
+	};
 
 	self.hide = function (into) {
 		/*
@@ -46,11 +46,11 @@ function MenuCategory(list) {
 				});
 			}
 		});
-	}
+	};
 
 	self.isOpen = function () {
 		return isOpened;
-	}
+	};
 
 	function show() {
 		/*
@@ -287,7 +287,7 @@ function MenuSearch(search, searchResultElem) {
 		show("searchResultElem");
 
 		var form = document.forms.search_form;
-		var url = '/objects_search?';
+		var url = 'index.php/site/search?';
 
 		for (var i=0; i<form.elements.length; i++) {
 			var item = form.elements[i];
@@ -318,7 +318,7 @@ function Menu(elem) {
 		actions:  new MenuActions(),
 		about:    new MenuAbout( $('#about_window') ),
 		search:   new MenuSearch( $("#search_filter"), $("#search_result") )
-	}
+	};
 	var lastOpened = null;
 	var curOpened = null;
 	var authorized = false;

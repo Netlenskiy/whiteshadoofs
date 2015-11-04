@@ -64,6 +64,10 @@ def objects_search(request):
     return render_to_response('search_result.html', {'result': result})
     
 
+def fetch_placemarks(request):
+    callback = request.GET['callback']
+    bbox = request.GET['bbox']
+    return render(request, 'pms.json', {'func': callback, })
 
 
 

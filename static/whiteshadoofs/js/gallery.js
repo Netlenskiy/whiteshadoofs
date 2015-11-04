@@ -32,7 +32,7 @@ function Gallery(gallery) {
 	var isOpened = false;
 	// var section = $("#section");
 	var carousel = $("#carousel");
-	var carouselWidth = parseInt( $("#carousel").css("width"), 10 );
+	var carouselWidth = parseInt( carousel.css("width"), 10 );
 
 	$.fx.speeds["very_slow"] = 1000;
 
@@ -62,7 +62,7 @@ function Gallery(gallery) {
 			show();
 			isOpened = !isOpened;
 		}
-	}
+	};
 	function appendImages(images) {
 		/*
 		Добавляет элементы img в контейнер галереи-карусели, которые формирует 
@@ -85,7 +85,7 @@ function Gallery(gallery) {
 			);
 			posLeft += (imgWidth + gap);
 			carousel.append( imgs[i] );
-		};
+		}
 	}
 	function scrollWindow(into) {
 		/*
