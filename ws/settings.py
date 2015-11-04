@@ -37,7 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'whiteshadoofs',
+    'ws',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -51,7 +51,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-ROOT_URLCONF = 'whiteshadoofs.urls'
+ROOT_URLCONF = 'ws.urls'
 
 TEMPLATES = [
     {
@@ -69,7 +69,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'whiteshadoofs.wsgi.application'
+WSGI_APPLICATION = 'ws.wsgi.application'
 
 
 # Database

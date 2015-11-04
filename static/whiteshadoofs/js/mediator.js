@@ -3,7 +3,7 @@ function Mediator() {
 	var self = this;
 	var curPmId = null;
 	//Testing information.
-	var images_path = "static/whiteshadoofs/photo/";
+	var images_path = "static/ws/photo/";
 	var images = [
 	"09_b.jpg"
 	, "b111007.jpg"

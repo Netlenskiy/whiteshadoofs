@@ -1,7 +1,7 @@
 //2
 
 function initGeoObjectManager() {
-	var icon_path = "static/whiteshadoofs/icons/";
+	var icon_path = "static/ws/icons/";
 	var myMap = new ymaps.Map('wsMap', {
 		center: [55.20, 37.20],
 		zoom: 10,

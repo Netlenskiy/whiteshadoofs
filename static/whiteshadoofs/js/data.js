@@ -11,7 +11,7 @@ var Types = {
 	street: 8,
 	other: 9
 }
-var face_path = "static/whiteshadoofs/";
+var face_path = "static/ws/";
 var myPlaceMarks = [
 	{
 		"id": 0,
