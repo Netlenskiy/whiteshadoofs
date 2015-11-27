@@ -287,7 +287,7 @@ function MenuSearch(search, searchResultElem) {
 		show("searchResultElem");
 
 		var form = document.forms.search_form;
-		var url = 'index.php/site/search?';
+		var url = 'objects_search?';
 
 		for (var i=0; i<form.elements.length; i++) {
 			var item = form.elements[i];
