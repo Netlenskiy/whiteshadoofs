@@ -1,31 +1,20 @@
 {{func}}({
     "type": "FeatureCollection",
     "features": [
-    {
-        "type": "Feature",
-        "id": 0,
-        "geometry": {
-            "type": "Point",
-            "coordinates": [55.831903, 37.411961]
-        },
-        "properties": {
-            "balloonContent": "Содержимое балуна",
-            "clusterCaption": "Метка 1",
-            "hintContent": "Текст подсказки"
+        {
+            {% for value in bbox %}
+                "type": "Feature",
+                "id": {{value.id}},
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [{{value.latitude}}, {{value.longitude}}]
+                },
+                "properties": {
+                    "balloonContent": "{{value.disclamer}}",
+                    "clusterCaption": "Метка 1",
+                    "hintContent": "Текст подсказки"
+                }
+            {% endfor %}
         }
-    },
-    {
-        "type": "Feature",
-        "id": 2,
-        "geometry": {
-            "type": "Point",
-            "coordinates": [55.763338, 37.565466]
-        },
-        "properties": {
-            "balloonContent": "Содержимое балуна",
-            "clusterCaption": "Метка 2",
-            "hintContent": "Текст подсказки"
-        }
-    }
-]
+    ]
 })

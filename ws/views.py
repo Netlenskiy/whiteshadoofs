@@ -73,7 +73,8 @@ def fetch_placemarks(request):
     for value in bbox:
         value = float(value)
 
-    return render(request, 'pms.json', {'func': callback, })
+    geo_objects = list(models.Geo_object.fetch(bbox))
+    return render(request, 'pms.json', {'func': callback, 'bbox': geo_objects})
 
 # public function actionFetchPlacemarks()
 #     {

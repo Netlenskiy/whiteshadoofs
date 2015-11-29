@@ -115,6 +115,11 @@ class Geo_object(models.Model):
     gallery_link = models.URLField(max_length=255,)
     object = models.ForeignKey(Object)
 
+    @staticmethod
+    def fetch(bbox):
+        geo_objects = Geo_object.objects.filter(latitude__range=(bbox[0], bbox[2]), longitude__range=(bbox[1], bbox[3]))
+        return geo_objects
+
     def __unicode__(self):
         return self.title
 
