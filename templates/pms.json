@@ -9,10 +9,12 @@
                     "type": "Point",
                     "coordinates": [{{value.latitude}}, {{value.longitude}}]
                 },
+                "icontype": 0,
                 "properties": {
                     "balloonContent": "{{value.disclamer}}",
-                    "clusterCaption": "Метка 1",
-                    "hintContent": "Текст подсказки"
+                    "hintContent": "{{value.title}}",
+                    "face_link": "{{value.face_link}}",
+                    "clusterize": false
                 }
             {% endfor %}
         }

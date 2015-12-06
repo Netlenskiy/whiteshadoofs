@@ -6,13 +6,56 @@
 from django.contrib import admin
 from ws.models import *
 
-admin.site.register(Role)
-admin.site.register(User)
-admin.site.register(Country)
-admin.site.register(Region)
-admin.site.register(Locality)
-admin.site.register(Address)
-admin.site.register(Mem_event)
-admin.site.register(Object)
-admin.site.register(Geo_object)
-admin.site.register(Arangement)
+
+class ObjectAdmin(admin.ModelAdmin):
+    exclude = ('id',)
+
+
+class AddressAdmin(admin.ModelAdmin):
+    exclude = ('id',)
+
+
+class LocalityAdmin(admin.ModelAdmin):
+    exclude = ('id',)
+
+
+class RegionAdmin(admin.ModelAdmin):
+    exclude = ('id',)
+
+
+class CountryAdmin(admin.ModelAdmin):
+    exclude = ('id',)
+
+
+class UserAdmin(admin.ModelAdmin):
+    exclude = ('id',)
+
+
+class RoleAdmin(admin.ModelAdmin):
+    exclude = ('id',)
+
+
+class Mem_eventAdmin(admin.ModelAdmin):
+    exclude = ('id',)
+
+
+class Geo_objectAdmin(admin.ModelAdmin):
+    exclude = ('id',)
+
+
+class ArangementAdmin(admin.ModelAdmin):
+    exclude = ('id',)
+
+
+admin.site.register(Role, RoleAdmin)
+admin.site.register(User, UserAdmin)
+admin.site.register(Country, CountryAdmin)
+admin.site.register(Region, RegionAdmin)
+admin.site.register(Locality, LocalityAdmin)
+admin.site.register(Address, AddressAdmin)
+admin.site.register(Mem_event, Mem_eventAdmin)
+admin.site.register(Object, ObjectAdmin)
+admin.site.register(Geo_object, Geo_objectAdmin)
+admin.site.register(Arangement, ArangementAdmin)
+# admin.site.register(Util_category)
+# admin.site.register(Util_state)

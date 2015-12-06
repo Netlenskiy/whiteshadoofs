@@ -15,18 +15,18 @@ function initMap() {
     var myBalloonLayout = ymaps.templateLayoutFactory.createClass(
         '<div style="width:170px; margin: 10px; overflow:auto">' +
         '<figure>' +
-        '<img src="{{properties.face_link}}" ' +
+        '<img src="http://127.0.0.1:8000/static/whiteshadoofs/face/{{properties.face_link}}" ' +
         ' style="width:150px; height:150px;cursor:pointer" ' +
         ' onclick="mediator.requestImageSrc({{properties.id}})"/>' +
-        '<figcaption>{{properties.disclamer}}</figcaption>' +
+        '<figcaption>{{properties.balloonContent}}</figcaption>' +
         '</figure>' +
         '</div>'
     );
     var myHintLayout = ymaps.templateLayoutFactory.createClass(
-        '{{properties.title}}'
+        '{{properties.hintContent}}'
     );
     // @TODO Сделать, чтобы поинтер метки определялся по типу метки
-    var iconImageHref = 'http://ws/imgs/fire.gif';
+    var iconImageHref = 'http://127.0.0.1:8000/static/whiteshadoofs/imgs/redStar.gif';
 
     var lom = new ymaps.LoadingObjectManager('http://0.0.0.0:8000/fetch_placemarks?bbox=%b', {
         clusterize: true,
@@ -37,7 +37,7 @@ function initMap() {
     lom.objects.options.set('hintContentLayout', myHintLayout);
     lom.objects.options.set('iconLayout', "default#image");
     lom.objects.options.set('iconImageHref', iconImageHref);
-
+    console.log(lom.objects);
 
     var mainCollection = new ymaps.GeoObjectCollection();
 

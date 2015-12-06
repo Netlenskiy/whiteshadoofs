@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#-*-coding:utf-8-*-
+# -*-coding:utf-8-*-
 """Models for db 'ws' """
 
 """
@@ -9,9 +9,25 @@
 from django.db import models
 
 
+class Util_category(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=25,)
+
+    def __unicode__(self):
+        return self.name
+
+
+class Util_state(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=25,)
+
+    def __unicode__(self):
+        return self.name
+
+
 class Role(models.Model):
     """Соответствует таблице role"""
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=45,)
 
     def __unicode__(self):
@@ -20,7 +36,7 @@ class Role(models.Model):
 
 class User(models.Model):
     """Соответствует таблице user, зарегистр-му пользователю сервиса"""
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=45,)
     soc_network = models.CharField(max_length=45, blank=True,)
     soc_network_id = models.CharField(max_length=45, blank=True,)
@@ -43,7 +59,7 @@ class Image(models.Model):
 
 class Country(models.Model):
     """Соответствует таблице country, стране, в кот. находится объект"""
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True,)
     title = models.CharField(max_length=30,)
 
     def __unicode__(self):
@@ -52,7 +68,7 @@ class Country(models.Model):
 
 class Region(models.Model):
     """Соответствует таблице region, региону, в кот. находится объект"""
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=45,)
     country = models.ForeignKey(Country)
 
@@ -62,7 +78,7 @@ class Region(models.Model):
 
 class Locality(models.Model):
     """Соответствует таблице Locality, насел. пункту, в кот. находится объект"""
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=45,)
     region = models.ForeignKey(Region)
 
@@ -72,7 +88,7 @@ class Locality(models.Model):
 
 class Address(models.Model):
     """Соответствует таблице address, полному адресу объекта"""
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     street = models.CharField(max_length=45,)
     locality = models.ForeignKey(Locality)
 
@@ -82,7 +98,7 @@ class Address(models.Model):
 
 class Mem_event(models.Model):
     """Соответствует таблице mem_event, ист. событию, связанному с объектом"""
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=45,)
     description = models.TextField(blank=True,)
 
@@ -91,10 +107,10 @@ class Mem_event(models.Model):
 
 
 class Object(models.Model):
-    id = models.IntegerField(primary_key=True)
-    state = models.CommaSeparatedIntegerField(max_length=5,)
+    id = models.AutoField(primary_key=True)
+    state_id = models.ForeignKey(Util_state,)
     title = models.CharField(max_length=255,)
-    category = models.CommaSeparatedIntegerField(max_length=10,)
+    category_id = models.ForeignKey(Util_category,)
     adding_date = models.DateField(auto_now_add=True,)
     description = models.TextField(blank=True,)
     user = models.ForeignKey(User, db_index=False)
@@ -106,7 +122,7 @@ class Object(models.Model):
 
 
 class Geo_object(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=255,)
     disclamer = models.CharField(max_length=1000,)
     latitude = models.FloatField()
@@ -117,7 +133,8 @@ class Geo_object(models.Model):
 
     @staticmethod
     def fetch(bbox):
-        geo_objects = Geo_object.objects.filter(latitude__range=(bbox[0], bbox[2]), longitude__range=(bbox[1], bbox[3]))
+        geo_objects = Geo_object.objects.filter(latitude__range=(bbox[0], bbox[2]),
+                                                longitude__range=(bbox[1], bbox[3]))
         return geo_objects
 
     def __unicode__(self):
@@ -125,7 +142,7 @@ class Geo_object(models.Model):
 
 
 class Arangement(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=45,)
     description = models.TextField()
     creation_date = models.DateTimeField()
@@ -136,7 +153,6 @@ class Arangement(models.Model):
 
     def __unicode__(self):
         return self.title
-
 
 
 

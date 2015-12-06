@@ -76,6 +76,19 @@ def fetch_placemarks(request):
     geo_objects = list(models.Geo_object.fetch(bbox))
     return render(request, 'pms.json', {'func': callback, 'bbox': geo_objects})
 
+
+def geocoder(request):
+    if request.GET['geo']:
+        geo = request.GET['geo']
+
+
+
+
+
+
+
+
+
 # public function actionFetchPlacemarks()
 #     {
 #         try {

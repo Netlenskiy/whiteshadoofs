@@ -1,0 +1,13 @@
+{{func}}({
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": 0,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [55.831903, 37.411961]
+      }
+    }
+  ]
+})
