@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*-coding:utf-8-*-
+# -*- coding: utf-8 -*-
 """Models for db 'ws' """
 
 """
@@ -7,10 +7,11 @@
 """
 
 from django.db import models
+import json
+import urllib
 
 
 class Util_category(models.Model):
-    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=25,)
 
     def __unicode__(self):
@@ -18,7 +19,6 @@ class Util_category(models.Model):
 
 
 class Util_state(models.Model):
-    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=25,)
 
     def __unicode__(self):
@@ -27,7 +27,6 @@ class Util_state(models.Model):
 
 class Role(models.Model):
     """Соответствует таблице role"""
-    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=45,)
 
     def __unicode__(self):
@@ -36,12 +35,11 @@ class Role(models.Model):
 
 class User(models.Model):
     """Соответствует таблице user, зарегистр-му пользователю сервиса"""
-    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=45,)
     soc_network = models.CharField(max_length=45, blank=True,)
     soc_network_id = models.CharField(max_length=45, blank=True,)
     nick = models.CharField(max_length=45, blank=True,)
-    role = models.ForeignKey(Role,)
+    role = models.ForeignKey(Role, null=True, blank=True)
     password = models.CharField(max_length=50,)
     email = models.EmailField(max_length=254,)
 
@@ -59,7 +57,6 @@ class Image(models.Model):
 
 class Country(models.Model):
     """Соответствует таблице country, стране, в кот. находится объект"""
-    id = models.AutoField(primary_key=True,)
     title = models.CharField(max_length=30,)
 
     def __unicode__(self):
@@ -68,37 +65,42 @@ class Country(models.Model):
 
 class Region(models.Model):
     """Соответствует таблице region, региону, в кот. находится объект"""
-    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=45,)
-    country = models.ForeignKey(Country)
+    country = models.ForeignKey(Country, null=True, blank=True)
 
     def __unicode__(self):
-        return u"{0}, {1}".format( self.title, self.country )
+        return u"{0}, {1}".format(self.title, self.country)
+
+
+class District(models.Model):
+
+    title = models.CharField(max_length=45,)
+    region = models.ForeignKey(Region, null=True, blank=True)
+
+    def __unicode__(self):
+        return u"{0}".format(self.title)
 
 
 class Locality(models.Model):
     """Соответствует таблице Locality, насел. пункту, в кот. находится объект"""
-    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=45,)
-    region = models.ForeignKey(Region)
+    district = models.ForeignKey(District, null=True, blank=True)
 
     def __unicode__(self):
-        return u"{0}, {1}".format( self.title, self.region )
+        return u"{0}".format(self.title)
 
 
 class Address(models.Model):
     """Соответствует таблице address, полному адресу объекта"""
-    id = models.AutoField(primary_key=True)
     street = models.CharField(max_length=45,)
-    locality = models.ForeignKey(Locality)
+    locality = models.ForeignKey(Locality, null=True, blank=True)
 
     def __unicode__(self):
-        return u"{0}, {1}".format( self.street, self.locality )
+        return u"{0}, {1}".format(self.street, self.locality)
 
 
 class Mem_event(models.Model):
     """Соответствует таблице mem_event, ист. событию, связанному с объектом"""
-    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=45,)
     description = models.TextField(blank=True,)
 
@@ -107,29 +109,27 @@ class Mem_event(models.Model):
 
 
 class Object(models.Model):
-    id = models.AutoField(primary_key=True)
-    state_id = models.ForeignKey(Util_state,)
+    state_id = models.ForeignKey(Util_state, null=True, blank=True)
     title = models.CharField(max_length=255,)
-    category_id = models.ForeignKey(Util_category,)
+    category_id = models.ForeignKey(Util_category, null=True, blank=True)
     adding_date = models.DateField(auto_now_add=True,)
     description = models.TextField(blank=True,)
-    user = models.ForeignKey(User, db_index=False)
-    mem_event = models.ForeignKey(Mem_event,)
-    address = models.ForeignKey(Address,)
+    user = models.ForeignKey(User, db_index=False, null=True, blank=True)
+    mem_event = models.ForeignKey(Mem_event, null=True, blank=True)
+    address = models.ForeignKey(Address, null=True, blank=True)
 
     def __unicode__(self):
         return self.title
 
 
 class Geo_object(models.Model):
-    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=255,)
     disclamer = models.CharField(max_length=1000,)
     latitude = models.FloatField()
     longitude = models.FloatField()
     face_link = models.URLField(max_length=255,)
     gallery_link = models.URLField(max_length=255,)
-    object = models.ForeignKey(Object)
+    object = models.ForeignKey(Object, null=True, blank=True)
 
     @staticmethod
     def fetch(bbox):
@@ -137,22 +137,46 @@ class Geo_object(models.Model):
                                                 longitude__range=(bbox[1], bbox[3]))
         return geo_objects
 
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        try:
+            url = u"https://geocode-maps.yandex.ru/1.x/?format=json&geocode="
+            addr = self.object.address
+            url += addr.locality.district.region.country.title
+            url += u',+'
+            url += addr.locality.district.region.title
+            url += u',+'
+            url += addr.locality.district.title
+            url += u',+'
+            url += addr.locality.title
+            url += u',+'
+            url += addr.street
+            url = url.replace(u' ', u'+')
+            doc = urllib.urlopen(url.encode('utf-8'))
+            pos = json.load(doc)
+            coords = pos['response']['GeoObjectCollection']['featureMember'][0]['GeoObject']['Point']['pos']
+            coords = coords.split(' ', 1)
+            self.latitude = float(coords[1])
+            self.longitude = float(coords[0])
+            super(Geo_object, self).save(force_insert=False, force_update=False,
+                                         using=None, update_fields=None)
+        except Exception as e:
+            return False
+        return True
+
     def __unicode__(self):
         return self.title
 
 
 class Arangement(models.Model):
-    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=45,)
     description = models.TextField()
     creation_date = models.DateTimeField()
     begining_date = models.DateTimeField()
     ending_date = models.DateTimeField()
-    user = models.ForeignKey(User)
-    object = models.ForeignKey(Object)
+    user = models.ForeignKey(User, null=True, blank=True)
+    object = models.ForeignKey(Object, null=True, blank=True)
 
     def __unicode__(self):
         return self.title
-
-
 

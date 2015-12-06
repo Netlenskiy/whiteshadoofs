@@ -5,7 +5,6 @@ from django.http import HttpResponse
 from django.shortcuts import render, render_to_response
 import ws.models as models
 
-
 def main(request):
     if request.method == 'GET' and request.META['QUERY_STRING']:
         return HttpResponse(request.META['QUERY_STRING'])

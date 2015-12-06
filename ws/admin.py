@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#-*-coding:utf-8-*-
+# -*-coding:utf-8-*-
 
 """Classes for administrator's interface"""
 
@@ -7,8 +7,18 @@ from django.contrib import admin
 from ws.models import *
 
 
+class Geo_objectInline(admin.StackedInline):
+    model = Geo_object
+    exclude = ('id', 'latitude', 'longitude')
+    extra = 1
+    max_num = 1
+
+
 class ObjectAdmin(admin.ModelAdmin):
     exclude = ('id',)
+    inlines = [
+        Geo_objectInline,
+    ]
 
 
 class AddressAdmin(admin.ModelAdmin):
@@ -40,7 +50,11 @@ class Mem_eventAdmin(admin.ModelAdmin):
 
 
 class Geo_objectAdmin(admin.ModelAdmin):
-    exclude = ('id',)
+    exclude = ('id', )#'latitude', 'longitude')
+
+    def save_model(self, request, obj, form, change):
+
+        pass
 
 
 class ArangementAdmin(admin.ModelAdmin):
@@ -51,11 +65,12 @@ admin.site.register(Role, RoleAdmin)
 admin.site.register(User, UserAdmin)
 admin.site.register(Country, CountryAdmin)
 admin.site.register(Region, RegionAdmin)
+admin.site.register(District)
 admin.site.register(Locality, LocalityAdmin)
 admin.site.register(Address, AddressAdmin)
 admin.site.register(Mem_event, Mem_eventAdmin)
 admin.site.register(Object, ObjectAdmin)
-admin.site.register(Geo_object, Geo_objectAdmin)
+# admin.site.register(Geo_object, Geo_objectAdmin)
 admin.site.register(Arangement, ArangementAdmin)
 # admin.site.register(Util_category)
 # admin.site.register(Util_state)
