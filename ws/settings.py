@@ -83,7 +83,9 @@ DATABASES = {
         'PASSWORD': 'password'
     }
 }
-
+# DATABASE_OPTIONS = {
+#     "init_command": "SET storage_engine=INNODB, SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED",
+# }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
@@ -102,12 +104,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_URL = os.path.join(BASE_DIR, '/static/')
-
+STATIC_URL = os.path.join(BASE_DIR, 'static/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
-#TEMPLATE_CONTEXT_PROCESSORS = (,)
-#SESSION_COOKIE_DOMAIN = '127.0.0.1:8000'
-#INTERNAL_IPS
-#TEMPLATE_LOADERS = ()
+
+# TEMPLATE_CONTEXT_PROCESSORS = (,)
+# SESSION_COOKIE_DOMAIN = '127.0.0.1:8000'
+# INTERNAL_IPS
+# TEMPLATE_LOADERS = ()

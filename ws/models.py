@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from django.db import models
+import json
+import urllib
+import settings
 """Models for db 'ws' """
 
 """
 
 """
-
-from django.db import models
-import json
-import urllib
 
 
 class Util_category(models.Model):
@@ -127,7 +127,8 @@ class Geo_object(models.Model):
     disclamer = models.CharField(max_length=1000,)
     latitude = models.FloatField()
     longitude = models.FloatField()
-    face_link = models.URLField(max_length=255,)
+    # face_link = models.URLField(max_length=255,)
+    face_link = models.ImageField(upload_to='ws/%Y/%m/%d', blank=True, verbose_name='image', max_length=255,)
     gallery_link = models.URLField(max_length=255,)
     object = models.ForeignKey(Object, null=True, blank=True)
 

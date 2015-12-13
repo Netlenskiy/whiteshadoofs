@@ -15,7 +15,7 @@ function initMap() {
     var myBalloonLayout = ymaps.templateLayoutFactory.createClass(
         '<div style="width:170px; margin: 10px; overflow:auto">' +
         '<figure>' +
-        '<img src="http://127.0.0.1:8000/static/whiteshadoofs/face/{{properties.face_link}}" ' +
+        '<img src="http://127.0.0.1:8000/media/{{properties.face_link}}" ' +
         ' style="width:150px; height:150px;cursor:pointer" ' +
         ' onclick="mediator.requestImageSrc({{properties.id}})"/>' +
         '<figcaption>{{properties.balloonContent}}</figcaption>' +
