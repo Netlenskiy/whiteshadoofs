@@ -54,7 +54,7 @@ function initMap() {
                         break;
                 }
                 if (j == types.length) mainCollection.add( items[i] );
-            };
+            }
         }
     }
 }

@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, render_to_response
 import ws.models as models
 
+
 def main(request):
     if request.method == 'GET' and request.META['QUERY_STRING']:
         return HttpResponse(request.META['QUERY_STRING'])
@@ -13,7 +14,9 @@ def main(request):
 
 
 def objects_search(request):
-    """Функция осуществляет поиск соответствующих get-запросу
+    """
+    @var request
+    Функция осуществляет поиск соответствующих get-запросу
     объектов в бд, передает их шаблону в качестве контекста. 
     
     """
@@ -80,7 +83,12 @@ def geocoder(request):
     if request.GET['geo']:
         geo = request.GET['geo']
 
-
+#
+# def image_handler(request):
+#     if not request.GET:
+#         raise BaseException
+#     else:
+#
 
 
 

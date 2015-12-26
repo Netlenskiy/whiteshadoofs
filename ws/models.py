@@ -3,7 +3,7 @@
 from django.db import models
 import json
 import urllib
-import settings
+
 """Models for db 'ws' """
 
 """
