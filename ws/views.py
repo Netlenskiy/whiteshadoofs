@@ -15,7 +15,7 @@ def main(request):
 
 def objects_search(request):
     """
-    @var request
+    :param request
     Функция осуществляет поиск соответствующих get-запросу
     объектов в бд, передает их шаблону в качестве контекста. 
     
@@ -67,6 +67,17 @@ def objects_search(request):
     return render_to_response('search_result.html', {'result': result})
     
 
+# def get_placemark_icon(request, icon):
+#     """
+#     returns an icon for introducing a placemark at the map
+#     :param request
+#     :param icon
+#     """
+#     if icon == '':
+#         return False
+#     return HttpResponse('/home/ivan/ws/static/imgs/' + icon)
+
+
 def fetch_placemarks(request):
     callback = request.GET['callback']
     bbox = request.GET['bbox']
@@ -76,7 +87,10 @@ def fetch_placemarks(request):
         value = float(value)
 
     geo_objects = list(models.Geo_object.fetch(bbox))
-    return render(request, 'pms.json', {'func': callback, 'bbox': geo_objects})
+    response = HttpResponse()
+    response['cache-control'] = 'no-store'
+    response = render(request, 'pms.json', {'func': callback, 'bbox': geo_objects})
+    return response
 
 
 def geocoder(request):
@@ -89,77 +103,3 @@ def geocoder(request):
 #         raise BaseException
 #     else:
 #
-
-
-
-
-
-
-
-# public function actionFetchPlacemarks()
-#     {
-#         try {
-#             $bbox = Yii::app()->request->getParam('bbox');
-#             $callback = Yii::app()->request->getParam('callback');
-#             $bbox = explode(',', $bbox);
-#             foreach ($bbox as &$value) {
-#                 $value = (float)$value;
-#             }
-#             $geo_object = new GeoObject();
-#             header('X-Content-Type-Options: nosniff', true);
-#             header('Content-Type: application/javascript', true);
-#             echo $geo_object->fetchPlacemarks($bbox, $callback);
-#         } catch (Exception $e) {
-#             echo json_encode( array('error' => true ) );
-#         }
-#     }
-
-# public function fetchPlacemarks(array $bbox, $callback)
-#     {
-#         try {
-#             $criteria = new CDbCriteria();
-#             $criteria->select = 'id, title, disclamer, face_link, latitude, longitude';
-#             $criteria->addCondition('latitude>='  . $bbox[0]);
-#             $criteria->addCondition('latitude<='  . $bbox[2]);
-#             $criteria->addCondition('longitude>=' . $bbox[1]);
-#             $criteria->addCondition('longitude<=' . $bbox[3]);
-#             $placemarks = $this->findAll($criteria);
-#             $response = array(
-#                 'type' => 'FeatureCollection',
-#                 'features' => array(),
-#             );
-#             foreach ($placemarks as $value) {
-#                 $response['features'][] = array(
-#                     'id'   => $value['id'],
-#                     'geometry' => array(
-#                         'type' => 'Point',
-#                         'coordinates' => array($value['latitude'], $value['longitude']),
-#                     ),
-#                     'properties' => array(
-#                         'title' => $value['title'],
-#                         'disclamer' => $value['disclamer'],
-#                         'face_link' => $value['face_link'],
-# //                        'face_link' => 'http://ws/face/96_big.jpg',
-#                         'gallery_link' => $value['gallery_link'],
-#                         'category' => $value['category'],
-#                         'object' => $value['object'],
-#                     )
-#                 );
-#             }
-#
-# //            return $callback . '(' . json_encode($response) . ');';
-#             return $callback . '(' . CJSON::encode($response) . ');';
-#
-#         } catch (Exception $e) {
-#             throw new Exception();
-#         }
-#     }
-
-
-
-
-
-
-
-
-

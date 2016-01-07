@@ -21,8 +21,10 @@ from ws import views
 # from django.contrib.staticfiles.urls import staticfiles_urlpatterns 
 
 urlpatterns = [
+    # url(r'^ws/', include('ws.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', views.main),
     url(r'^objects_search', views.objects_search),
     url(r'^fetch_placemarks', views.fetch_placemarks),
+    # url(r'^placemark_icons/(?P<icon>.*)', views.get_placemark_icon),
 ]

@@ -1,8 +1,8 @@
 {{func}}({
     "type": "FeatureCollection",
     "features": [
+    {% for value in bbox %}
         {
-            {% for value in bbox %}
                 "type": "Feature",
                 "id": {{value.id}},
                 "geometry": {
@@ -14,9 +14,9 @@
                     "balloonContent": "{{value.disclamer}}",
                     "hintContent": "{{value.title}}",
                     "face_link": "{{value.face_link}}",
-                    "clusterize": false
+                    "clusterize": true
                 }
-            {% endfor %}
-        }
+        },
+    {% endfor %}
     ]
 })

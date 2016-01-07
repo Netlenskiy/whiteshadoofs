@@ -41,8 +41,8 @@ class UserAdmin(admin.ModelAdmin):
     exclude = ('id',)
 
 
-class RoleAdmin(admin.ModelAdmin):
-    exclude = ('id',)
+# class RoleAdmin(admin.ModelAdmin):
+#     exclude = ('id',)
 
 
 class Mem_eventAdmin(admin.ModelAdmin):
@@ -61,8 +61,8 @@ class ArangementAdmin(admin.ModelAdmin):
     exclude = ('id',)
 
 
-admin.site.register(Role, RoleAdmin)
-admin.site.register(User, UserAdmin)
+# admin.site.register(Role, RoleAdmin)
+# admin.site.register(User, UserAdmin)
 admin.site.register(Country, CountryAdmin)
 admin.site.register(Region, RegionAdmin)
 admin.site.register(District)

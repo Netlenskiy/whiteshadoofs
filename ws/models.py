@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from django.contrib.auth.models import User
 from django.db import models
 import json
 import urllib
@@ -20,28 +21,6 @@ class Util_category(models.Model):
 
 class Util_state(models.Model):
     name = models.CharField(max_length=25,)
-
-    def __unicode__(self):
-        return self.name
-
-
-class Role(models.Model):
-    """Соответствует таблице role"""
-    title = models.CharField(max_length=45,)
-
-    def __unicode__(self):
-        return self.title
-
-
-class User(models.Model):
-    """Соответствует таблице user, зарегистр-му пользователю сервиса"""
-    name = models.CharField(max_length=45,)
-    soc_network = models.CharField(max_length=45, blank=True,)
-    soc_network_id = models.CharField(max_length=45, blank=True,)
-    nick = models.CharField(max_length=45, blank=True,)
-    role = models.ForeignKey(Role, null=True, blank=True)
-    password = models.CharField(max_length=50,)
-    email = models.EmailField(max_length=254,)
 
     def __unicode__(self):
         return self.name
@@ -114,6 +93,7 @@ class Object(models.Model):
     category_id = models.ForeignKey(Util_category, null=True, blank=True)
     adding_date = models.DateField(auto_now_add=True,)
     description = models.TextField(blank=True,)
+    # user = models.ForeignKey(User, db_index=False, null=True, blank=True)
     user = models.ForeignKey(User, db_index=False, null=True, blank=True)
     mem_event = models.ForeignKey(Mem_event, null=True, blank=True)
     address = models.ForeignKey(Address, null=True, blank=True)
