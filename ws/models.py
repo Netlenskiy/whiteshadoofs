@@ -26,12 +26,13 @@ class Util_state(models.Model):
         return self.name
 
 
-class Image(models.Model):
+class ImageSet(models.Model):
     """TO DO"""
-    pass
+    gallery_link = models.ImageField(upload_to=u'ws/gallery/%Y/%m/%d',
+                                     blank=True, verbose_name=u'gallery', max_length=255,)
 
     def __unicode__(self):
-        pass 
+        pass
 
 
 class Country(models.Model):
@@ -107,10 +108,13 @@ class Geo_object(models.Model):
     disclamer = models.CharField(max_length=1000,)
     latitude = models.FloatField()
     longitude = models.FloatField()
-    # face_link = models.URLField(max_length=255,)
-    face_link = models.ImageField(upload_to='ws/%Y/%m/%d', blank=True, verbose_name='image', max_length=255,)
-    gallery_link = models.URLField(max_length=255,)
-    object = models.ForeignKey(Object, null=True, blank=True)
+    face_link = models.ImageField(upload_to='ws/face/%Y/%m/%d',
+                                  blank=True, verbose_name='image', max_length=255,)
+    # gallery_link = models.ForeignKey(ImageSet, null=True, blank=True,)
+    # gallery_link = models.URLField(max_length=255,)
+    # gallery_link = models.ImageField(upload_to='ws/gallery/%Y/%m/%d',
+    # blank=True, verbose_name='gallery', max_length=255,)
+    object = models.ForeignKey(Object, null=True, blank=True,)
 
     @staticmethod
     def fetch(bbox):
@@ -160,4 +164,3 @@ class Arangement(models.Model):
 
     def __unicode__(self):
         return self.title
-

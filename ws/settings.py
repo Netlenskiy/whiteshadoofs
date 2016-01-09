@@ -83,9 +83,6 @@ DATABASES = {
         'PASSWORD': 'password'
     }
 }
-# DATABASE_OPTIONS = {
-#     "init_command": "SET storage_engine=INNODB, SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED",
-# }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/

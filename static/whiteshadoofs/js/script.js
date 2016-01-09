@@ -13,5 +13,5 @@ ymaps.ready( function () {
     // mediator.requestImageSrc(1);
     window.menu = new Menu( $("#mainMenu") );
     window.mediator = new Mediator();
-    window.gallery = new Gallery( $("#gallery") );
+    //window.gallery = new Gallery( $("#gallery") );
 });

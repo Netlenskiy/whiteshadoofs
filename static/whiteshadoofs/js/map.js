@@ -16,6 +16,7 @@ function initMap() {
         '<div style="width:170px; margin: 10px; overflow:auto">' +
         '<figure>' +
         '<img src="http://белыежуравли.рф/media/{{properties.face_link}}" ' +
+        //'<img src="http://белыежуравли.рф/media/{{properties.face_link}}" ' +
         ' style="width:150px; height:150px;cursor:pointer" ' +
         ' onclick="mediator.requestImageSrc({{properties.id}})"/>' +
         '<figcaption>{{properties.balloonContent}}</figcaption>' +
@@ -26,6 +27,7 @@ function initMap() {
         '{{properties.hintContent}}'
     );
     // @TODO Сделать, чтобы поинтер метки определялся по типу метки
+    //var iconImageHref = 'http://127.0.0.1:8000/placemark_icons/redStar.gif';
     var iconImageHref = 'http://белыежуравли.рф/static/whiteshadoofs/imgs/redStar.gif';
 
     var lom = new ymaps.LoadingObjectManager('http://0.0.0.0:8000/fetch_placemarks?bbox=%b', {

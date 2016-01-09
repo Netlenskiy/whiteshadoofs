@@ -176,7 +176,7 @@ aside {
 	display: none;
 	font-family: "Arial", sans-serif;
 }
-#addObject {
+#add_object {
 	position: absolute;
 	top: 15px;
 	width: 175px;
@@ -185,14 +185,14 @@ aside {
 	outline: 1px solid orange;
 	display: none;	
 }
-#addObject li {
+#add_object li {
 	margin-bottom: 15px;
 }
-#addObject input[type=file] {
+#add_object input[type=file] {
 	width: 150px;
 	overflow: auto;
 }
-#addObject input[name=comments] {
+#add_object input[name=comments] {
 }
 #search_result {
 	position: absolute;

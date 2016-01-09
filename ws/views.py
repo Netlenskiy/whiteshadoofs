@@ -10,7 +10,7 @@ def main(request):
     if request.method == 'GET' and request.META['QUERY_STRING']:
         return HttpResponse(request.META['QUERY_STRING'])
     else:
-        return render_to_response('index.html')
+        return render_to_response('ws/index.html')
 
 
 def objects_search(request):
@@ -64,7 +64,7 @@ def objects_search(request):
 
     if not result:
         return HttpResponse(nothing_found)
-    return render_to_response('search_result.html', {'result': result})
+    return render_to_response('ws/search_result.html', {'result': result})
     
 
 # def get_placemark_icon(request, icon):
@@ -89,7 +89,7 @@ def fetch_placemarks(request):
     geo_objects = list(models.Geo_object.fetch(bbox))
     response = HttpResponse()
     response['cache-control'] = 'no-store'
-    response = render(request, 'pms.json', {'func': callback, 'bbox': geo_objects})
+    response = render(request, 'ws/pms.json', {'func': callback, 'bbox': geo_objects})
     return response
 
 

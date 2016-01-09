@@ -50,19 +50,13 @@ class Mem_eventAdmin(admin.ModelAdmin):
 
 
 class Geo_objectAdmin(admin.ModelAdmin):
-    exclude = ('id', )#'latitude', 'longitude')
-
-    def save_model(self, request, obj, form, change):
-
-        pass
+    exclude = ('id', )  # 'latitude', 'longitude')
 
 
 class ArangementAdmin(admin.ModelAdmin):
     exclude = ('id',)
 
 
-# admin.site.register(Role, RoleAdmin)
-# admin.site.register(User, UserAdmin)
 admin.site.register(Country, CountryAdmin)
 admin.site.register(Region, RegionAdmin)
 admin.site.register(District)

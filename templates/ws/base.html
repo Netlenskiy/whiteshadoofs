@@ -1,0 +1,72 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Белые журавли</title>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no, maximum-scale=1" />
+	<link href="{% static 'whiteshadoofs/css/document.css' %}" rel="stylesheet" type="text/css"/>
+	<link href="{% static 'whiteshadoofs/css/header.css' %}" rel="stylesheet" type="text/css"/>
+	<link href="{% static 'whiteshadoofs/css/menu.css' %}" rel="stylesheet" type="text/css"/>
+	<link href="{% static 'whiteshadoofs/css/main_section.css' %}" rel="stylesheet" type="text/css"/>
+	<link href="{% static 'whiteshadoofs/css/left_panel.css' %}" rel="stylesheet" type="text/css"/>
+	<link href="{% static 'whiteshadoofs/css/map.css' %}" rel="stylesheet" type="text/css"/>
+	<link href="{% static 'whiteshadoofs/css/gallery.css' %}" rel="stylesheet" type="text/css"/>
+
+	<script src="{% static 'whiteshadoofs/js/jquery-2.1.3.min.js' %}"></script>
+	<script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU&mode=debug"></script>
+	<script src="{% static 'whiteshadoofs/js/menu.js' %}"></script>
+	<script src="{% static 'whiteshadoofs/js/gallery.js' %}"></script>
+	<script src="{% static 'whiteshadoofs/js/data.js' %}"></script>
+</head>
+<body>
+<div id="main_wrapper">
+	<header>
+		<img id="logo" src="{% static 'whiteshadoofs/imgs/logo.png' %}" alt="Белые журавли">
+		<div id="auth"></div>
+	</header>
+	<nav>
+        {% include 'ws/main_menu.html' %}
+	</nav>
+	<section id="container">
+		<aside id="aside">
+            {% include 'ws/category_list.html' %}
+            {% include 'ws/search_filter.html' %}
+			<div id="search_result">
+				<div id="sr_block">
+
+				</div>
+				<input name="new_search" type="button" value="Начать новый поиск">
+			</div>
+            {% include 'ws/add_object.html' %}
+
+		</aside>
+
+		<div id="section">
+			<div id="wsMap"></div>	<!--  контейнер карты -->
+{#            {% include 'gallery.html' %}#}
+		</div>
+
+		<div id="actionsWindow_1" class="actionsWindow">
+		</div>
+		<div id="actionsWindow_2" class="actionsWindow">
+			<input type="button" value="Предложить мероприятие">
+		</div>
+		<div id="actionsWindow_3" class="actionsWindow">
+			<div id="aw3_date" class="aw3_divs">Дата<input type="textarea"></div>
+			<div id="aw3_place" class="aw3_divs">Место<input  type="textarea"></div>
+			<div id="aw3_desc" class="aw3_divs">Описание<input type="textarea"></div>
+			<input type="button" value="Добавить">
+		</div>
+		<div id="actionsWindow_4" class="actionsWindow">
+			<input type="button" value="Предложить мероприятие">
+		</div>
+		<div id="about_window">
+		</div>
+	</section>
+	<footer id="footer"></footer>
+</div>
+</body>
+<script src="{% static 'whiteshadoofs/js/map.js' %}"></script>
+<script src="{% static 'whiteshadoofs/js/mediator.js' %}"></script>
+<script src="{% static 'whiteshadoofs/js/script.js' %}"></script>
+</html>
