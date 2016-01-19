@@ -9,7 +9,7 @@ from ws.models import *
 
 class Geo_objectInline(admin.StackedInline):
     model = Geo_object
-    exclude = ('id', 'latitude', 'longitude')
+    exclude = ('id',)
     extra = 1
     max_num = 1
 
