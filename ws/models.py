@@ -1,7 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django.contrib.auth.models import User
+from django.contrib import auth
+from django.http import HttpRequest
 from django.db import models
+
 import json
 import urllib
 
@@ -107,6 +110,14 @@ class Object(models.Model):
     user = models.ForeignKey(User, db_index=False, verbose_name='Пользователь', null=True, blank=False)
     mem_event = models.ForeignKey(Mem_event, verbose_name='Памятное событие', null=True, blank=False)
     address = models.ForeignKey(Address, verbose_name='Адрес', null=True, blank=False)
+
+    # def save(self, force_insert=False, force_update=False, using=None,
+    #          update_fields=None):
+    #     cur_user = request.user
+    #     self.user = cur_user
+    #
+    #     super(Object, self).save(force_insert=False, force_update=False,
+    #                              using=None, update_fields=None)
 
     def __unicode__(self):
         return self.title
