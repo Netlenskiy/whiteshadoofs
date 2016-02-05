@@ -1,356 +1,280 @@
 //3
 /*
-Класс "Menu" включает 4 подкласса, каждый из которых
-является одним из подменю на странице.
-Конструктору "Menu" передается DOM-элемент, обернутый в jquery (далее 
-DOM-jquery-элемент), в котором содержится меню.
+ Класс "Menu" включает 4 подкласса, каждый из которых
+ является одним из подменю на странице.
+ Конструктору "Menu" передается DOM-элемент, обернутый в jquery (далее
+ DOM-jquery-элемент), в котором содержится меню.
 
-*/
-function MenuCategory(list) {
-	/*
-	Меню "Категории". Аргумент - DOM-jquery-элемент, содержащий список 
-	категорий объекта с чекбоксами для того, чтобы отфильтровывать объекты на карте.
+ */
+function BaseMenu(doc_elem) {
+    this.doc_elem = doc_elem;
+    this.isOpened = false;
+    this.show_position = 0;
+    this.show_duration = "default";
+    this.hide_position = 1000;
+    this.hide_duration = "default";
+    this.preview_style = {
+        "display": "none"
+    };
 
-	*/
-	var self = this;
-	var isOpened = false;
-	var posInLeft = -175;
-	var posInRight = 200;
-
-	self.toggle = function (e) {
-		isOpened ? self.hide() : show();
-	};
-
-	self.hide = function (into) {
-		/*
-		into- направление смещения списка при закрытии или замещении
-		его другим элементом в боковой панели. При завершении смещения
-		список делается невидимым и возвращается в исходную позицию,
-		слева от боковой панели.
-		Вызов без аргумента - смещение вправо.
-
-		pos - позиция элемента, в которую он будет смещен при нажатии 
-		меню, либо кнопки под списком.
-
-		*/
-		var pos = into == "left" ? posInLeft : posInRight;
-		isOpened = false;
-		list.animate({
-			left: pos
-		}, {
-			duration: "default",
-			complete: function () {
-				list.css({
-					"display": "none",
-					"left": posInLeft
-				});
-			}
-		});
-	};
-
-	self.isOpen = function () {
-		return isOpened;
-	};
-
-	function show() {
-		/*
-		Отображает список в боковой панели.
-		*/
-		isOpened = true;
-		list.css("display", "block");
-		list.animate({
-			left: 25
-		}, {
-			duration: "default"
-		});
-	}
-
-	list.last().on("click", function (e) {
-		/*
-		Обработчик нажатия на кнопку под списком. При нажатии
-		callback-функция формирует массив, в котором названия
-		категорий выбранных чекбоксов. Массив передается методу
-		класса Mediator, который передает из объекту карты.
-		*/
-		if (e.target.id != "filter") return;
-		var types = [];
-		list.find("input").each(function (index, element) {
-			if (element.checked)
-			 	types.push(index);
-		});
-		mediator.sendTypesToMap({
-			type: "filter",
-			types: types
-		});
-	});
+    this.hide = function () {
+        this.isOpened = false;
+        this.doc_elem.animate({
+            left: this.hide_position
+        }, {
+            duration: this.hide_duration,
+            complete: function () {
+                this.doc_elem.css(this.preview_style);
+            }.bind(this)
+        });        
+    };
+    
+    this.show = function () {
+        this.isOpened = true;
+        this.doc_elem.css("display", "block");
+        this.doc_elem.animate({
+            left: this.show_position
+        }, {
+            duration: this.show_duration
+        });
+    };
+    
+    this.toggle = function () {
+        console.log(this.show_duration);
+        this.isOpened ? this.hide() : this.show();
+    };
+    
+    this.isOpen = function () {
+        return this.isOpened;
+    }
 }
 
-function MenuActions() {
-	/*
-	
-	*/
-	var self = this;
-	var isOpened = false;
-	var elem_1 = $('#actionsWindow_1');
-	var elem_2 = $('#actionsWindow_2');
-	var elem_3 = $('#actionsWindow_3');
-	var elem_4 = $('#actionsWindow_4');
-	var elem = elem_1;
-	self.authorized = false;
+function MenuCategory(doc_elem) {
 
-	self.toggle = function () {
-		isOpened ? self.hide() : show();
-	};
+    BaseMenu.apply(this, arguments);
+    var self = this;
+    var posInLeft = -175;
+    var posInRight = 200;
+    self.show_position = 25;
+    self.preview_style = {
+        "display": "none",
+        "left": posInLeft
+    };
 
-	self.isOpen = function () {
-		return isOpened;
-	};
+    var parent_hide = self.hide;
+    self.hide = function (into) {
+        /*
+         into- направление смещения списка при закрытии или замещении
+         его другим элементом в боковой панели. При завершении смещения
+         список делается невидимым и возвращается в исходную позицию,
+         слева от боковой панели.
+         Вызов без аргумента - смещение вправо.
+         */
+        self.hide_position = into == "left" ? posInLeft : posInRight;
+        parent_hide.apply(self, arguments);
+    };
 
-	self.hide = function () {
-		isOpened = false;
-		$(self.authorized).change();
-		elem.animate({
-			left: 1000
-		}, {
-			duration: "default",
-			complete: function () {
-				elem.css("display", "none");
-			}
-		});
-	};
-
-	self.toggleAuth = function (flag) {
-		function toggle(newElem) {
-			elem.animate({
-				opacity: 0
-			}, {
-				duration: "default",
-				complete: function () {
-					elem.css("display", "none");
-					elem = newElem;
-					elem.css("display", "block");
-					elem.animate({
-						opacity: 1
-					}, {
-						duration: "default"
-					});
-				}
-			});
-		}
-		if (flag) {
-			toggle(elem_2);
-		} else {
-			toggle(elem_1);
-		}
-	};
-	function show () {
-		isOpened = true;
-		elem.css("display", "block");
-		elem.animate({
-			left: 0
-		}, {
-			duration: "slow"
-		});
-		//setTimeout(self.toggleAuth(true), 5000);
-	}
+    doc_elem.last().on("click", function (e) {
+        /*
+         Обработчик нажатия на кнопку под списком. При нажатии
+         callback-функция формирует массив, в котором названия
+         категорий выбранных чекбоксов. Массив передается методу
+         класса Mediator, который передает из объекту карты.
+         */
+        if (e.target.id != "filter") return;
+        var types = [];
+        doc_elem.find("input").each(function (index, element) {
+            if (element.checked)
+                types.push(index);
+        });
+        mediator.sendTypesToMap({
+            type: "filter",
+            types: types
+        });
+    });
 }
 
-function MenuAbout(elem) {
-	var self = this;
-	var isOpened = false;
+function MenuActions(doc_elem) {
+    BaseMenu.apply(this, arguments);
+    var self = this;
+    self.show_duration = "slow";
 
-	self.toggle = function () {
-		isOpened ? self.hide() : show();
-	};
-	self.isOpen = function () {
-		return isOpened;
-	};
-	self.hide = function () {
-		isOpened = false;
-		elem.animate({
-			left: 1000
-		}, {
-			duration: "default",
-			complete: function () {
-				elem.css("display", "none");
-			}
-		});
-	};
-	function show () {
-		isOpened = true;
-		elem.css("display", "block");
-		elem.animate({
-			left: 0
-		}, {
-			duration: "slow"
-		});
-	}	
+    //self.toggleAuth = function (flag) {
+    //    function toggle(newElem) {
+    //        doc_elem.animate({
+    //            opacity: 0
+    //        }, {
+    //            duration: "default",
+    //            complete: function () {
+    //                doc_elem.css("display", "none");
+    //                doc_elem = newElem;
+    //                doc_elem.css("display", "block");
+    //                doc_elem.animate({
+    //                    opacity: 1
+    //                }, {
+    //                    duration: "default"
+    //                });
+    //            }
+    //        });
+    //    }
+    //
+    //    if (flag) {
+    //        toggle(elem_2);
+    //    } else {
+    //        toggle(elem_1);
+    //    }
+    //};
+}
+
+function MenuAbout() {
+    BaseMenu.apply(this, arguments);
+    var self = this;
+    self.show_duration = "slow";
 }
 
 function MenuSearch(search, searchResultElem) {
-	/*	
-	Меню "Поиск". Аргументы: 
-	search - блок с формой поиска,
-	searchResultElem - блок с результатами поиска.
+    /*
+     Меню "Поиск". Аргументы:
+     search - блок с формой поиска,
+     searchResultElem - блок с результатами поиска.
 
-	openedItem - отображаемый в данный момент блок.
+     openedItem - отображаемый в данный момент блок.
 
-	*/
-	var self = this;
-	var isOpened = false;
-	var openedItem = "search";
-	var posInRight = 200;
+     */
+    BaseMenu.call(this);
+    var self = this;
+    var posInRight = 200;
+    self.doc_elem = search;
+    self.preview_style = {
+        "display": "none",
+        "left": -posInRight
+    };
 
-	self.toggle = function () {
-		/*
-		
-		*/
-		if (isOpened) {
-			openedItem === "searchResultElem" ? self.hide(null, "searchResultElem") : self.hide();
-		} else {
-			show();
-		}
-	};
+    self.toggle = function () {
+        if (self.isOpen()) {
+            self.doc_elem === searchResultElem ? self.hide(null, searchResultElem) : self.hide();
+        } else {
+            self.show();
+        }
+    };
+    var parent_hide = self.hide;
+    self.hide = function (into) {
+        self.hide_position = into == "left" ? -posInRight : posInRight;
+        self.doc_elem = self.doc_elem == searchResultElem ? searchResultElem : search;
+        parent_hide.apply(self);
+    };
 
-	self.hide = function (into) {
-		/*
-		
-		*/
-		var pos = into == "left" ? -posInRight : posInRight;
-		var elem = openedItem === "searchResultElem" ? searchResultElem : search;
-		isOpened = false;
+    var parent_show = self.show;
+    self.show = function (item) {
+        self.doc_elem = item == "searchResultElem" ? searchResultElem : search;
+        parent_show.apply(self, arguments);
+    };
 
-		elem.animate({
-			left: pos
-		}, {
-			duration: "default",
-			complete: function () {
-				elem.css({
-					"display": "none",
-					"left": -posInRight
-				});
-			}
-		});
-	};
+    function jxRequestSearchResult(url, elem) {
+        /*Отправляет ajax-запрос форму с параметрами поиска.
+         При получении результата встраивает его в элемент
+         div блока результата поиска.*/
+        if (url === 'undefined' || elem === 'undefined')
+            throw new Error('2 arguments expected.');
 
-	self.isOpen = function () {
-		return isOpened;
-	};
+        var xhr = new XMLHttpRequest();
 
-	function show(item) {
-		/*
-		
-		*/
-		isOpened = true;
-		var elem = item === "searchResultElem" ? searchResultElem : search;
-		openedItem = item === "searchResultElem" ? "searchResultElem" : "search";
+        xhr.open('GET', url);
+        xhr.send();
 
-		elem.css("display", "block");		
-		elem.animate({
-			left: 0
-		}, {
-			duration: "default"
-		});
-	}
+        xhr.onreadystatechange = function () {
+            // Обработка ответа сервера
+            if (xhr.readyState != 4) return;
 
-	function jxRequestSearchResult (url, elem) {
-		/*Отправляет ajax-запрос форму с параметрами поиска.
-		При получении результата встраивает его в элемент 
-		div блока результата поиска.*/
-		if (url === 'undefined' || elem === 'undefined')
-			throw new Error('2 arguments expected.');
+            if (xhr.status == 200)
+                $('#sr_block', elem).html(this.responseText);
+            else
+                $('body').html(this.responseText);
+        }
+    }
 
-		var xhr = new XMLHttpRequest();
-		
-		xhr.open('GET', url);
-		xhr.send();
+    $("input[name=to_search]", search).on('click', function (event) {
+        /*
+         При клике прячется форма поиска и отображается блок с результатами
+         поиска, далее обход формы и формирование строки GET-запроса.
+         */
+        event.preventDefault();
+        self.hide();
+        self.show("searchResultElem");
 
-		xhr.onreadystatechange = function () {
-			// Обработка ответа сервера
-			if (xhr.readyState != 4) return;
-			
-			if (xhr.status == 200)
-				$('#sr_block', elem).html(this.responseText);
-			else 
-				$('body').html(this.responseText);
-		}
-	}
+        var form = document.forms.search_form;
+        var url = 'objects_search?';
 
-	$("input[name=to_search]", search).on('click', function (event) {
-		/*	
-		При клике прячется форма поиска и отображается блок с результатами
-		поиска, далее обход формы и формирование строки GET-запроса.
-		
-		*/
-		event.preventDefault();
-		self.hide();
-		show("searchResultElem");
+        for (var i = 0; i < form.elements.length; i++) {
+            var item = form.elements[i];
+            if (i != 0 && item.type != 'submit') url += '&';
 
-		var form = document.forms.search_form;
-		var url = 'objects_search?';
+            if (item.type == 'checkbox' || item.type == 'text') {
+                url += (item.name + '=');
+                if (item.type == 'checkbox')
+                    url += item.checked;
+                else if (item.type == 'text')
+                    url += encodeURIComponent(item.value);
+            }
+        }
+        jxRequestSearchResult(url, $('#search_result'));
+    });
 
-		for (var i=0; i<form.elements.length; i++) {
-			var item = form.elements[i];
-			if (i != 0 && item.type != 'submit') url += '&';
+    $("input[name=new_search]", searchResultElem).on('click', function (event) {
+        event.preventDefault();
+        self.hide("right", searchResultElem);
+        self.show();
+    });
+}
 
-			if (item.type == 'checkbox' || item.type == 'text') {
-				url += (item.name + '=');
-				if (item.type == 'checkbox')
-					url += item.checked;
-				else if (item.type == 'text')
-					url += encodeURIComponent(item.value);
-			}
-		}
-		jxRequestSearchResult(url, $('#search_result'));
-	});
-
-	$("input[name=new_search]", searchResultElem).on('click', function (event) {
-		event.preventDefault();
-		self.hide("right", "searchResultElem");
-		show();
-	});
+function MenuProfile(doc_elem) {
+    BaseMenu.apply(this, arguments);
+    var self = this;
+    self.show_duration = "slow";
 }
 
 function Menu(elem) {
-	//
-	var menu = {
-		category: new MenuCategory( $("#category_list") ),
-		actions:  new MenuActions(),
-		about:    new MenuAbout( $('#about_window') ),
-		search:   new MenuSearch( $("#search_filter"), $("#search_result") )
-	};
-	var lastOpened = null;
-	var curOpened = null;
-	var authorized = false;
+    //
+    var menu = {
+        category: new MenuCategory($("#category_list")),
+        actions: new MenuActions($('#actionsWindow_1')),
+        about: new MenuAbout($('#about_window')),
+        search: new MenuSearch($("#search_filter"), $("#search_result")),
+        profile: new MenuProfile($("#profile_window"))
+    };
+    var lastOpened = null;
+    var curOpened = null;
 
-	function hideAll (argument) {
-		if (lastOpened) menu[lastOpened].hide();
-	}
+    function hideAll() {
+        if (lastOpened) menu[lastOpened].hide();
+    }
 
-	elem.on('click', function(event) {
-		event.preventDefault();
-		curOpened = event.target.id;
-		if (curOpened != lastOpened) {
-			switch(lastOpened) {
-			case "category":
-				if (curOpened != "search") menu.category.hide("left");
-				else menu.category.hide();
-				break;
-			case "actions":
-				menu.actions.hide();
-				break;
-			case "search":
-				if (curOpened != "category") menu.search.hide("left");
-				else menu.search.hide();
-				break;
-			case "about":
-				menu.about.hide();
-				break;
-			}
-			lastOpened = event.target.id;
-		}
-		menu[curOpened].toggle();
-	});
+    elem.on('click', function (event) {
+        event.preventDefault();
+        curOpened = event.target.id;
+        if (curOpened != lastOpened) {
+            switch (lastOpened) {
+                case "category":
+                    if (curOpened != "search") menu.category.hide("left");
+                    else menu.category.hide();
+                    break;
+                case "actions":
+                    menu.actions.hide();
+                    break;
+                case "search":
+                    if (curOpened != "category") menu.search.hide("left");
+                    else menu.search.hide();
+                    break;
+                case "about":
+                    menu.about.hide();
+                    break;
+                case "profile":
+                    menu.profile.hide();
+            }
+            lastOpened = event.target.id;
+        }
+        menu[curOpened].toggle();
+    });
 
-	this.hideAll = hideAll;
+    this.hideAll = hideAll;
 }

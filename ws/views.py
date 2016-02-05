@@ -64,18 +64,7 @@ def objects_search(request):
 
     if not result:
         return HttpResponse(nothing_found)
-    return render_to_response('ws/search_result.html', {'result': result})
-    
-
-# def get_placemark_icon(request, icon):
-#     """
-#     returns an icon for introducing a placemark at the map
-#     :param request
-#     :param icon
-#     """
-#     if icon == '':
-#         return False
-#     return HttpResponse('/home/ivan/ws/static/imgs/' + icon)
+    return render_to_response('ws/menu/search/search_result.html', {'result': result})
 
 
 def fetch_placemarks(request):
@@ -93,13 +82,9 @@ def fetch_placemarks(request):
     return response
 
 
-def geocoder(request):
-    if request.GET['geo']:
-        geo = request.GET['geo']
-
-#
-# def image_handler(request):
-#     if not request.GET:
-#         raise BaseException
-#     else:
-#
+def user_profile(request):
+    if request.user.is_autenticated():
+        responce = 'user_profile'
+    else:
+        responce = 'anonimous'
+    return render_to_response(responce)

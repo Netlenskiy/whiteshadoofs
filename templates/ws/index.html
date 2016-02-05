@@ -26,24 +26,23 @@
 		<div id="auth"></div>
 	</header>
 	<nav>
-        {% include 'ws/main_menu.html' %}
+        {% include 'ws/menu/main_menu.html' %}
 	</nav>
 	<section id="container">
 		<aside id="aside">
-            {% include 'ws/category_list.html' %}
-            {% include 'ws/search_filter.html' %}
-            {% include 'ws/search_result.html' %}
+            {% include 'ws/menu/category/category_list.html' %}
+            {% include 'ws/menu/search/search_filter.html' %}
+            {% include 'ws/menu/search/search_result.html' %}
             {% include 'ws/add_object.html' %}
 		</aside>
 
 		<div id="section">
 			<div id="wsMap"></div>
-
 		</div>
 
 		<div id="actionsWindow_1" class="actionsWindow">
 		</div>
-		<div id="actionsWindow_2" class="actionsWindow">
+		{% comment %}<div id="actionsWindow_2" class="actionsWindow">
 			<input type="button" value="Предложить мероприятие">
 		</div>
 		<div id="actionsWindow_3" class="actionsWindow">
@@ -54,9 +53,10 @@
 		</div>
 		<div id="actionsWindow_4" class="actionsWindow">
 			<input type="button" value="Предложить мероприятие">
-		</div>
-		<div id="about_window">
-		</div>
+		</div>{% endcomment %}
+
+        {% include 'ws/menu/about/about_window.html' %}
+        {% include 'ws/menu/profile/profile_window.html' %}
 	</section>
 	<footer id="footer"></footer>
 </div>

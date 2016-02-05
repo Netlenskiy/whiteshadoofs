@@ -203,3 +203,11 @@ input[name=title] {
 input[name=to_search] {
     width: 75px;
 }
+#profile_window {
+    position: absolute;
+    left: 800px;
+    width: 997px;
+    height: 450px;
+    display: none;
+    background: #777;
+}
