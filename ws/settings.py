@@ -56,7 +56,16 @@ ROOT_URLCONF = 'ws.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates/ws'),
+            os.path.join(BASE_DIR, 'templates/ws/about'),
+            os.path.join(BASE_DIR, 'templates/ws/category'),
+            os.path.join(BASE_DIR, 'templates/ws/menu'),
+            os.path.join(BASE_DIR, 'templates/ws/gallery'),
+            os.path.join(BASE_DIR, 'templates/ws/profile'),
+            os.path.join(BASE_DIR, 'templates/ws/search'),
+            os.path.join(BASE_DIR, 'static'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -105,6 +114,11 @@ STATIC_URL = os.path.join(BASE_DIR, 'static/')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'static/ws'),
+    os.path.join(BASE_DIR, 'static/ws/js'),
+    os.path.join(BASE_DIR, 'static/ws/css'),
+    os.path.join(BASE_DIR, 'static/ws/icons'),
+    os.path.join(BASE_DIR, 'static/ws/imgs'),
 )
 
 # TEMPLATE_CONTEXT_PROCESSORS = (,)

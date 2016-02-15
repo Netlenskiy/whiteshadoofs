@@ -10,15 +10,16 @@ def main(request):
     if request.method == 'GET' and request.META['QUERY_STRING']:
         return HttpResponse(request.META['QUERY_STRING'])
     else:
-        return render_to_response('ws/index.html')
+        responce = 'index.html'
+        return render_to_response(responce)
 
 
 def objects_search(request):
     """
     :param request
     Функция осуществляет поиск соответствующих get-запросу
-    объектов в бд, передает их шаблону в качестве контекста. 
-    
+    объектов в бд, передает их шаблону в качестве контекста.
+
     """
 
     nothing_found = "Ничего не нашлось..."
@@ -64,7 +65,7 @@ def objects_search(request):
 
     if not result:
         return HttpResponse(nothing_found)
-    return render_to_response('ws/menu/search/search_result.html', {'result': result})
+    return render_to_response('ws/menu/../templates/ws/search/search_result.html', {'result': result})
 
 
 def fetch_placemarks(request):
@@ -86,5 +87,15 @@ def user_profile(request):
     if request.user.is_autenticated():
         responce = 'user_profile'
     else:
-        responce = 'anonimous'
+        responce = 'login_page.html'
+    return render_to_response(responce, {'user': request.user})
+
+
+def user_login(request):
+    responce = 'login_page.html'
+    return render_to_response(responce)
+
+
+def get_fe_menu(request):
+    responce = 'category_list.html'
     return render_to_response(responce)

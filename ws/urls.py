@@ -13,18 +13,24 @@ Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
-from django.conf import settings
+
 from django.conf.urls import include, url
 from django.contrib import admin
 from ws import views
 # from django.conf.urls.static import static
-# from django.contrib.staticfiles.urls import staticfiles_urlpatterns 
+# from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
+ws_patterns = [
+    url(r'^$', views.main, name='main'),
+    url(r'^objects_search', views.objects_search, name='objects_search'),
+    url(r'^fetch_placemarks', views.fetch_placemarks, name='fetch_placemarks'),
+    url(r'^get_fe_menu', views.get_fe_menu, name='get_fe_menu'),
+    url(r'^user_profile', views.user_profile, name='user_profile'),
+    url(r'^user_login$', views.user_login, name='user_login'),
+    # url(r'^placemark_icons/(?P<icon>.*)', views.get_placemark_icon),
+]
 
 urlpatterns = [
-    # url(r'^ws/', include('ws.urls')),
+    url(r'^$', include(ws_patterns, 'ws', 'ws')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', views.main),
-    url(r'^objects_search', views.objects_search),
-    url(r'^fetch_placemarks', views.fetch_placemarks),
-    # url(r'^placemark_icons/(?P<icon>.*)', views.get_placemark_icon),
 ]
