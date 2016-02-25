@@ -53,19 +53,18 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'ws.urls'
 
+
+def template_dirs_creator(arg, dirname, names):
+    arg += [dirname]
+
+template_dirs = []
+os.path.walk(os.path.join(BASE_DIR, 'templates/ws'), template_dirs_creator, template_dirs)
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(BASE_DIR, 'templates/ws'),
-            os.path.join(BASE_DIR, 'templates/ws/about'),
-            os.path.join(BASE_DIR, 'templates/ws/category'),
-            os.path.join(BASE_DIR, 'templates/ws/menu'),
-            os.path.join(BASE_DIR, 'templates/ws/gallery'),
-            os.path.join(BASE_DIR, 'templates/ws/profile'),
-            os.path.join(BASE_DIR, 'templates/ws/search'),
-            os.path.join(BASE_DIR, 'static'),
-        ],
+        'DIRS': template_dirs,
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
