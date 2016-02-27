@@ -54,11 +54,11 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'ws.urls'
 
 
-def template_dirs_creator(arg, dirname, names):
+def list_dirs_creator(arg, dirname, names):
     arg += [dirname]
 
 template_dirs = []
-os.path.walk(os.path.join(BASE_DIR, 'templates/ws'), template_dirs_creator, template_dirs)
+os.path.walk(os.path.join(BASE_DIR, 'ws/templates'), list_dirs_creator, template_dirs)
 
 
 TEMPLATES = [
@@ -109,18 +109,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/ws/')
 STATIC_URL = os.path.join(BASE_DIR, 'static/')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-    os.path.join(BASE_DIR, 'static/ws'),
-    os.path.join(BASE_DIR, 'static/ws/js'),
-    os.path.join(BASE_DIR, 'static/ws/css'),
-    os.path.join(BASE_DIR, 'static/ws/icons'),
-    os.path.join(BASE_DIR, 'static/ws/imgs'),
-)
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/ws/')
 
-# TEMPLATE_CONTEXT_PROCESSORS = (,)
-# SESSION_COOKIE_DOMAIN = '127.0.0.1:8000'
-# INTERNAL_IPS
-# TEMPLATE_LOADERS = ()
+
+static_dirs = []
+os.path.walk(os.path.join(BASE_DIR, 'ws/static'), list_dirs_creator, static_dirs)
+# STATICFILES_DIRS = static_dirs

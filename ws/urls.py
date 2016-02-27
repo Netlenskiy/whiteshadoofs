@@ -21,12 +21,12 @@ from ws import views
 # from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 ws_patterns = [
-    url(r'^$', views.main, name='main'),
+    url(r'^$', views.index, name='index'),
     url(r'^objects_search', views.objects_search, name='objects_search'),
     url(r'^fetch_placemarks', views.fetch_placemarks, name='fetch_placemarks'),
     url(r'^get_fe_menu', views.get_fe_menu, name='get_fe_menu'),
     url(r'^user_profile', views.user_profile, name='user_profile'),
-    url(r'^user_login$', views.user_login, name='user_login'),
+    url(r'^user_login', views.user_login, name='user_login'),
     # url(r'^placemark_icons/(?P<icon>.*)', views.get_placemark_icon),
 ]
 

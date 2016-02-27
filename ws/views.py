@@ -6,7 +6,7 @@ from django.shortcuts import render, render_to_response
 import ws.models as models
 
 
-def main(request):
+def index(request):
     if request.method == 'GET' and request.META['QUERY_STRING']:
         return HttpResponse(request.META['QUERY_STRING'])
     else:
@@ -65,7 +65,7 @@ def objects_search(request):
 
     if not result:
         return HttpResponse(nothing_found)
-    return render_to_response('ws/menu/../templates/ws/search/search_result.html', {'result': result})
+    return render_to_response('ws/templates/menu/../templates/ws/search/search_result.html', {'result': result})
 
 
 def fetch_placemarks(request):
@@ -79,7 +79,7 @@ def fetch_placemarks(request):
     geo_objects = list(models.Geo_object.fetch(bbox))
     response = HttpResponse()
     response['cache-control'] = 'no-store'
-    response = render(request, 'ws/pms.json', {'func': callback, 'bbox': geo_objects})
+    response = render(request, 'ws/templates/pms.json', {'func': callback, 'bbox': geo_objects})
     return response
 
 
