@@ -91,6 +91,13 @@ def get_fe_menu(request):
     return render_to_response(responce)
 
 
+class GetFEMenuView(View):
+
+    def get(self, request):
+        responce = request.GET['name'] + '.html'
+        return render_to_response(responce)
+
+
 class ProfileView(FormView):
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated():

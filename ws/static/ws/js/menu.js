@@ -52,7 +52,6 @@ function BaseMenu(own_block_id) {
                     document.body.appendChild(script);
                     script.onload = function (e) {
                         console.log(script);
-                        alert('dynamic loaded script is available!');
                     }
                 }
             }.bind(this);
@@ -85,7 +84,7 @@ function MenuCategory(own_block_id) {
     var posInLeft = -175;
     var posInRight = 200;
     self.own_block_id = own_block_id;
-    self.view_url = 'get_fe_menu?name=category';
+    self.view_url = 'get_fe_menu?name=category_list';
     self.js_url   = '';
     self.show_position = 25;
     self.preview_style = {
@@ -127,9 +126,14 @@ function MenuCategory(own_block_id) {
 }
 
 function MenuActions(own_block) {
-    BaseMenu.apply(this, arguments);
+    //BaseMenu.apply(this, arguments);
     var self = this;
     self.show_duration = 'slow';
+
+    //plugs
+    this.hide = function () {};
+    this.show = function () {};
+    this.toggle = function () {};
 
     //self.toggleAuth = function (flag) {
     //    function toggle(newElem) {
@@ -159,9 +163,14 @@ function MenuActions(own_block) {
 }
 
 function MenuAbout() {
-    BaseMenu.apply(this, arguments);
+    //BaseMenu.apply(this, arguments);
     var self = this;
     self.show_duration = 'slow';
+
+    //plugs
+    this.hide = function () {};
+    this.show = function () {};
+    this.toggle = function () {};
 }
 
 function MenuSearch(search, searchResultElem) {
@@ -173,10 +182,11 @@ function MenuSearch(search, searchResultElem) {
      openedItem - отображаемый в данный момент блок.
 
      */
-    BaseMenu.call(this);
+    BaseMenu.apply(this, arguments);
     var self = this;
     var posInRight = 200;
     self.own_block = search;
+    self.view_url = 'get_fe_menu?name=search_filter';
     self.preview_style = {
         'display': 'none',
         'left': -posInRight
