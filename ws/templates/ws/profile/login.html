@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Регистрация</title>
+  </head>
+  <body>
+    <form id="login_form" name="login_form" action="{% url 'ws:login' %}" method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Войти</button>
+    </form>
+    <a href="{% url 'ws:register' %}">
+      <button type="submit">REgister</button>
+    </a>
+  </body>
+</html>

@@ -1,17 +1,19 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, render_to_response
-import ws.models as models
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import login, logout
+from django.views.generic.edit import FormView
+from django.views.generic.base import View
+from . import models, forms
 
 
-def index(request):
-    if request.method == 'GET' and request.META['QUERY_STRING']:
-        return HttpResponse(request.META['QUERY_STRING'])
-    else:
+class IndexView(View):
+    def get(self, request):
         responce = 'index.html'
-        return render_to_response(responce)
+        return render_to_response(responce, {'user': request.user})
 
 
 def objects_search(request):
@@ -65,7 +67,8 @@ def objects_search(request):
 
     if not result:
         return HttpResponse(nothing_found)
-    return render_to_response('ws/templates/menu/../templates/ws/search/search_result.html', {'result': result})
+    template = 'ws/ws/templates/ws/search/search_result.html'
+    return render_to_response(template, {'result': result})
 
 
 def fetch_placemarks(request):
@@ -83,19 +86,48 @@ def fetch_placemarks(request):
     return response
 
 
-def user_profile(request):
-    if request.user.is_autenticated():
-        responce = 'user_profile'
-    else:
-        responce = 'login_page.html'
-    return render_to_response(responce, {'user': request.user})
-
-
-def user_login(request):
-    responce = 'login_page.html'
-    return render_to_response(responce)
-
-
 def get_fe_menu(request):
     responce = 'category_list.html'
     return render_to_response(responce)
+
+
+class ProfileView(FormView):
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated():
+            responce = 'profile.html'
+            # return HttpResponseRedirect('logout')
+        else:
+            return HttpResponseRedirect('login')
+        return render_to_response(responce, {'user': request.user})
+
+
+class RegisterFormView(FormView):
+    form_class = forms.UserCreationForm
+    success_url = '/login'
+    template_name = 'register.html'
+
+    def form_valid(self, form):
+        form.save()
+        return super(RegisterFormView, self).form_valid(form)
+
+
+class LoginFormView(FormView):
+    form_class = AuthenticationForm
+    success_url = '/'
+    template_name = 'login.html'
+
+    def __init__(self, **kwargs):
+        self.user = None
+        super(LoginFormView, self).__init__(**kwargs)
+
+    def form_valid(self, form):
+        self.user = form.get_user()
+        login(self.request, self.user)
+        return super(LoginFormView, self).form_valid(form)
+
+
+class LogoutView(View):
+
+    def get(self, request):
+        logout(request)
+        return HttpResponseRedirect('/')
