@@ -1,5 +1,6 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+
 from django.contrib.auth.models import User
 from django.contrib import auth
 from django.http import HttpRequest
@@ -7,12 +8,6 @@ from django.db import models
 
 import json
 import urllib
-
-"""Models for db 'ws' """
-
-"""
-
-"""
 
 
 class Util_category(models.Model):

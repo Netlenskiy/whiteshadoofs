@@ -1,0 +1,213 @@
+nav {
+    width: 1000px;
+    height: 50px;
+}
+nav li {
+    list-style-type: none;
+    float: left;
+    width: 188px;
+    height: 37px;
+    margin-left: 10px;
+    outline: 1px solid grey;
+    color: #000;
+    font-family: "Arial", sans-serif;
+    font-size: 20px;
+    text-align: center;
+    padding-top: 12px;
+    cursor: pointer;
+    background-image: url("../imgs/nav_but.png");
+}
+nav li:hover {
+    background: #343434;
+    color: white;
+    opacity: 0.7;
+}
+#category_list {
+    position: absolute;
+    top: 50px;
+    left: -175px;
+    list-style-type: none;
+    display: none;
+    font-family: "Arial", sans-serif;
+}
+#category_list li {
+    width: 150px;
+    margin-bottom: 15px;
+}
+#category_list li input {
+    margin-right: 10px;
+}
+#category_list #filter {
+    width: 150px;
+    height: 20px;
+    background-color: #e0e0e0;
+    text-align: center;
+    cursor: pointer;
+}
+#category_list #filter:hover {
+    -webkit-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    -o-transform: scale(1.05);
+    transform: scale(1.05);/**/
+}
+#category_list #filter:active {
+    -webkit-transform: scale(1.02);
+    -moz-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+    -o-transform: scale(1.02);
+    transform: scale(1.02);/**/
+}
+#search_filter {
+    position: absolute;
+    width: 175px;
+    left: -200px;
+    display: none;
+    font-family: "Arial", sans-serif;
+}
+#add_object {
+    position: absolute;
+    top: 15px;
+    width: 175px;
+    left: 12px;
+    height: 570px;
+    outline: 1px solid orange;
+    display: none;
+}
+#search_result {
+    position: absolute;
+    width: 200px;
+    left: -200px;
+    display: none;
+    height: 450px;
+}
+#search_result #sr_block {
+    width: 170px;
+    overflow-y: auto;
+    padding: 15px;
+
+}
+#search_result #sr_block {
+    list-style-type: none;
+}
+#search_result input {
+    position: relative;
+    left: 30px;
+    top: 50px;
+    /*bottom: 10px;*/
+}
+
+#sf_block_1 {
+    top: 10px;
+}
+#sf_block_1 span {
+    margin-left: 15px;
+}
+#sf_block_3 {
+    top: 90px;
+    left: 15px;
+}
+#sf_block_3 li {
+    list-style-type: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+#sf_block_4 {
+    top: 85px;
+    left: 15px;
+}
+#sf_block_4 input {
+    margin-bottom: 5px;
+}
+#sf_block_2 {
+    top: 0px;
+    left: 20px;
+    width: 120px;
+    height: 40px;
+}
+#sf_block_2 input {
+    margin-right: 5px;
+}
+#actionsWindow_1 {
+    left: 800px;
+}
+.actionsWindow {
+    position: absolute;
+    width: 997px;
+    height: 450px;
+    display: none;
+    background: #333;
+}
+#actionsWindow_2>input {
+    position: absolute;
+    top: 20px;
+    left: 300px;
+    width: 400px;
+    height: 20px;
+}
+.aw3_divs {
+    left: 300px;
+    width: 300px;
+    height: 20px;
+}
+#actionsWindow_3 {
+    display: none;
+    opacity: 0;
+}
+#actionsWindow_2 {
+    display: none;
+    opacity: 0;
+}
+#actionsWindow_3 input[type=textarea] {
+    float: right;
+}
+#actionsWindow_3 input[type=button] {
+    position: absolute;
+    left: 300px;
+    top: 200px;
+    width: 200px;
+}
+#actionsWindow_3 #aw3_date {
+    position: absolute;
+    top: 50px;
+}
+#actionsWindow_3 #aw3_place {
+    position: absolute;
+    top: 100px;
+}
+#actionsWindow_3 #aw3_desc {
+    position: absolute;
+    top: 150px;
+}
+#about_window {
+    position: absolute;
+    left: 800px;
+    width: 997px;
+    height: 450px;
+    display: none;
+    background: #094;
+}
+#add_object li {
+    margin-bottom: 15px;
+}
+#add_object input[type=file] {
+    width: 150px;
+    overflow: auto;
+}
+#add_object input[name=comments] {
+}
+input[name=title] {
+    top: 50px;
+    left: 15px;
+}
+input[name=to_search] {
+    width: 75px;
+}
+#profile_window {
+    position: absolute;
+    left: 800px;
+    width: 997px;
+    height: 450px;
+    display: none;
+    background: #777;
+}
