@@ -29,6 +29,7 @@ ws_patterns = [
     url(r'^profile$', views.ProfileView.as_view(), name='profile'),
     url(r'^login/$', views.LoginFormView.as_view(), name='login'),
     url(r'^logout/$', views.LogoutView.as_view(), name='logout'),
+    url(r'^add/$', views.AddObjectFormView.as_view(), name='add'),
     # url(r'^placemark_icons/(?P<icon>.*)', views.get_placemark_icon),
 ]
 

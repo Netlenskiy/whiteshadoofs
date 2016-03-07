@@ -1,11 +1,5 @@
 //3
-/*
- Класс 'Menu' включает 4 подкласса, каждый из которых
- является одним из подменю на странице.
- Конструктору 'Menu' передается DOM-элемент, обернутый в jquery (далее
- DOM-jquery-элемент), в котором содержится меню.
 
- */
 function BaseMenu(own_block_id) {
     this.own_block_id    = own_block_id;
     this.own_block       = $(this.own_block_id);
@@ -45,14 +39,6 @@ function BaseMenu(own_block_id) {
                 if (xhr.readyState != 4) return;
                 if (xhr.status == 200) {
                     $(this.own_block).html(xhr.responseText);
-
-                    var script = document.createElement('script');
-                    script.type = 'text/javascript';
-                    script.src = this.js_url;
-                    document.body.appendChild(script);
-                    script.onload = function (e) {
-                        console.log(script);
-                    }
                 }
             }.bind(this);
         }
@@ -94,35 +80,9 @@ function MenuCategory(own_block_id) {
 
     var parent_hide = self.hide;
     self.hide = function (into) {
-        /*
-         into- направление смещения списка при закрытии или замещении
-         его другим элементом в боковой панели. При завершении смещения
-         список делается невидимым и возвращается в исходную позицию,
-         слева от боковой панели.
-         Вызов без аргумента - смещение вправо.
-         */
         self.hide_position = into == 'left' ? posInLeft : posInRight;
         parent_hide.apply(self, arguments);
     };
-    //
-    //own_block.last().on('click', function (e) {
-    //    /*
-    //     Обработчик нажатия на кнопку под списком. При нажатии
-    //     callback-функция формирует массив, в котором названия
-    //     категорий выбранных чекбоксов. Массив передается методу
-    //     класса Mediator, который передает из объекту карты.
-    //     */
-    //    if (e.target.id != 'filter') return;
-    //    var types = [];
-    //    own_block.find('input').each(function (index, element) {
-    //        if (element.checked)
-    //            types.push(index);
-    //    });
-    //    mediator.sendTypesToMap({
-    //        type: 'filter',
-    //        types: types
-    //    });
-    //});
 }
 
 function MenuActions(own_block) {
@@ -134,32 +94,6 @@ function MenuActions(own_block) {
     this.hide = function () {};
     this.show = function () {};
     this.toggle = function () {};
-
-    //self.toggleAuth = function (flag) {
-    //    function toggle(newElem) {
-    //        own_block.animate({
-    //            opacity: 0
-    //        }, {
-    //            duration: 'default',
-    //            complete: function () {
-    //                own_block.css('display', 'none');
-    //                own_block = newElem;
-    //                own_block.css('display', 'block');
-    //                own_block.animate({
-    //                    opacity: 1
-    //                }, {
-    //                    duration: 'default'
-    //                });
-    //            }
-    //        });
-    //    }
-    //
-    //    if (flag) {
-    //        toggle(elem_2);
-    //    } else {
-    //        toggle(elem_1);
-    //    }
-    //};
 }
 
 function MenuAbout() {

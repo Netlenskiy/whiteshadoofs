@@ -138,3 +138,19 @@ class LogoutView(View):
     def get(self, request):
         logout(request)
         return HttpResponseRedirect('/')
+
+
+class AddObjectFormView(FormView):
+
+    form_class = forms.AddObjectForm
+    success_url = '/'
+    template_name = 'add_object.html'
+
+    def form_valid(self, form):
+        user = self.request.user
+        if user.is_authenticated():
+            form.save()
+            return super(AddObjectFormView, self).form_valid(form)
+        else:
+            HttpResponseRedirect('/')
+
