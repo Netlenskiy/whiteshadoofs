@@ -3,10 +3,12 @@
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, render_to_response
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout
 from django.views.generic.edit import FormView
 from django.views.generic.base import View
+# Если раскомментировать, будет циклический импорт
+# from django.core import urlresolvers
 from . import models, forms
 
 
@@ -141,16 +143,78 @@ class LogoutView(View):
 
 
 class AddObjectFormView(FormView):
-
     form_class = forms.AddObjectForm
-    success_url = '/'
+    success_url = '/add'
     template_name = 'add_object.html'
 
     def form_valid(self, form):
-        user = self.request.user
-        if user.is_authenticated():
-            form.save()
+        if self.request.user.is_authenticated():
+            obj = form.save(commit=False)
+            obj.user = self.request.user
+            obj.save()
             return super(AddObjectFormView, self).form_valid(form)
         else:
             HttpResponseRedirect('/')
+
+
+class AddAddressFormView(FormView):
+    form_class = forms.AddAddressForm
+    success_url = '/add'
+    template_name = 'add_address.html'
+
+    def form_valid(self, form):
+        if self.request.user.is_authenticated():
+            form.save()
+            return super(AddAddressFormView, self).form_valid(form)
+
+
+class AddLocalityFormView(FormView):
+    form_class = forms.AddLocalityForm
+    success_url = '/add_address'
+    template_name = 'add_locality.html'
+
+    def form_valid(self, form):
+        form.save()
+        return super(AddLocalityFormView, self).form_valid(form)
+
+
+class AddDistrictFormView(FormView):
+    form_class = forms.AddDistrictForm
+    success_url = '/add_locality'
+    template_name = 'add_district.html'
+
+    def form_valid(self, form):
+        if self.request.user.is_authenticated():
+            form.save()
+            return super(AddDistrictFormView, self).form_valid(form)
+
+
+class AddRegionFormView(FormView):
+    form_class = forms.AddRegionForm
+    success_url = '/add_district'
+    template_name = 'add_region.html'
+
+    def form_valid(self, form):
+        form.save()
+        return super(AddRegionFormView, self).form_valid(form)
+
+
+class AddCountryFormView(FormView):
+    form_class = forms.AddCountryForm
+    success_url = '/add_region'
+    template_name = 'add_country.html'
+
+    def form_valid(self, form):
+        form.save()
+        return super(AddCountryFormView, self).form_valid(form)
+
+
+class AddMemEventFormView(FormView):
+    form_class = forms.AddMemEventForm
+    success_url = '/add'
+    template_name = 'add_mem_event.html'
+
+    def form_valid(self, form):
+        form.save()
+        return super(AddMemEventFormView, self).form_valid(form)
 

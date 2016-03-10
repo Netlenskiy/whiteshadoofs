@@ -1,0 +1,16 @@
+{% extends 'base_add.html' %}
+{% block title %}Добавить район{% endblock %}
+{% block form_id %}add_district{% endblock %}
+{% block form_name %}add_district{% endblock %}
+{% block field_with_button %}
+    {% if field.name == 'region' %}
+        <p>
+            {{ field }}
+            <a href="{% url 'ws:add_region' %}">
+                <button type="button">Добавить</button>
+            </a>
+        </p>
+    {% else %}
+        <p>{{ field }}</p>
+    {% endif %}
+{% endblock %}

@@ -30,6 +30,12 @@ ws_patterns = [
     url(r'^login/$', views.LoginFormView.as_view(), name='login'),
     url(r'^logout/$', views.LogoutView.as_view(), name='logout'),
     url(r'^add/$', views.AddObjectFormView.as_view(), name='add'),
+    url(r'^add_address/$', views.AddAddressFormView.as_view(), name='add_address'),
+    url(r'^add_locality/$', views.AddLocalityFormView.as_view(), name='add_locality'),
+    url(r'^add_district/$', views.AddDistrictFormView.as_view(), name='add_district'),
+    url(r'^add_region/$', views.AddRegionFormView.as_view(), name='add_region'),
+    url(r'^add_country/$', views.AddCountryFormView.as_view(), name='add_country'),
+    url(r'^add_mem_event/$', views.AddMemEventFormView.as_view(), name='add_mem_event'),
     # url(r'^placemark_icons/(?P<icon>.*)', views.get_placemark_icon),
 ]
 
