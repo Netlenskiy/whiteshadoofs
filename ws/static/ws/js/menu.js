@@ -196,12 +196,19 @@ function MenuSearch(search, searchResultElem) {
     });
 }
 
+function MenuProfile() {
+    this.hide = function () {};
+    this.show = function () {};
+    this.toggle = function () {};
+}
+
 function Menu(elem) {
     var menu = {
         category: new MenuCategory('#category_list'),
         actions: new MenuActions($('#actionsWindow_1')),
         about: new MenuAbout($('#about_window')),
-        search: new MenuSearch($('#search_filter'), $('#search_result'))
+        search: new MenuSearch($('#search_filter'), $('#search_result')),
+        profile: new MenuProfile(),
     };
     var lastOpened = null;
     var curOpened = null;
@@ -211,7 +218,10 @@ function Menu(elem) {
     }
 
     elem.on('click', function (event) {
-        event.preventDefault();
+        console.log(event.target.id);
+        if (event.target.id != 'profile') {
+            event.preventDefault();
+        }
         curOpened = event.target.id;
         if (curOpened != lastOpened) {
             switch (lastOpened) {

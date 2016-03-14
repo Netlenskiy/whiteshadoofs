@@ -17,8 +17,10 @@
     <form id='search_form' action="" method="GET"></form>
     </div>
     <div id="sf_block_5" class="posabs">
+        {% if user.is_authenticated %}
         <a href="{% url 'ws:add' %}">
             <button>Добавить объект</button>
         </a>
+        {% endif %}
     </div>
 </div>

@@ -80,7 +80,7 @@ class Locality(models.Model):
 class Address(models.Model):
     """Соответствует таблице address, полному адресу объекта"""
     street = models.CharField(verbose_name='Улица', max_length=45, blank=False)
-    locality = models.ForeignKey(Locality, null=True)
+    locality = models.ForeignKey(Locality, verbose_name='Населенный пункт', null=True)
     latitude = models.FloatField(verbose_name='Широта', blank=True, null=True)
     longitude = models.FloatField(verbose_name='Долгота', blank=True, null=True)
 

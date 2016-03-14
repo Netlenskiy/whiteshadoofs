@@ -8,8 +8,10 @@ from django.contrib.auth import login, logout
 from django.views.generic.edit import FormView
 from django.views.generic.base import View
 # Если раскомментировать, будет циклический импорт
+# Пытался использовать reverse() для success_url
 # from django.core import urlresolvers
 from . import models, forms
+import requests
 
 
 class IndexView(View):
@@ -166,6 +168,19 @@ class AddAddressFormView(FormView):
         if self.request.user.is_authenticated():
             form.save()
             return super(AddAddressFormView, self).form_valid(form)
+
+
+class PointAddressFormView(FormView):
+    form_class = forms.PointAddressForm
+    template_name = 'point_address.html'
+    success_url = '/add'
+
+    def form_valid(self, form):
+        # todo to add geocoding and saving address model
+        if form.is_valid():
+            pass
+
+        return super(PointAddressFormView, self).form_valid(form)
 
 
 class AddLocalityFormView(FormView):

@@ -5,8 +5,39 @@
   </head>
   <body>
     <form id="reg_form" name="reg_form" action="" method="post">
-      {% csrf_token %}
-      {{ form.as_p }}
+        {{ form.non_field_errors }}
+        {% csrf_token %}
+{#      {{ form.as_p }}#}
+        <p>
+            {{ form.email.errors }}
+            <label for="id_email">Email</label>
+            {{ form.email }}
+        </p>
+        <p>
+            {{ form.username.errors }}
+            <label for="id_username">Ник</label>
+            {{ form.username }}
+        </p>
+        <p>
+            {{ form.first_name.errors }}
+            <label for="id_first_name">Имя</label>
+            {{ form.first_name }}
+        </p>
+        <p>
+            {{ form.last_name.errors }}
+            <label for="id_last_name">Фамилия</label>
+            {{ form.last_name }}
+        </p>
+        <p>
+            {{ form.password1.errors }}
+            <label for="id_password1">Пароль</label>
+            {{ form.password1 }}
+        </p>
+        <p>
+            {{ form.password2.errors }}
+            <label for="id_password2">Повторите пароль</label>
+            {{ form.password2 }}
+        </p>
       <button type="submit">Зарегистрироваться</button>
     </form>
   </body>

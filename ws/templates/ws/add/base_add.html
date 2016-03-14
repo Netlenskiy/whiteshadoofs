@@ -17,6 +17,9 @@
                         <a href="{% url 'ws:add_address' %}">
                             <button type="button">Добавить</button>
                         </a>
+                        <a href="{% url 'ws:point_address' %}">
+                            <button type="button">Указать на карте</button>
+                        </a>
                     </p>
                 {% else %}
                     <p>{{ field }}</p>

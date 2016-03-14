@@ -5,12 +5,22 @@
   </head>
   <body>
     <form id="login_form" name="login_form" action="{% url 'ws:login' %}" method="post">
+        {{ form.non_field_errors }}
       {% csrf_token %}
-      {{ form.as_p }}
+        <p>
+            {{ form.username.errors }}
+            <label for="id_username">Ник</label>
+            {{ form.username }}
+        </p>
+        <p>
+            {{ form.password.errors }}
+            <label for="id_password">Пароль</label>
+            {{ form.password }}
+        </p>
       <button type="submit">Войти</button>
     </form>
     <a href="{% url 'ws:register' %}">
-      <button type="submit">REgister</button>
+      <button type="submit">Зарегистрироваться</button>
     </a>
   </body>
 </html>

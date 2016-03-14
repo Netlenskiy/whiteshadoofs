@@ -31,6 +31,7 @@ ws_patterns = [
     url(r'^logout/$', views.LogoutView.as_view(), name='logout'),
     url(r'^add/$', views.AddObjectFormView.as_view(), name='add'),
     url(r'^add_address/$', views.AddAddressFormView.as_view(), name='add_address'),
+    url(r'^point_address/$', views.PointAddressFormView.as_view(), name='point_address'),
     url(r'^add_locality/$', views.AddLocalityFormView.as_view(), name='add_locality'),
     url(r'^add_district/$', views.AddDistrictFormView.as_view(), name='add_district'),
     url(r'^add_region/$', views.AddRegionFormView.as_view(), name='add_region'),

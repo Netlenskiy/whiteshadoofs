@@ -79,6 +79,11 @@ class AddAddressForm(forms.ModelForm):
         )
 
 
+class PointAddressForm(forms.Form):
+    latitude = forms.FloatField(label='Широта')
+    longitude = forms.FloatField(label='Долгота')
+
+
 class AddCountryForm(forms.ModelForm):
 
     class Meta:
