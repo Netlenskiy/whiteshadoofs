@@ -1,24 +1,27 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<script defer src="http://api-maps.yandex.ru/2.1/?lang=ru_RU&mode=debug"></script>
+    <script defer src="{% static 'js/point_address/map.js' %}"></script>
     <meta charset="UTF-8">
     <title>Указать адрес на карте</title>
+
     <style>
-        #map {
-            width:50px;
-            height:50px;
+        #point_address_map {
+            width:500px;
+            height:350px;
             background-color: #555;
         }
     </style>
 </head>
 <body>
-    <div id="map">
-
-    </div>
-    <form action="{% url 'ws:point_address' %}" method="post">
+    <div id="point_address_map"></div>
+    <form id="point_address_form" action="{% url 'ws:point_address' %}" method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Сохранить</button>
     </form>
+    <button id="request_address" type="button">Проверить</button>
+        <button type="submit" form="point_address_form">Сохранить</button>
 </body>
 </html>
