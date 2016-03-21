@@ -11,7 +11,6 @@ from django.views.generic.base import View
 # Пытался использовать reverse() для success_url
 # from django.core import urlresolvers
 from . import models, forms
-import requests
 
 
 class IndexView(View):
@@ -176,9 +175,35 @@ class PointAddressFormView(FormView):
     success_url = '/add'
 
     def form_valid(self, form):
-        # todo to add geocoding and saving address model
+        # todo должен производиться повторный запрос и сравниваться координаты присланные пользователем с полученными с сервера
         if form.is_valid():
-            pass
+            country_title = form.cleaned_data['country']
+            country = models.Country.objects.get_or_create(title=country_title)
+
+            region_title = form.cleaned_data['region']
+            region = models.Region.objects.get_or_create(
+                title=region_title,
+                country=country[0],
+            )
+
+            district_title = form.cleaned_data['district']
+            district = models.District.objects.get_or_create(
+                title=district_title,
+                region=region[0],
+            )
+
+            locality_title = form.cleaned_data['locality']
+            locality = models.Locality.objects.get_or_create(
+                title=locality_title,
+                district=district[0],
+            )
+
+            address = models.Address()
+            address.street = form.cleaned_data['street']
+            address.latitude = form.cleaned_data['latitude']
+            address.longitude = form.cleaned_data['longitude']
+            address.locality = locality[0]
+            address.save()
 
         return super(PointAddressFormView, self).form_valid(form)
 

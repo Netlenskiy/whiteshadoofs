@@ -83,6 +83,11 @@ class PointAddressForm(forms.Form):
     latitude = forms.FloatField(label='Широта', widget=forms.TextInput)
     longitude = forms.FloatField(label='Долгота', widget=forms.TextInput)
     address = forms.CharField(label='Адрес')
+    country = forms.CharField(widget=forms.HiddenInput)
+    region = forms.CharField(widget=forms.HiddenInput, required=False)
+    district = forms.CharField(widget=forms.HiddenInput, required=False)
+    locality = forms.CharField(widget=forms.HiddenInput, required=False)
+    street = forms.CharField(widget=forms.HiddenInput, required=False)
 
 
 class AddCountryForm(forms.ModelForm):

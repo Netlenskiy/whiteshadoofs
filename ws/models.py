@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.contrib import auth
 from django.http import HttpRequest
 from django.db import models
@@ -40,6 +41,14 @@ class Country(models.Model):
     def __unicode__(self):
         return self.title
 
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        try:
+            self.validate_unique()
+            super(Country, self).save()
+        except ValidationError:
+            pass
+
 
 class Region(models.Model):
     """Соответствует таблице region, региону, в кот. находится объект"""
@@ -50,7 +59,9 @@ class Region(models.Model):
         return u"{0}, {1}".format(self.title, self.country)
 
     class Meta:
-        unique_together = (('title', 'country'),)
+        unique_together = (
+            ('title', 'country'),
+        )
 
 
 class District(models.Model):
@@ -62,7 +73,9 @@ class District(models.Model):
         return u"{0}".format(self.title)
 
     class Meta:
-        unique_together = (('title', 'region'),)
+        unique_together = (
+            ('title', 'region'),
+        )
 
 
 class Locality(models.Model):
@@ -74,18 +87,22 @@ class Locality(models.Model):
         return u"{0}".format(self.title)
 
     class Meta:
-        unique_together = (('title', 'district'),)
+        unique_together = (
+            ('title', 'district'),
+        )
 
 
 class Address(models.Model):
     """Соответствует таблице address, полному адресу объекта"""
-    street = models.CharField(verbose_name='Улица', max_length=45, blank=False)
+    street = models.CharField(verbose_name='Улица, дом', max_length=45, blank=False)
     locality = models.ForeignKey(Locality, verbose_name='Населенный пункт', null=True)
     latitude = models.FloatField(verbose_name='Широта', blank=True, null=True)
     longitude = models.FloatField(verbose_name='Долгота', blank=True, null=True)
 
     class Meta:
-        unique_together = (('latitude', 'longitude'),)
+        unique_together = (
+            ('latitude', 'longitude'),
+        )
 
     def __unicode__(self):
         return u"{0}, {1}".format(self.street, self.locality)
