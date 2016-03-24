@@ -28,7 +28,7 @@ function initMap() {
     );
     // @TODO Сделать, чтобы поинтер метки определялся по типу метки
     //var iconImageHref = 'http://127.0.0.1:8000/placemark_icons/redStar.gif';
-    var iconImageHref = 'http://белыежуравли.рф/static/ws/imgs/redStar.gif';
+    var iconImageHref = 'http://белыежуравли.рф/static/ws_app/imgs/redStar.gif';
 
     var lom = new ymaps.LoadingObjectManager('http://0.0.0.0:8000/fetch_placemarks?bbox=%b', {
         clusterize: true,

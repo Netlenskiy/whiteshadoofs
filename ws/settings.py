@@ -58,7 +58,7 @@ def list_dirs_creator(arg, dirname, names):
     arg += [dirname]
 
 template_dirs = []
-os.path.walk(os.path.join(BASE_DIR, 'ws/templates'), list_dirs_creator, template_dirs)
+os.path.walk(os.path.join(BASE_DIR, 'ws/../ws_app/templates'), list_dirs_creator, template_dirs)
 
 
 TEMPLATES = [
