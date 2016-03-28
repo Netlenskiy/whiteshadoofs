@@ -258,3 +258,5 @@ class AddMemEventFormView(FormView):
         form.save()
         return super(AddMemEventFormView, self).form_valid(form)
 
+
+

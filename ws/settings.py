@@ -37,7 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'ws',
+    'ws_app',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -58,7 +58,7 @@ def list_dirs_creator(arg, dirname, names):
     arg += [dirname]
 
 template_dirs = []
-os.path.walk(os.path.join(BASE_DIR, 'ws/../ws_app/templates'), list_dirs_creator, template_dirs)
+os.path.walk(os.path.join(BASE_DIR, 'ws_app/templates'), list_dirs_creator, template_dirs)
 
 
 TEMPLATES = [
@@ -113,7 +113,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 STATIC_URL = os.path.join(BASE_DIR, 'static/')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
+print(STATIC_URL)
 
 static_dirs = []
-os.path.walk(os.path.join(BASE_DIR, 'ws/static'), list_dirs_creator, static_dirs)
+os.path.walk(os.path.join(BASE_DIR, 'ws_app/static'), list_dirs_creator, static_dirs)
 STATICFILES_DIRS = static_dirs

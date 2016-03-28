@@ -1,2 +1,2 @@
 USE ws;
-DELETE FROM ws_mem_event;
+DELETE FROM ws_app_mem_event;
