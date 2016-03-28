@@ -26,6 +26,7 @@ class AddObjectForm(forms.ModelForm):
         model = models.Object
         exclude = (
             'user',
+            'address',
         )
         localized_fields = '__all__'
 
@@ -98,3 +99,7 @@ class AddCountryForm(forms.ModelForm):
         fields = (
             'title',
         )
+
+
+class TestForm(forms.Form):
+    oops = forms.CharField(label='oops', widget=forms.Textarea)

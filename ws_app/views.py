@@ -145,10 +145,21 @@ class LogoutView(View):
 
 class AddObjectFormView(FormView):
     form_class = forms.AddObjectForm
+    form_class_2 = forms.PointAddressForm
     success_url = '/add'
     template_name = 'add_object.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(AddObjectFormView, self).get_context_data()
+        if 'form' not in context:
+            context['form'] = self.form_class()
+        if 'form2' not in context:
+            context['form2'] = self.form_class_2()
+
+        return context
+
     def form_valid(self, form):
+        print(form)
         if self.request.user.is_authenticated():
             obj = form.save(commit=False)
             obj.user = self.request.user

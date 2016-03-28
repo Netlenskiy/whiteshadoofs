@@ -1,32 +1,35 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
   <head>
+	<script defer src="http://api-maps.yandex.ru/2.1/?lang=ru_RU&mode=debug"></script>
+	<script defer src="{% static 'js/jquery-2.1.3.min.js' %}"></script>
+    <script defer src="{% static 'js/point_address/map.js' %}"></script>
     <title>{% block title %}Добавить объект{% endblock %}</title>
+    <style>
+{#todo вынести стили отсюда #}
+        #point_address_map {
+            width:500px;
+            height:350px;
+            background-color: #555;
+        }
+        #id_address {
+            width: 800px;
+        }
+    </style>
   </head>
   <body>
-    <form id="{% block form_id %}add_object{% endblock %}" name="{% block form_name %}add_object{% endblock %}" action="" method="post">
-      {% csrf_token %}
-        {{ form.non_field_errors }}
-        {% for field in form %}
-            <p>{{ field.errors }}</p>
-            <p>{{ field.label_tag }}</p>
-            {% block field_with_button %}
-                {% if field.name == 'address' %}
-                    <p>
-                        {{ field }}
-                        <a href="{% url 'ws_app:add_address' %}">
-                            <button type="button">Добавить</button>
-                        </a>
-                        <a href="{% url 'ws_app:point_address' %}">
-                            <button type="button">Указать на карте</button>
-                        </a>
-                    </p>
-                {% else %}
-                    <p>{{ field }}</p>
-                {% endif %}
-            {% endblock field_with_button %}
-        {% endfor %}
-      <button type="submit">Добавить</button>
+    <form id="{% block form_id %}add_object{% endblock %}"
+          name="{% block form_name %}add_object{% endblock %}" action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% csrf_token %}
+        {{ form2.as_p }}
     </form>
+    <div id="point_address_map"></div>
+    <button id="request_address" type="button">Проверить</button>
+{#todo спрятать кнопку пока не нажата Проверить #}
+        <button type="submit" form="add_object">Сохранить</button>
+{#    <button form="add_object" type="submit">Добавить</button>#}
   </body>
 </html>

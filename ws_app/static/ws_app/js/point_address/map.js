@@ -11,14 +11,14 @@ function init_point_address_map () {
     map.events.add('click', function (e) {
         // Получение координат щелчка
         var coords = e.get('coords');
-        document.forms.point_address_form.latitude.value = coords[1];
-        document.forms.point_address_form.longitude.value = coords[0];
+        document.forms.add_object.latitude.value = coords[1];
+        document.forms.add_object.longitude.value = coords[0];
     });
 }
 
 $('#request_address').click(function (e) {
-    var latitude = document.forms.point_address_form.latitude.value;
-    var longitude= document.forms.point_address_form.longitude.value;
+    var latitude = document.forms.add_object.latitude.value;
+    var longitude= document.forms.add_object.longitude.value;
     if (!latitude || !longitude) return;
     var url = 'https://geocode-maps.yandex.ru/1.x/?&geocode='
         + latitude + ',' + longitude
@@ -35,15 +35,15 @@ $('#request_address').click(function (e) {
                 ['GeocoderMetaData'];
             var AddressDetails = GeocoderMetaData['AddressDetails'];
             document.forms
-                .point_address_form
+                .add_object
                 .address
                 .value = GeocoderMetaData['text'];
             document.forms
-                .point_address_form
+                .add_object
                 .country
                 .value = AddressDetails['Country']['CountryName'];
             document.forms
-                .point_address_form
+                .add_object
                 .region
                 .value = AddressDetails['Country']
                 ['AdministrativeArea']
@@ -55,7 +55,7 @@ $('#request_address').click(function (e) {
             var street = '';
             if (SubAdministrativeArea) {
                 document.forms
-                    .point_address_form
+                    .add_object
                     .district.
                     value = SubAdministrativeArea['SubAdministrativeAreaName'];
                 locality = SubAdministrativeArea['Locality']['LocalityName'];
@@ -70,8 +70,8 @@ $('#request_address').click(function (e) {
                     ['Locality']
                     ['Thoroughfare'];
             }
-            document.forms.point_address_form.locality.value = locality;
-            document.forms.point_address_form.street.value = street['ThoroughfareName']
+            document.forms.add_object.locality.value = locality;
+            document.forms.add_object.street.value = street['ThoroughfareName']
                 + ' ' + street['Premise']['PremiseNumber']
         }
     })
